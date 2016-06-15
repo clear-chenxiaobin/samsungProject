@@ -1,0 +1,87 @@
+
+.live-content-container {
+    background: url("../images/bg_activity_live.png") no-repeat 0 101px !important;
+}
+
+.live-content .channel-header {
+    height: 100px;
+    line-height: 100px;
+}
+
+.channel-header:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.channel-header .channel-title {
+    float: left;
+    padding-left: 60px;
+    font-size: 36px;
+}
+
+.channel-header .channel-pager {
+    float: right;
+    padding-right: 100px;
+    font-size: 30px;
+}
+
+.channel-list-container {
+    width: 1700px;
+    margin: 0 auto;
+}
+
+.channel-list {
+    display: inline-block;
+    width: 1589px;
+}
+
+.channel-list:after {
+    content: '';
+    display: block;
+    clear: both;
+}
+
+.channel-list ul {
+    float: left;
+}
+
+.channel-list>li>ul>li {
+    width: 469px;
+    height: 72px;
+    line-height: 72px;
+    font-size: 30px;
+    overflow: hidden;
+    padding: 0 20px;
+    border-radius: 10px;
+    background-color: #1F343A;
+    margin-bottom: 10px;
+}
+
+.channel-list>li>ul>li.selected {
+    background-color: #ffffff;
+    color: #1F343A;
+}
+
+.channel-list>li:not(:first-child)>ul {
+    margin-left: 30px;
+}
+
+.channel-list-container:before, .channel-list-container:after {
+    content: '';
+    display: inline-block;
+    width: 40px;
+}
+
+.channel-list-container:before, .channel-list-container:after, .channel-list {
+    height: 694px;
+}
+
+.channel-list-container.left-arrow:before {
+    background: url("../images/ic_arrow_left.png") no-repeat 10px 300px;
+}
+
+.channel-list-container.right-arrow:after {
+    background: url("../images/ic_arrow_right.png") no-repeat 10px 300px;
+}
+

@@ -1,0 +1,64 @@
+
+.tpl-pic-text-simple-main>.current {
+    width: 890px;
+    margin: 40px;
+    height: calc(100% - 80px);
+    position: relative;
+    display: inline-block;
+    vertical-align: top;
+}
+
+.tpl-pic-text-simple-main>.current>i {
+    width: 870px;
+    height: 490px;
+    display: block;
+    text-align: center;
+    padding: 10px;
+    background: #ffffff;
+    border-radius: 20px;
+}
+
+.tpl-pic-text-simple-main>.current>i:before {
+    content: '';
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+
+.tpl-pic-text-simple-main>.current>i>img {
+    vertical-align: middle;
+    max-width: 870px;
+    max-height: 490px;
+    border-radius: 20px;
+}
+
+.tpl-pic-text-simple-main>.current>p {
+    position: absolute;
+    top: 530px;
+    line-height: 48px;
+    font-size: 32px;
+}
+
+.tpl-pic-text-simple-main>.previous, .tpl-pic-text-simple-main>.next {
+    width: 370px;
+    height: 100%;
+    display: inline-block;
+    vertical-align: top;
+    overflow: hidden;
+}
+
+.tpl-pic-text-simple-main>.previous>img, .tpl-pic-text-simple-main>.next>img {
+    height: 400px;
+    margin-top: 100px;
+    opacity: 0.7;
+    border-radius: 20px;
+}
+
+
+.tpl-pic-text-simple-main>.previous>img {
+    float: right;
+}
+
+.tpl-pic-text-simple-main>.next>img {
+    float: left;
+}
