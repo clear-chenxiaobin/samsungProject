@@ -8,13 +8,13 @@
 }
 
 .toolbar {
-    line-height: 54px;
+    line-height: 40px;
     color: #ffffff;
 }
 
 .toolbar .center, .toolbar li {
     height: 54px;
-    padding: 0 20px;
+    padding: 0 25px;
     font-size: 28px;
 }
 
@@ -26,13 +26,18 @@
 }
 
 .toolbar .center>img, .toolbar li>img {
+    height: 70%;
     max-height: 100%;
     vertical-align: middle;
 }
 
+.toolbar .ng-binding {
+    font-size: 24px;
+}
+
 .toolbar>.left {
     float: left;
-    width: 720px;
+    width: 350px;
     height: 100%;
     overflow: hidden;
 }
@@ -47,14 +52,14 @@
 
 .toolbar>.right {
     float: left;
-    width: 600px;
+    width: 350px;
     height: 100%;
     overflow: hidden;
 }
 
 .toolbar>.center {
     float: left;
-    width: 360px;
+    width: 250px;
     height: 100%;
     overflow: hidden;
 }

@@ -4,7 +4,7 @@
 .welcome-content {
     text-align: center;
     color: #ffffff;
-    margin-top: 138px;
+    margin-top: 62px;
 }
 
 /* index page */
@@ -14,39 +14,41 @@
 }
 
 .index-guest-name {
-    font-size: 64px;
-    padding: 60px;
+    font-size: 50px;
+    padding: 35px;
 }
 
 .index-welcome-text {
-    font-size: 42px;
+    font-size: 38px;
     margin: -8px 0 8px 0;
 }
 
 .index-sub-welcome-text {
-    font-size: 40px;
+    font-size: 36px;
     line-height: 140%;
 }
 
 .index-room-number {
-    font-size: 64px;
-    padding: 54px;
+    font-size: 54px;
+    padding: 30px;
 }
 
 .welcome-content>i {
     display: inline-block;
-    width: 306px;
-    height: 105px;
+    width: 210px;
+    height: 70px;
     margin: -16px 41px 16px 41px;
-    line-height: 105px;
+    line-height: 68px;
     font-size: 36px;
     background: url("../images/ic_button.png");
+    background-size: 210px 70px;
 }
 
 .welcome-content>i.active {
     background: url("../images/ic_button_active.png");
+    background-size: 210px 70px;
 }
 
 .index-language-hint {
-    font-size: 32px;
+    font-size: 24px;
 }

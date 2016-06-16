@@ -18,6 +18,9 @@ body {
     width: 1280px;
     height: 720px;
     font-weight: 500;
+    background-size: cover;
+    left: 50%;
+    margin-left: -640px;
 }
 
 i, em, b,label {
