@@ -6,7 +6,7 @@ angular.module('app.movie', [])
         activity.initialize($scope);
 
         activity.loadI18NResource(function (res) {
-            $scope.title = '叫醒服务';
+            $scope.title = '电影';
         });
 
         activity.onKeyUp(function (keyCode) {

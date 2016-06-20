@@ -11,6 +11,7 @@ angular.module('app', [
     'app.dnd',
     'app.bill',
     'app.live',
+    'app.play_video_unicast',
     'app.order',
     'app.movie',
     'app.music',
@@ -47,7 +48,7 @@ angular.module('app', [
             38: COMMON_KEYS.KEY_UP,
             39: COMMON_KEYS.KEY_RIGHT,
             40: COMMON_KEYS.KEY_DOWN,
-            13: COMMON_KEYS.KEY_OK,
+            13: COMMON_KEYS.KEY_ENTER,
             81: COMMON_KEYS.KEY_BACK,
             84: COMMON_KEYS.KEY_TV,
             77: COMMON_KEYS.KEY_MENU
@@ -60,8 +61,9 @@ angular.module('app', [
             keyMapping[tvKey.KEY_RIGHT] = COMMON_KEYS.KEY_RIGHT;
             keyMapping[tvKey.KEY_UP] = COMMON_KEYS.KEY_UP;
             keyMapping[tvKey.KEY_DOWN] = COMMON_KEYS.KEY_DOWN;
-            keyMapping[tvKey.KEY_PANEL_ENTER] = COMMON_KEYS.KEY_OK;
-            keyMapping[tvKey.KEY_PANEL_RETURN] = COMMON_KEYS.KEY_BACK;
+            keyMapping[tvKey.KEY_ENTER] = COMMON_KEYS.KEY_ENTER;
+            keyMapping[tvKey.KEY_1] = COMMON_KEYS.KEY_MENU;
+            keyMapping[tvKey.KEY_BACK] = COMMON_KEYS.KEY_BACK;
         }
         
         $scope.showMenu = false;
@@ -98,7 +100,7 @@ angular.module('app', [
         KEY_RIGHT: 1,
         KEY_UP: 2,
         KEY_DOWN: 3,
-        KEY_OK: 4,
+        KEY_ENTER: 4,
         KEY_BACK: 5,
         KEY_TV: 6,
         KEY_MENU: 7

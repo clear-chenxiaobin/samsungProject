@@ -29,7 +29,7 @@ angular.module('app.welcome', [])
                     $scope.language = languages[languageIndex];
                     ResourceManager.setLocale($scope.language);
                     break;
-                case COMMON_KEYS.KEY_OK:
+                case COMMON_KEYS.KEY_ENTER:
                     ActivityManager.startActivity('index');
                     break;
             }

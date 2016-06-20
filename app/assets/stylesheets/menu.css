@@ -3,25 +3,24 @@
 
 .menu-container {
     position: absolute;
-    left: 100px;
-    top: 815px;
-    width: 1721px;
-    height: 230px;
+    left: 140px;
+    top: 528px;
+    width: 1000px;
+    height: 152px;
     z-index: 9;
     color: #fff;
-    font-size: 32px;
+    font-size: 26px;
 }
 
 .menu-container>.menu-name {
     text-align: center;
-    line-height: 68px;
-    font-size: 40px;
+    line-height: 45px;
+    font-size: 30px;
 }
 
 .menu-container>.menu-guest-info {
-    width: 240px;
-    height: 102px;
-    padding: 30px;
+    width: 175px;
+    padding: 20px 25px;
     float: left;
 }
 
@@ -30,23 +29,24 @@
 }
 
 .menu-container>.menu-date-info {
-    width: 240px;
+    width: 175px;
     height: 102px;
-    padding: 30px;
+    padding: 20px 25px;;
     float: left;
 }
 
 .menu-container>.menu-item-container {
-    width: 1073px;
-    height: 162px;
+    width: 480px;
+    height: 106px;
     float: left;
     overflow: hidden;
+    margin: 0px 10px;
 }
 
 .menu-container>.left-arrow {
     display: block;
     float: left;
-    height: 162px;
+    height: 106px;
     width: 24px;
     background: url("../images/ic_arrow_left.png") no-repeat center;
 }
@@ -54,7 +54,7 @@
 .menu-container>.right-arrow {
     display: block;
     float: left;
-    height: 162px;
+    height: 106px;
     width: 24px;
     background: url("../images/ic_arrow_right.png") no-repeat center;
 }
@@ -66,7 +66,13 @@
 
 .menu-container>.menu-item-container li {
     float: left;
-    height: 162px;
+    height: 106px;
+    width: 120px;
+}
+
+.menu-container>.menu-item-container li.selected {
+    float: left;
+    height: 106px;
     width: 153px;
 }
 
@@ -93,7 +99,17 @@
     vertical-align: middle;
     position: relative;
     left: 50%;
-    margin-left: -58px;
+    margin-left: -60px;
+    width: 100px;
+    height: 100px;
+}
+
+.menu-container>.menu-item-container li.selected>img {
+    max-height: 100%;
+    vertical-align: middle;
+    position: relative;
+    left: 50%;
+    margin-left: -70px;
     width: 100px;
     height: 100px;
 }

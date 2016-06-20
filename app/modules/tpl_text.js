@@ -7,14 +7,14 @@ angular.module('app.tpl_text', [])
 
         $scope.texts = []
         for (var i = 0; i < 10; i++) {
-            $scope.texts.push({title: 'Run a directive after the DOM has finished rendering', content: 'To run the directive after the DOM has finished rendering you should postpone the execution, for example using the setTimeout function. AngularJS has a method wrapper for the window.setTimeout function, that is $timeout.'});
+            $scope.texts.push({title: i + '、Run a directive after the DOM has finished rendering', content: i + '、To run the directive after the DOM has finished rendering you should postpone the execution, for example using the setTimeout function. AngularJS has a method wrapper for the window.setTimeout function, that is $timeout.'});
         }
 
         $scope.selectedIndex = 0;
         $scope.preTopStyle = 0;
         $scope.ulTopStyle = 0;
         $scope.title = '新闻';
-        $scope.currentPage = 0;
+        $scope.currentPage = 1;
         $scope.totalPage = 0;
 
         var pageHeight = 100;
@@ -31,12 +31,12 @@ angular.module('app.tpl_text', [])
                     activity.finish();
                     break;
                 case COMMON_KEYS.KEY_LEFT:
-                    if (pageIndex > 0) {
+                    if (pageIndex > 1) {
                         pageIndex--;
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    if (pageIndex < $scope.totalPage - 1) {
+                    if (pageIndex < $scope.totalPage) {
                         pageIndex++;
                     }
                     break;

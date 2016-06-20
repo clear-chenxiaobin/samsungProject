@@ -17,6 +17,7 @@ body {
 
 .include-content.menu-visible {
     background: url("../images/bg_activity_with_menu.png") no-repeat 0 0;
+    background-size: 1000px 640px;
 }
 
 .activity-stack-container>li:first-child>.include-content {
@@ -48,7 +49,7 @@ body {
 
 .include-content>div>.content-main {
     width: 100%;
-    height: 510px;
+    height: 528px;
     margin-bottom: 7px;
 }
 

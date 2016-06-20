@@ -1,7 +1,7 @@
 
 .tpl-pic-text-simple-main>.current {
-    width: 890px;
-    margin: 40px;
+    width: 521px;
+    margin: 20px;
     height: calc(100% - 80px);
     position: relative;
     display: inline-block;
@@ -9,8 +9,8 @@
 }
 
 .tpl-pic-text-simple-main>.current>i {
-    width: 870px;
-    height: 490px;
+    width: 500px;
+    height: 280px;
     display: block;
     text-align: center;
     padding: 10px;
@@ -27,20 +27,20 @@
 
 .tpl-pic-text-simple-main>.current>i>img {
     vertical-align: middle;
-    max-width: 870px;
-    max-height: 490px;
+    max-width: 500px;
+    max-height: 290px;
     border-radius: 20px;
 }
 
 .tpl-pic-text-simple-main>.current>p {
     position: absolute;
-    top: 530px;
-    line-height: 48px;
-    font-size: 32px;
+    top: 300px;
+    line-height: 30px;
+    font-size: 26px;
 }
 
 .tpl-pic-text-simple-main>.previous, .tpl-pic-text-simple-main>.next {
-    width: 370px;
+    width: 214px;
     height: 100%;
     display: inline-block;
     vertical-align: top;
@@ -48,8 +48,8 @@
 }
 
 .tpl-pic-text-simple-main>.previous>img, .tpl-pic-text-simple-main>.next>img {
-    height: 400px;
-    margin-top: 100px;
+    height: 280px;
+    margin-top: 30px;
     opacity: 0.7;
     border-radius: 20px;
 }

@@ -1,11 +1,12 @@
 
 .live-content-container {
-    background: url("../images/bg_activity_live.png") no-repeat 0 101px !important;
+    background: url("../images/bg_activity_live.png") no-repeat 0 0;
+    background-size: 1000px 640px;
 }
 
 .live-content .channel-header {
-    height: 100px;
-    line-height: 100px;
+    height: 50px;
+    line-height: 50px;
 }
 
 .channel-header:after {
@@ -27,13 +28,13 @@
 }
 
 .channel-list-container {
-    width: 1700px;
+    width: 1000px;
     margin: 0 auto;
 }
 
 .channel-list {
     display: inline-block;
-    width: 1589px;
+    width: 1000px;
 }
 
 .channel-list:after {
@@ -44,18 +45,19 @@
 
 .channel-list ul {
     float: left;
+    margin-left: 15px;
 }
 
 .channel-list>li>ul>li {
-    width: 469px;
-    height: 72px;
-    line-height: 72px;
-    font-size: 30px;
+    width: 270px;
+    height: 40px;
+    line-height: 40px;
+    font-size: 24px;
     overflow: hidden;
-    padding: 0 20px;
+    padding: 0 10px;
     border-radius: 10px;
     background-color: #1F343A;
-    margin-bottom: 10px;
+    margin: 0px 0px 10px 20px;
 }
 
 .channel-list>li>ul>li.selected {
@@ -64,7 +66,7 @@
 }
 
 .channel-list>li:not(:first-child)>ul {
-    margin-left: 30px;
+    margin-left: 10px;
 }
 
 .channel-list-container:before, .channel-list-container:after {
@@ -74,7 +76,7 @@
 }
 
 .channel-list-container:before, .channel-list-container:after, .channel-list {
-    height: 694px;
+    /*height: 694px;*/
 }
 
 .channel-list-container.left-arrow:before {

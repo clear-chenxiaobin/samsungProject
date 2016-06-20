@@ -35,12 +35,12 @@ angular.module('app.tpl_category_list', [])
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
                     break;
-                case COMMON_KEYS.KEY_OK:
+                case COMMON_KEYS.KEY_ENTER:
                     ActivityManager.startActivity('tpl_pic_text_simple');
                     break;
             }
-            if ($scope.selectedIndex > 10) {
-                $scope.listTopStyle = (10 - $scope.selectedIndex) * 64;
+            if ($scope.selectedIndex > 9) {
+                $scope.listTopStyle = (9 - $scope.selectedIndex) * 64;
             } else if ($scope.listTopStyle !== 0) {
                 $scope.listTopStyle = 0;
             }

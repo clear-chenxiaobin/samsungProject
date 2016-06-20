@@ -6,7 +6,7 @@ angular.module('app.music', [])
         activity.initialize($scope);
 
         activity.loadI18NResource(function (res) {
-            $scope.title = '叫醒服务';
+            $scope.title = '音乐';
         });
 
         activity.onKeyUp(function (keyCode) {

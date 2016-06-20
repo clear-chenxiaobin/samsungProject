@@ -2,9 +2,9 @@
 
 angular.module('app.video', [])
     .controller('VideoController', ['$scope', '$element', 'ResourceManager', function ($scope, $element, ResourceManager) {
-        var unbindFunc = $scope.$on('config.ready', function (ev) {
+        var unbindFunc = $scope.$on(function (ev) {
             var video = document.createElement('video');
-            video.setAttribute('src', ResourceManager.backgroundVideoUrl());
+            video.setAttribute('src', ResourceManager.getConfigurations().backgroundVideoUrl());
             video.setAttribute('type', 'video/mp4');
             video.setAttribute('loop', '');
             $element[0].appendChild(video);
@@ -14,7 +14,6 @@ angular.module('app.video', [])
         });
     }])
     .service('VideoService', [function () {
-
         var pluginSef = document.getElementById('pluginSef');
         if (!pluginSef) {
             pluginSef.Open = function (pluginName, version, credential) {
