@@ -1,78 +1,131 @@
 'use strict';
 
 angular.module('app.live', [])
-    .controller('LiveController', ['$scope', '$element', 'ActivityManager', 'LiveService', 'COMMON_KEYS', function ($scope, $element, ActivityManager, LiveService, COMMON_KEYS) {
+    .controller('LiveController', ['$scope', '$element', 'ActivityManager', 'LiveService', 'COMMON_KEYS', 'ResourceManager', function ($scope, $element, ActivityManager, LiveService, COMMON_KEYS, ResourceManager) {
         var activity = ActivityManager.getActiveActivity();
+        var chaData,
+            numOfChannels,
+            configUrl = ResourceManager.getConfigurations().serverUrl(),
+            jsonUrl,
+            stream;
+        var channelsPerColumn = 8, column;
+        var channels = [];
+
+        document.getElementsByTagName("body")[0].setAttribute("style","background-image:none");
         activity.initialize($scope);
         activity.shouldDisplayMenu(false);
-
-        LiveService.initialize('http://192.168.18.123/nativevod/now/Main/json/Live_46.json').success(function () {
-            console.log(LiveService.getChannels());
-        });
+        activity.hide();
 
         $element[0].parentNode.classList.add('live-content-container');
+        LiveService.getPlayUrl(configUrl).success(function (data) {
+            data.Content.forEach(function (el, idx, arr) {
+                if (el.Name == '直播') {
+                    jsonUrl = ResourceManager.getConfigurations().serverUrl() + el.Json_URL;
+                    return;
+                }
+            })
 
-        var channels = [];
-        var channelsPerColumn = 8, column;
-        for (var i = 0; i < 100; i++) {
-            if (i % channelsPerColumn === 0) {
+            LiveService.initialize(jsonUrl).success(function (data) {
+                //console.log(LiveService.getChannels());
+                chaData = LiveService.getChannels();
+
+                stream = chaData[0].stream;
+                LiveService.onLoad(stream);
+
+                channelsPerColumn = 8, column;
+                for (var i = 0; i < chaData.length; i++) {
+                    if (i % channelsPerColumn === 0) {
+                        if (column) {
+                            channels.push(column);
+                        }
+                        column = [];
+                    }
+                    column.push({
+                        index: i,
+                        icon: chaData[i].icon,
+                        name: chaData[i].ChannelName,
+                        stream: chaData[i].stream
+                    });
+                }
                 if (column) {
                     channels.push(column);
                 }
-                column = [];
-            }
-            column.push({
-                index: i,
-                name: 'CCTV0'
-            });
-        }
-        if (column) {
-            channels.push(column);
-        }
-        $scope.currentPage = 0;
-        $scope.selectedIndex = 0;
-        $scope.title = 'TV Channels';
-        $scope.totalPage = Math.ceil(100 / (3 * channelsPerColumn));
-        $scope.channels = channels.slice(0, 3);
-        var numOfChannels = 100;
-
-        activity.hide();
+                $scope.currentPage = 0;
+                $scope.selectedIndex = 0;
+                $scope.title = '电视频道';
+                $scope.totalPage = Math.ceil(chaData.length / (3 * channelsPerColumn));
+                $scope.channels = channels.slice(0, 3);
+                numOfChannels = chaData.length;
+            })
+        })
 
         activity.onKeyUp(function (keyCode) {
+            var tempIndex = $scope.selectedIndex;
+            var oldIndex = tempIndex + 1;
+
             if (activity.isHide()) {
                 switch (keyCode) {
-                    case COMMON_KEYS.KEY_OK:
+                    case COMMON_KEYS.KEY_UP:
+                        tempIndex += 1;
+                        stream = chaData[tempIndex].stream;
+                        LiveService.changeVideo(stream);
+                        break;
+                    case COMMON_KEYS.KEY_DOWN:
+                        tempIndex -= 1;
+                        stream = chaData[tempIndex].stream;
+                        LiveService.changeVideo(stream);
+                        break;
+                    case COMMON_KEYS.KEY_ENTER:
                         activity.show();
                         break;
+                    case COMMON_KEYS.KEY_BACK:
+                        LiveService.stopPlay();
+                        document.getElementsByTagName("body")[0].setAttribute("style","background-image:(url:../assets/images/bg_window.jpg)");
+                        activity.finish();
+                        break;
                 }
+                $scope.selectedIndex = tempIndex;
                 return;
             }
 
-            var tempIndex = $scope.selectedIndex;
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
                     tempIndex -= 8;
+                    stream = chaData[tempIndex].stream;
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
                     tempIndex += 8;
+                    stream = chaData[tempIndex].stream;
                     break;
                 case COMMON_KEYS.KEY_UP:
                     tempIndex -= 1;
+                    stream = chaData[tempIndex].stream;
                     break;
                 case COMMON_KEYS.KEY_DOWN:
                     tempIndex += 1;
+                    stream = chaData[tempIndex].stream;
                     break;
-                case COMMON_KEYS.KEY_OK:
+                case COMMON_KEYS.KEY_ENTER:
+                    activity.hide();
+                    LiveService.changeVideo(stream);
                     break;
                 case COMMON_KEYS.KEY_BACK:
-                    activity.finish();
+                    activity.hide();
                     break;
             }
             if (tempIndex >= numOfChannels) {
-                tempIndex = numOfChannels - 1;
+                if (oldIndex != chaData.length) {
+                    tempIndex = numOfChannels - 1;
+                } else {
+                    tempIndex = 0;
+                }
             }
             if (tempIndex < 0) {
-                tempIndex = 0;
+                if (oldIndex == 1) {
+                    tempIndex = chaData.length - 1;
+                } else {
+                    tempIndex = 0;
+                }
             }
             var currentPage = Math.floor(tempIndex / (3 * channelsPerColumn));
             if (currentPage != $scope.currentPage) {
@@ -81,13 +134,25 @@ angular.module('app.live', [])
             }
             $scope.selectedIndex = tempIndex;
         });
+
     }])
     .service('LiveService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+        var widgetAPI = new Common.API.Widget();
+        var pluginObj = new Common.API.Plugin();
+        var tvKey = new Common.API.TVKeyValue();
 
-        var configUrl, channels = [];
+        var configUrl,
+            channels = [];
+        var pluginSef;
+        var pluginObjectTVMW;
+        var PL_MEDIA_SOURCE = 43;
+
+        this.getPlayUrl = function (_configUrl) {
+            return $http.get(_configUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
+            })
+        }
 
         this.initialize = function (_configUrl) {
-
             var deferred = $q.defer();
 
             // cached configurations
@@ -95,13 +160,13 @@ angular.module('app.live', [])
                 deferred.resolve();
                 return deferred.promise;
             }
-
             return $http.get(_configUrl).success(function (configJSON) {
                 var zhStrs = [], enStrs = [];
                 configUrl = _configUrl;
                 configJSON.Content.forEach(function (el, idx, arr) {
                     var nameKey = 'channel_name_' + el.ChannelNum;
                     channels.push({
+                        ChannelName: el.ChannelName,
                         nameKey: nameKey,
                         stream: el.ChannelSrc[0].Src,
                         icon: ResourceManager.getConfigurations().serverUrl() + el.ChannelPic
@@ -111,11 +176,42 @@ angular.module('app.live', [])
                 });
                 ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
             });
-
         };
 
         this.getChannels = function () {
             return channels;
         };
+
+        this.stopPlay = function () {
+            pluginSef.Execute("Stop");
+        }
+
+        this.changeVideo = function (videoURL) {
+            pluginSef.Execute("Stop");
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+        }
+
+        this.onLoad = function (videoURL) {
+            widgetAPI.sendReadyEvent();
+
+            pluginObj.unregistKey(tvKey.KEY_VOL_UP);
+            pluginObj.unregistKey(tvKey.KEY_VOL_DOWN);
+            pluginObj.unregistKey(tvKey.KEY_MUTE);
+
+            pluginSef = document.getElementById("pluginSef");
+            pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
+
+            pluginSef.Open('Player', '1.000', 'Player');
+
+            if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+                pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            }
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+
+        }
 
     }]);

@@ -19,7 +19,6 @@
 </head>
 
 <body ng-app="app"  ng-keyup="onkeyup($event)" ng-keydown="onkeydown($event)" ng-controller="RootController">
-
     <!-- view stack -->
     <ul class="activity-stack-container">
         <li ng-repeat="activity in activityStack" ng-show="$index==activityStack.length - 1 && !activity._hide">
@@ -86,7 +85,6 @@
     <script src="modules/weather.js"></script>
     <script src="modules/weather_detail.js"></script>
     <script src="modules/welcome.js"></script>
-    <script src="modules/play_video_unicast.js"></script>
 
 </body>
 

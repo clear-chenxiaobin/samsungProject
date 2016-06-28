@@ -116,4 +116,4 @@ angular.module('app.resource', [])
         };
 
     }])
-    .constant('SERVER_URL', 'http://192.168.18.123/nativevod/now');
+    .constant('SERVER_URL', 'http://172.17.173.100/nativevod/now');

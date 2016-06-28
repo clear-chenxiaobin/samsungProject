@@ -11,7 +11,6 @@ angular.module('app', [
     'app.dnd',
     'app.bill',
     'app.live',
-    'app.play_video_unicast',
     'app.order',
     'app.movie',
     'app.music',
@@ -51,7 +50,10 @@ angular.module('app', [
             13: COMMON_KEYS.KEY_ENTER,
             81: COMMON_KEYS.KEY_BACK,
             84: COMMON_KEYS.KEY_TV,
-            77: COMMON_KEYS.KEY_MENU
+            77: COMMON_KEYS.KEY_MENU,
+            104: COMMON_KEYS.KEY_VOL_UP,
+            98: COMMON_KEYS.KEY_VOL_DOWN,
+            101: COMMON_KEYS.KEY_MUTE
         };
 
         /* production environment */
@@ -63,7 +65,10 @@ angular.module('app', [
             keyMapping[tvKey.KEY_DOWN] = COMMON_KEYS.KEY_DOWN;
             keyMapping[tvKey.KEY_ENTER] = COMMON_KEYS.KEY_ENTER;
             keyMapping[tvKey.KEY_1] = COMMON_KEYS.KEY_MENU;
-            keyMapping[tvKey.KEY_BACK] = COMMON_KEYS.KEY_BACK;
+            keyMapping[tvKey.KEY_2] = COMMON_KEYS.KEY_BACK;
+            keyMapping[tvKey.KEY_VOL_UP] = COMMON_KEYS.KEY_VOL_UP;
+            keyMapping[tvKey.KEY_VOL_DOWN] = COMMON_KEYS.KEY_VOL_DOWN;
+            keyMapping[tvKey.KEY_MUTE] = COMMON_KEYS.KEY_MUTE;
         }
         
         $scope.showMenu = false;
@@ -96,12 +101,15 @@ angular.module('app', [
 
     }])
     .constant('COMMON_KEYS', {
-        KEY_LEFT: 0,
-        KEY_RIGHT: 1,
-        KEY_UP: 2,
-        KEY_DOWN: 3,
-        KEY_ENTER: 4,
-        KEY_BACK: 5,
-        KEY_TV: 6,
-        KEY_MENU: 7
+        KEY_LEFT    : 0,
+        KEY_RIGHT   : 1,
+        KEY_UP      : 2,
+        KEY_DOWN    : 3,
+        KEY_ENTER   : 4,
+        KEY_BACK    : 5,
+        KEY_TV      : 6,
+        KEY_MENU    : 7,
+        KEY_VOL_UP  : 8,
+        KEY_VOL_DOWN: 9,
+        KEY_MUTE    :10
     });

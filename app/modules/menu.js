@@ -3,15 +3,16 @@
 angular.module('app.menu', [])
     .controller('MenuController', ['$scope', '$interval', 'ActivityManager', 'COMMON_KEYS', function ($scope, $interval, ActivityManager, COMMON_KEYS) {
         $scope.menuItems = [
+            {name: '电视', icon: 'assets/images/ic_menu_default.png', activityId: 'live'},
+            {name: '电影', icon: 'assets/images/ic_menu_default.png', activityId: 'video'},
             {name: '账单', icon: 'assets/images/ic_menu_bill.png', activityId: 'bill'},
             {name: '订餐', icon: 'assets/images/ic_menu_default.png', activityId: 'order'},
             {name: '酒店介绍', icon: 'assets/images/ic_menu_default.png', activityId: 'tpl_pic_text_simple'},
             {name: '城市介绍', icon: 'assets/images/ic_menu_default.png', activityId: 'tpl_category_list'},
             {name: '新闻', icon: 'assets/images/ic_menu_default.png', activityId: 'tpl_text'},
-            {name: '电视', icon: 'assets/images/ic_menu_default.png', activityId: 'video'},
             {name: '天气', icon: 'assets/images/ic_menu_default.png', activityId: 'weather'},
             {name: '闹钟', icon: 'assets/images/ic_menu_default.png', activityId: 'alarm'},
-            {name: '消息', icon: 'assets/images/ic_menu_default.png', activityId: 'live'},
+            {name: '消息', icon: 'assets/images/ic_menu_default.png', activityId: 'dnd'},
             {name: '免打扰', icon: 'assets/images/ic_menu_default.png', activityId: 'dnd'}
         ];
         $scope.selectedMenuItemIndex = 0;

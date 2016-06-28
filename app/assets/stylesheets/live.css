@@ -60,6 +60,10 @@
     margin: 0px 0px 10px 20px;
 }
 
+.channel-list>li>ul>li>img {
+    float: right;
+}
+
 .channel-list>li>ul>li.selected {
     background-color: #ffffff;
     color: #1F343A;

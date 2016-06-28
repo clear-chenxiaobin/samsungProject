@@ -33,7 +33,13 @@
     padding: 10px 30px 40px;
 }
 
-.welcome-content>i {
+.index-room-language {
+    position: absolute;
+    width: 100%;
+    top: 410px;
+}
+
+.index-room-language>i {
     display: inline-block;
     width: 210px;
     height: 70px;
@@ -44,7 +50,7 @@
     background-size: 210px 70px;
 }
 
-.welcome-content>i.active {
+.index-room-language>i.active {
     background: url("../images/ic_button_active.png");
     background-size: 210px 70px;
 }

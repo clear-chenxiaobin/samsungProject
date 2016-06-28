@@ -2,11 +2,11 @@
     <div class="content-header">{{title}}</div>
     <div class="content-main">
         <div class="bill-header">
-            <span>账单列表</span><span>日期</span><span>金额</span>
+            <span>账单列表</span><span>时间</span><span>金额</span>
         </div>
         <ul class="bill-main">
             <li ng-repeat="item in billItems">
-                <span>{{item.title}}</span><span>{{item.date| date:'yyyy.MM.dd'}}</span><span>{{item.amount| currency:'￥'}}</span>
+                <span>{{item.title}}</span><span>{{item.date| date:'yyyy/MM/dd HH:mm'}}</span><span>{{item.amount| currency:'￥'}}</span>
             </li>
         </ul>
         <div class="bill-footer">
