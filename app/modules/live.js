@@ -11,53 +11,28 @@ angular.module('app.live', [])
         var channelsPerColumn = 8, column;
         var channels = [];
 
-        document.getElementsByTagName("body")[0].setAttribute("style","background-image:none");
+        document.getElementsByTagName("body")[0].setAttribute("style", "background-image:none");
         activity.initialize($scope);
         activity.shouldDisplayMenu(false);
         activity.hide();
 
         $element[0].parentNode.classList.add('live-content-container');
-        LiveService.getPlayUrl(configUrl).success(function (data) {
-            data.Content.forEach(function (el, idx, arr) {
-                if (el.Name == '直播') {
-                    jsonUrl = ResourceManager.getConfigurations().serverUrl() + el.Json_URL;
-                    return;
-                }
-            })
-
-            LiveService.initialize(jsonUrl).success(function (data) {
-                //console.log(LiveService.getChannels());
-                chaData = LiveService.getChannels();
-
-                stream = chaData[0].stream;
-                LiveService.onLoad(stream);
-
-                channelsPerColumn = 8, column;
-                for (var i = 0; i < chaData.length; i++) {
-                    if (i % channelsPerColumn === 0) {
-                        if (column) {
-                            channels.push(column);
-                        }
-                        column = [];
+        if (LiveService.getChannels().length == 0) {
+            LiveService.getPlayUrl(configUrl).success(function (data) {
+                data.Content.forEach(function (el, idx, arr) {
+                    if (el.Name == '直播') {
+                        jsonUrl = ResourceManager.getConfigurations().serverUrl() + el.Json_URL;
+                        return;
                     }
-                    column.push({
-                        index: i,
-                        icon: chaData[i].icon,
-                        name: chaData[i].ChannelName,
-                        stream: chaData[i].stream
-                    });
-                }
-                if (column) {
-                    channels.push(column);
-                }
-                $scope.currentPage = 0;
-                $scope.selectedIndex = 0;
-                $scope.title = '电视频道';
-                $scope.totalPage = Math.ceil(chaData.length / (3 * channelsPerColumn));
-                $scope.channels = channels.slice(0, 3);
-                numOfChannels = chaData.length;
+                })
+                LiveService.initialize(jsonUrl).success(function (data) {
+                    //console.log(LiveService.getChannels());
+                    bind();
+                })
             })
-        })
+        } else {
+            bind();
+        }
 
         activity.onKeyUp(function (keyCode) {
             var tempIndex = $scope.selectedIndex;
@@ -67,20 +42,18 @@ angular.module('app.live', [])
                 switch (keyCode) {
                     case COMMON_KEYS.KEY_UP:
                         tempIndex += 1;
-                        stream = chaData[tempIndex].stream;
-                        LiveService.changeVideo(stream);
+                        cutVideo();
                         break;
                     case COMMON_KEYS.KEY_DOWN:
                         tempIndex -= 1;
-                        stream = chaData[tempIndex].stream;
-                        LiveService.changeVideo(stream);
+                        cutVideo();
                         break;
                     case COMMON_KEYS.KEY_ENTER:
                         activity.show();
                         break;
                     case COMMON_KEYS.KEY_BACK:
-                        LiveService.stopPlay();
-                        document.getElementsByTagName("body")[0].setAttribute("style","background-image:(url:../assets/images/bg_window.jpg)");
+                        stopPlay();
+                        document.getElementsByTagName("body")[0].setAttribute("style", "background-image:(url:../assets/images/bg_window.jpg)");
                         activity.finish();
                         break;
                 }
@@ -91,23 +64,22 @@ angular.module('app.live', [])
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
                     tempIndex -= 8;
-                    stream = chaData[tempIndex].stream;
+                    cutVideo();
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
                     tempIndex += 8;
-                    stream = chaData[tempIndex].stream;
+                    cutVideo();
                     break;
                 case COMMON_KEYS.KEY_UP:
                     tempIndex -= 1;
-                    stream = chaData[tempIndex].stream;
+                    cutVideo();
                     break;
                 case COMMON_KEYS.KEY_DOWN:
                     tempIndex += 1;
-                    stream = chaData[tempIndex].stream;
+                    cutVideo();
                     break;
                 case COMMON_KEYS.KEY_ENTER:
-                    activity.hide();
-                    LiveService.changeVideo(stream);
+                    //activity.hide();
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.hide();
@@ -133,19 +105,92 @@ angular.module('app.live', [])
                 $scope.channels = channels.slice(currentPage * 3, currentPage * 3 + 3);
             }
             $scope.selectedIndex = tempIndex;
+
+            function cutVideo() {
+                stream = chaData[tempIndex].stream;
+                changeVideo(stream);
+            }
         });
 
-    }])
-    .service('LiveService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+        function bind() {
+            chaData = LiveService.getChannels();
+            stream = chaData[0].stream;
+            onLoad(stream);
+
+            for (var i = 0; i < chaData.length; i++) {
+                if (i % channelsPerColumn === 0) {
+                    if (column) {
+                        channels.push(column);
+                    }
+                    column = [];
+                }
+                column.push({
+                    index: i,
+                    icon: chaData[i].icon,
+                    name: chaData[i].ChannelName,
+                    stream: chaData[i].stream
+                });
+            }
+            if (column) {
+                channels.push(column);
+            }
+            $scope.currentPage = 0;
+            $scope.selectedIndex = 0;
+            $scope.title = '电视频道';
+            $scope.totalPage = Math.ceil(chaData.length / (3 * channelsPerColumn));
+            $scope.channels = channels.slice(0, 3);
+            numOfChannels = chaData.length;
+        }
+
         var widgetAPI = new Common.API.Widget();
         var pluginObj = new Common.API.Plugin();
         var tvKey = new Common.API.TVKeyValue();
-
-        var configUrl,
-            channels = [];
         var pluginSef;
         var pluginObjectTVMW;
         var PL_MEDIA_SOURCE = 43;
+
+        function stopPlay() {
+            try {
+                pluginSef.Execute("Stop");
+            } catch (e) {
+            }
+        }
+
+        function changeVideo(videoURL) {
+            stopPlay();
+            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            //}
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+        }
+
+        function onLoad(videoURL) {
+            widgetAPI.sendReadyEvent();
+
+            pluginObj.unregistKey(tvKey.KEY_VOL_UP);
+            pluginObj.unregistKey(tvKey.KEY_VOL_DOWN);
+            pluginObj.unregistKey(tvKey.KEY_MUTE);
+
+            pluginSef = document.getElementById("pluginSef");
+            pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
+
+            pluginSef.Open('Player', '1.000', 'Player');
+
+            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            //}
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+
+        }
+
+    }])
+    .service('LiveService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+        var configUrl,
+            channels = [];
 
         this.getPlayUrl = function (_configUrl) {
             return $http.get(_configUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
@@ -181,37 +226,4 @@ angular.module('app.live', [])
         this.getChannels = function () {
             return channels;
         };
-
-        this.stopPlay = function () {
-            pluginSef.Execute("Stop");
-        }
-
-        this.changeVideo = function (videoURL) {
-            pluginSef.Execute("Stop");
-            pluginSef.Execute("InitPlayer", videoURL);
-            pluginSef.Execute("Start", videoURL);
-            pluginSef.Execute("StartPlayback", 0);
-        }
-
-        this.onLoad = function (videoURL) {
-            widgetAPI.sendReadyEvent();
-
-            pluginObj.unregistKey(tvKey.KEY_VOL_UP);
-            pluginObj.unregistKey(tvKey.KEY_VOL_DOWN);
-            pluginObj.unregistKey(tvKey.KEY_MUTE);
-
-            pluginSef = document.getElementById("pluginSef");
-            pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
-
-            pluginSef.Open('Player', '1.000', 'Player');
-
-            if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
-                pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
-            }
-            pluginSef.Execute("InitPlayer", videoURL);
-            pluginSef.Execute("Start", videoURL);
-            pluginSef.Execute("StartPlayback", 0);
-
-        }
-
     }]);

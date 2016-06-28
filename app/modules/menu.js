@@ -19,7 +19,7 @@ angular.module('app.menu', [])
         $scope.guestName = '李嘉诚先生';
         $scope.roomNumber = '8088';
         
-        $scope.menuStyleLeft = (168 - $scope.selectedMenuItemIndex * 120) + 'px';
+        $scope.menuStyleLeft = (215 - $scope.selectedMenuItemIndex * 120) + 'px';
         $scope.menuStyleWidth = $scope.menuItems.length * 120 + 1000 + 'px';
         
         $scope.$on('menu.keyup', function (ev, key) {
@@ -27,13 +27,13 @@ angular.module('app.menu', [])
                 case COMMON_KEYS.KEY_LEFT:
                     if ($scope.selectedMenuItemIndex > 0) {
                         $scope.selectedMenuItemIndex--;
-                        $scope.menuStyleLeft = (168 - $scope.selectedMenuItemIndex * 120) + 'px';
+                        $scope.menuStyleLeft = (215 - $scope.selectedMenuItemIndex * 120) + 'px';
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
                     if ($scope.selectedMenuItemIndex < $scope.menuItems.length - 1) {
                         $scope.selectedMenuItemIndex++;
-                        $scope.menuStyleLeft = (168 - $scope.selectedMenuItemIndex * 120) + 'px';
+                        $scope.menuStyleLeft = (215 - $scope.selectedMenuItemIndex * 120) + 'px';
                     }
                     break;
                 case COMMON_KEYS.KEY_ENTER:

@@ -1,7 +1,7 @@
 
 /* bill page */
 .bill-header, .bill-main {
-    width: 1000px;
+    width: 1136px;
     margin: 0 auto;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .bill-header>span:nth-child(1), .bill-main>li>span:nth-child(1) {
-    width: 500px;
+    width: 606px;
 }
 
 .bill-header>span:nth-child(2), .bill-main>li>span:nth-child(2) {
@@ -49,12 +49,12 @@
 }
 
 .bill-header>span:nth-child(3), .bill-main>li>span:nth-child(3) {
-    width: 120px;
+    width: 150px;
     text-align: center;
 }
 
 .bill-footer {
-    width: 1000px;
+    width: 1136px;
     margin: 0 auto;
     font-size: 26px;
 }
@@ -66,13 +66,13 @@
 }
 
 .bill-footer>.bill-pager-container {
-    width: 760px;
     float: left;
     padding-left: 20px;
 }
 
 .bill-footer>.bill-amount-container {
-    float: left;
+    float: right;
+    padding-right: 20px;
 }
 
 .bill-pager:before {

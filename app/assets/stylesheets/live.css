@@ -1,7 +1,7 @@
 
 .live-content-container {
-    background: url("../images/bg_activity_live.png") no-repeat 0 0;
-    background-size: 1000px 640px;
+    background: url("../images/bg_activity_live.png") no-repeat 0 67px;
+    background-size: 1136px 551px;
 }
 
 .live-content .channel-header {
@@ -28,7 +28,7 @@
 }
 
 .channel-list-container {
-    width: 1000px;
+    width: 1136px;
     margin: 0 auto;
 }
 
@@ -80,14 +80,15 @@
 }
 
 .channel-list-container:before, .channel-list-container:after, .channel-list {
-    /*height: 694px;*/
+    height: 400px;
+    margin-left: 10px;
 }
 
 .channel-list-container.left-arrow:before {
-    background: url("../images/ic_arrow_left.png") no-repeat 10px 300px;
+    background: url("../images/ic_arrow_left.png") no-repeat 10px 200px;
 }
 
 .channel-list-container.right-arrow:after {
-    background: url("../images/ic_arrow_right.png") no-repeat 10px 300px;
+    background: url("../images/ic_arrow_right.png") no-repeat 10px 200px;
 }
 

@@ -8,7 +8,7 @@
 }
 
 .toolbar {
-    line-height: 40px;
+    line-height: 36px;
     color: #ffffff;
 }
 
@@ -38,7 +38,7 @@
 
 .toolbar>.left {
     float: left;
-    width: 350px;
+    width: 418px;
     height: 100%;
     overflow: hidden;
 }
@@ -53,7 +53,7 @@
 
 .toolbar>.right {
     float: left;
-    width: 350px;
+    width: 418px;
     height: 100%;
     overflow: hidden;
 }

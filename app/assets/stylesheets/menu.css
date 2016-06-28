@@ -3,9 +3,9 @@
 
 .menu-container {
     position: absolute;
-    left: 140px;
-    top: 528px;
-    width: 1000px;
+    left: 72px;
+    top: 532px;
+    width: 1136px;
     height: 152px;
     z-index: 9;
     color: #fff;
@@ -19,7 +19,7 @@
 }
 
 .menu-container>.menu-guest-info {
-    width: 175px;
+    width: 194px;
     padding: 20px 25px;
     float: left;
 }
@@ -29,14 +29,14 @@
 }
 
 .menu-container>.menu-date-info {
-    width: 175px;
+    width: 194px;
     height: 102px;
     padding: 20px 25px;;
     float: left;
 }
 
 .menu-container>.menu-item-container {
-    width: 480px;
+    width: 580px;
     height: 106px;
     float: left;
     overflow: hidden;
