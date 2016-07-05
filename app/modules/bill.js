@@ -45,7 +45,7 @@ angular.module('app.bill', [])
             }
         });
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
                     currentPage--;

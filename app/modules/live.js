@@ -1,12 +1,10 @@
 'use strict';
 
 angular.module('app.live', [])
-    .controller('LiveController', ['$scope', '$element', 'ActivityManager', 'LiveService', 'COMMON_KEYS', 'ResourceManager', function ($scope, $element, ActivityManager, LiveService, COMMON_KEYS, ResourceManager) {
+    .controller('LiveController', ['$scope', '$element', 'ActivityManager', 'LiveService', 'COMMON_KEYS', function ($scope, $element, ActivityManager, LiveService, COMMON_KEYS) {
         var activity = ActivityManager.getActiveActivity();
         var chaData,
             numOfChannels,
-            configUrl = ResourceManager.getConfigurations().serverUrl(),
-            jsonUrl,
             stream;
         var channelsPerColumn = 8, column;
         var channels = [];
@@ -18,14 +16,8 @@ angular.module('app.live', [])
 
         $element[0].parentNode.classList.add('live-content-container');
         if (LiveService.getChannels().length == 0) {
-            LiveService.getPlayUrl(configUrl).success(function (data) {
-                data.Content.forEach(function (el, idx, arr) {
-                    if (el.Name == '直播') {
-                        jsonUrl = ResourceManager.getConfigurations().serverUrl() + el.Json_URL;
-                        return;
-                    }
-                })
-                LiveService.initialize(jsonUrl).success(function (data) {
+            LiveService.getPlayUrl().success(function (data) {
+                LiveService.initialize().success(function (data) {
                     //console.log(LiveService.getChannels());
                     bind();
                 })
@@ -34,7 +26,7 @@ angular.module('app.live', [])
             bind();
         }
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             var tempIndex = $scope.selectedIndex;
             var oldIndex = tempIndex + 1;
 
@@ -52,7 +44,7 @@ angular.module('app.live', [])
                         activity.show();
                         break;
                     case COMMON_KEYS.KEY_BACK:
-                        stopPlay();
+                        LiveService.stopPlay();
                         document.getElementsByTagName("body")[0].setAttribute("style", "background-image:(url:../assets/images/bg_window.jpg)");
                         activity.finish();
                         break;
@@ -107,15 +99,17 @@ angular.module('app.live', [])
             $scope.selectedIndex = tempIndex;
 
             function cutVideo() {
-                stream = chaData[tempIndex].stream;
-                changeVideo(stream);
+                //stream = chaData[tempIndex].stream;
+                stream = "udp://@229.1.1.1:8001";
+                LiveService.changeVideo(stream);
             }
         });
 
         function bind() {
             chaData = LiveService.getChannels();
-            stream = chaData[0].stream;
-            onLoad(stream);
+            //stream = chaData[0].stream;
+            stream = "udp://@224.1.1.1:8001";
+            LiveService.onLoad(stream);
 
             for (var i = 0; i < chaData.length; i++) {
                 if (i % channelsPerColumn === 0) {
@@ -141,80 +135,49 @@ angular.module('app.live', [])
             $scope.channels = channels.slice(0, 3);
             numOfChannels = chaData.length;
         }
-
+    }])
+    .service('LiveService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
         var widgetAPI = new Common.API.Widget();
         var pluginObj = new Common.API.Plugin();
         var tvKey = new Common.API.TVKeyValue();
+
+        var configUrl,
+            conUrl = ResourceManager.getConfigurations().serverUrl(),
+            jsonUrl,
+            channels = [];
         var pluginSef;
         var pluginObjectTVMW;
-        var PL_MEDIA_SOURCE = 43;
+        var PL_MEDIA_SOURCE = 45;
 
-        function stopPlay() {
-            try {
-                pluginSef.Execute("Stop");
-            } catch (e) {
-            }
-        }
-
-        function changeVideo(videoURL) {
-            stopPlay();
-            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
-            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
-            //}
-            pluginSef.Execute("InitPlayer", videoURL);
-            pluginSef.Execute("Start", videoURL);
-            pluginSef.Execute("StartPlayback", 0);
-        }
-
-        function onLoad(videoURL) {
-            widgetAPI.sendReadyEvent();
-
-            pluginObj.unregistKey(tvKey.KEY_VOL_UP);
-            pluginObj.unregistKey(tvKey.KEY_VOL_DOWN);
-            pluginObj.unregistKey(tvKey.KEY_MUTE);
-
-            pluginSef = document.getElementById("pluginSef");
-            pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
-
-            pluginSef.Open('Player', '1.000', 'Player');
-
-            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
-            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
-            //}
-            pluginSef.Execute("InitPlayer", videoURL);
-            pluginSef.Execute("Start", videoURL);
-            pluginSef.Execute("StartPlayback", 0);
-
-        }
-
-    }])
-    .service('LiveService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
-        var configUrl,
-            channels = [];
-
-        this.getPlayUrl = function (_configUrl) {
-            return $http.get(_configUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
+        this.getPlayUrl = function () {
+            return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
+                menuJSON.Content.forEach(function (el, idx, arr) {
+                    if (el.Name == '直播') {
+                        jsonUrl = conUrl + el.Json_URL;
+                        return;
+                    }
+                })
             })
         }
 
-        this.initialize = function (_configUrl) {
+        this.initialize = function () {
             var deferred = $q.defer();
 
             // cached configurations
-            if (_configUrl === configUrl) {
+            if (jsonUrl === configUrl) {
                 deferred.resolve();
                 return deferred.promise;
             }
-            return $http.get(_configUrl).success(function (configJSON) {
+            return $http.get(jsonUrl).success(function (configJSON) {
                 var zhStrs = [], enStrs = [];
-                configUrl = _configUrl;
+                configUrl = jsonUrl;
                 configJSON.Content.forEach(function (el, idx, arr) {
                     var nameKey = 'channel_name_' + el.ChannelNum;
                     channels.push({
                         ChannelName: el.ChannelName,
                         nameKey: nameKey,
                         stream: el.ChannelSrc[0].Src,
-                        icon: ResourceManager.getConfigurations().serverUrl() + el.ChannelPic
+                        icon: conUrl + el.ChannelPic
                     });
                     zhStrs[nameKey] = el.ChannelName;
                     enStrs[nameKey] = el.ChannelNameEng;
@@ -226,4 +189,43 @@ angular.module('app.live', [])
         this.getChannels = function () {
             return channels;
         };
+
+        this.stopPlay = function () {
+            try {
+                pluginSef.Execute("Stop");
+            } catch (e) {
+            }
+        }
+
+        this.changeVideo = function (videoURL) {
+            pluginSef.Execute("Stop");
+            if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+                pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            }
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+        }
+        
+        this.onLoad = function (videoURL) {
+            widgetAPI.sendReadyEvent();
+
+            pluginObj.unregistKey(tvKey.KEY_VOL_UP);
+            pluginObj.unregistKey(tvKey.KEY_VOL_DOWN);
+            pluginObj.unregistKey(tvKey.KEY_MUTE);
+
+            pluginSef = document.getElementById("pluginSef");
+            pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
+
+            pluginSef.Open('Player', '1.000', 'Player');
+
+            if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+                pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            }
+            pluginSef.Execute("InitPlayer", videoURL);
+            pluginSef.Execute("Start", videoURL);
+            pluginSef.Execute("StartPlayback", 0);
+
+        }
+
     }]);

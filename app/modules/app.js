@@ -40,7 +40,7 @@ angular.module('app', [
 
     }])
     .controller('RootController', ['$scope', 'ActivityManager', 'COMMON_KEYS', function ($scope, ActivityManager, COMMON_KEYS) {
-        
+
         /* browser environment */
         var keyMapping = {
             37: COMMON_KEYS.KEY_LEFT,
@@ -70,10 +70,10 @@ angular.module('app', [
             keyMapping[tvKey.KEY_VOL_DOWN] = COMMON_KEYS.KEY_VOL_DOWN;
             keyMapping[tvKey.KEY_MUTE] = COMMON_KEYS.KEY_MUTE;
         }
-        
+
         $scope.showMenu = false;
 
-        $scope.onkeyup = function (ev) {
+        $scope.onkeydown = function (ev) {
             var key = keyMapping[ev.keyCode];
             if (key === COMMON_KEYS.KEY_MENU) {
                 if (ActivityManager.getActiveActivity().shouldDisplayMenu()) {
@@ -81,17 +81,19 @@ angular.module('app', [
                     $scope.$broadcast('menu.toggle', $scope.showMenu);
                 }
             } else if (!$scope.showMenu) {
-                ActivityManager.getActiveActivity().keyUp(key);
+                ActivityManager.getActiveActivity().keyDown(key);
             } else {
-                $scope.$broadcast('menu.keyup', key);
+                $scope.$broadcast('menu.keydown', key);
             }
         };
 
-        $scope.onkeydown = function (ev) {
+        $scope.onkeyup = function (ev) {
+            var key = keyMapping[ev.keyCode];
             if (!$scope.showMenu) {
-                ActivityManager.getActiveActivity().keyDown(keyMapping[ev.keyCode]);
+                ActivityManager.getActiveActivity().keyUp(key);
             }
-        };
+        }
+
         $scope.activityStack = ActivityManager.getActivityStack();
 
         $scope.$on('activity.created', function (ev) {

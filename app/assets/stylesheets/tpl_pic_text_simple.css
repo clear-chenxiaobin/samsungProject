@@ -1,6 +1,6 @@
 
 .tpl-pic-text-simple-main>.current {
-    width: 521px;
+    width: 520px;
     margin: 20px;
     height: calc(100% - 80px);
     position: relative;
@@ -28,7 +28,7 @@
 .tpl-pic-text-simple-main>.current>i>img {
     vertical-align: middle;
     max-width: 500px;
-    max-height: 290px;
+    max-height: 280px;
     border-radius: 20px;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .tpl-pic-text-simple-main>.previous, .tpl-pic-text-simple-main>.next {
-    width: 214px;
+    width: 282.5px;
     height: 100%;
     display: inline-block;
     vertical-align: top;
@@ -48,8 +48,8 @@
 }
 
 .tpl-pic-text-simple-main>.previous>img, .tpl-pic-text-simple-main>.next>img {
-    height: 280px;
-    margin-top: 30px;
+    height: 240px;
+    margin-top: 50px;
     opacity: 0.7;
     border-radius: 20px;
 }

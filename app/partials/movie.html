@@ -1,5 +1,24 @@
 <div ng-controller="MovieController" class="movie-content">
-    <div class="content-header"></div>
-    <div class="content-main index-content"></div>
+    <div class="content-header">{{title}}</div>
+    <div class="content-main index-content">
+        <div class="movie-type">
+            <ul class="movie-type-list ">
+                <li class="selected">全部</li>
+                <li>科幻</li>
+            </ul>
+        </div>
+        <div class="movie">
+            <ul class="movie-list">
+                <li ng-repeat="column in movies">
+                    <ul>
+                        <li ng-repeat="item in column" ng-class="{'selected': item.index==selectedIndex}">
+                            <img ng-src="{{item.pic}}">
+                            <span>{{item.name}}</span>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+    </div>
     <toolbar items="|"></toolbar>
 </div>

@@ -1,15 +1,20 @@
 
 .category-list-container, .category-preview {
     display: inline-block;
-    width: 468px;
-    height: 400px;
+    width: 542px;
+    height: 492px;
     background: url("../images/bg_category_list.png") no-repeat 0 0;
-    background-size: 468px 400px;
+    background-size: 542px 490px;
     overflow: hidden;
 }
 
 .category-list-container {
-    margin: 10px 6px 0 28px;
+    margin: 10px 0px 10px 21px;
+}
+
+.category-preview {
+    margin: 10px 21px 10px 0px;
+    float: right;
 }
 
 .category-list {
@@ -24,7 +29,7 @@
 
 .category-list li.selected {
     background: url("../images/bg_category_lsit_selected.png") 0 0 no-repeat;
-    background-size: 452px 39px;
+    background-size: 526px 39px;
 
 }
 
@@ -32,7 +37,7 @@
     display: inline-block;
     font-size: 26px;
     padding: 0 10px;
-    width: 405px;
+    width: 475px;
     height: 100%;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -49,17 +54,19 @@
 }
 
 .category-preview>.category-preview-image-container {
-    width: 450px;
-    height: 257px;
+    width: 520px;
+    height: 297px;
     background: url("../images/bg_category_preview_image.png") 0 0 no-repeat;
-    background-size: 450px;
+    background-size: 520px;
     margin: 10px auto;
+    text-align: center;
 }
 
 .category-preview img {
-    max-width: 780px;
-    max-height: 434px;
-    margin: 12px;
+    max-width: 505px;
+    max-height: 281px;
+    margin: 8px;
+    border-radius: 9px;
 }
 
 .category-preview>p {

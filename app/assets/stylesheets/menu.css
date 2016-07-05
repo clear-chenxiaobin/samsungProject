@@ -66,14 +66,16 @@
 
 .menu-container>.menu-item-container li {
     float: left;
-    height: 106px;
-    width: 120px;
+    height: 80px;
+    width: 80px;
+    margin: 10px;
 }
 
 .menu-container>.menu-item-container li.selected {
     float: left;
-    height: 106px;
-    width: 153px;
+    height: 100px;
+    width: 100px;
+    margin-top: 0px;
 }
 
 .menu-container>.menu-item-container ul {
@@ -99,9 +101,8 @@
     vertical-align: middle;
     position: relative;
     left: 50%;
-    margin-left: -60px;
-    width: 100px;
-    height: 100px;
+    margin-left: -40px;
+    width: 80px;
 }
 
 .menu-container>.menu-item-container li.selected>img {
@@ -109,12 +110,6 @@
     vertical-align: middle;
     position: relative;
     left: 50%;
-    margin-left: -70px;
     width: 100px;
-    height: 100px;
-}
-
-.menu-container>.menu-item-container li.selected>img {
-    width: 120px;
-    height: 120px;
+    margin-left: -50px;
 }

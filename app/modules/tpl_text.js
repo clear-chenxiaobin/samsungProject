@@ -23,7 +23,7 @@ angular.module('app.tpl_text', [])
             $scope.totalPage = Math.ceil(totalHeight / pageHeight);
         }, 0);
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             var tempIndex = $scope.selectedIndex;
             var pageIndex = $scope.currentPage;
             switch (keyCode) {

@@ -1,7 +1,7 @@
 
 /* bill page */
 .bill-header, .bill-main {
-    width: 1136px;
+    width: 950px;
     margin: 0 auto;
 }
 
@@ -40,7 +40,7 @@
 }
 
 .bill-header>span:nth-child(1), .bill-main>li>span:nth-child(1) {
-    width: 606px;
+    width: 420px;
 }
 
 .bill-header>span:nth-child(2), .bill-main>li>span:nth-child(2) {
@@ -54,7 +54,7 @@
 }
 
 .bill-footer {
-    width: 1136px;
+    width: 950px;
     margin: 0 auto;
     font-size: 26px;
 }

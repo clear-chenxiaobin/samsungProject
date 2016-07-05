@@ -22,7 +22,7 @@ angular.module('app.welcome', [])
         var languages = ['zh-CN', 'en-US'],
             languageIndex = 0;
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
                 case COMMON_KEYS.KEY_RIGHT:

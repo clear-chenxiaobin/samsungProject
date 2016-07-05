@@ -8,6 +8,7 @@
     <link rel="stylesheet" href="assets/stylesheets/index.css" />
     <link rel="stylesheet" href="assets/stylesheets/main.css" />
     <link rel="stylesheet" href="assets/stylesheets/menu.css" />
+    <link rel="stylesheet" href="assets/stylesheets/movie.css" />
     <link rel="stylesheet" href="assets/stylesheets/reset.css" />
     <link rel="stylesheet" href="assets/stylesheets/toolbar.css" />
     <link rel="stylesheet" href="assets/stylesheets/live.css" />
@@ -47,6 +48,18 @@
             <span>{{timeString}}</span>
         </div>
     </div>
+
+    <!-- video event -->
+    <div id="test" style="color:#fff; background-color: rgba(50,40,30,0.5);"></div>
+
+    <!-- Player Controller-->
+    <footer id="all" class="videoContro" style="display: none;">
+        <div id="playProgress">
+            <i id="playtime"></i>
+        </div>
+        <label id="startTime">00:00:00</label>
+        <em id="endTime">00:00:00</em>
+    </footer>
 
     <!-- video player -->
     <div class="video-container" ng-controller="VideoController"></div>

@@ -17,7 +17,7 @@ angular.module('app.index', [])
             $scope.roomNumber = '房间号8088';
         });
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();

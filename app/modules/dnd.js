@@ -9,7 +9,7 @@ angular.module('app.dnd', [])
             $scope.title = '免打扰服务';
         });
 
-        activity.onKeyUp(function (keyCode) {
+        activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
