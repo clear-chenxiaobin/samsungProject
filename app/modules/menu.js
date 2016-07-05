@@ -7,7 +7,6 @@ angular.module('app.menu', [])
             {name: '电影', icon: 'assets/images/ic_menu_default.png', activityId: 'movie'},
             {name: '账单', icon: 'assets/images/ic_menu_bill.png', activityId: 'bill'},
             {name: '订餐', icon: 'assets/images/ic_menu_order.png', activityId: 'order'},
-            {name: '酒店介绍', icon: 'assets/images/ic_menu_default.png', activityId: 'tpl_pic_text_simple'},
             {name: '城市介绍', icon: 'assets/images/ic_menu_city.png', activityId: 'tpl_category_list'},
             {name: '新闻', icon: 'assets/images/ic_menu_news.png', activityId: 'tpl_text'},
             {name: '天气', icon: 'assets/images/ic_menu_weather.png', activityId: 'weather'},

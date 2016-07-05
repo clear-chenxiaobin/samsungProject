@@ -5,7 +5,8 @@ angular.module('app.resource', [])
 
         var locale         = 'zh-CN',
             i18nResource,
-            configurations;
+            configurations,
+            picTextDetail;
 
         this.initialize = function (mainJSON, menuJSON) {
 
@@ -92,6 +93,17 @@ angular.module('app.resource', [])
                 i18nResource['en-US'][key] = strs['en-US'][key];
             });
         };
+
+        this.setPicTextDetail = function (title, detail) {
+            picTextDetail = {
+                title : title,
+                detail : detail
+            };
+        }
+
+        this.getPicTextDetail = function () {
+            return picTextDetail;
+        }
 
         this.getConfigurations = function () {
             return {

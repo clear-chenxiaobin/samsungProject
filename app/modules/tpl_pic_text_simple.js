@@ -1,24 +1,28 @@
 'use strict';
 
 angular.module('app.tpl_pic_text_simple', [])
-    .controller('TplPicTextSimpleController', ['$scope', 'ActivityManager', 'COMMON_KEYS', function ($scope, ActivityManager, COMMON_KEYS) {
+    .controller('TplPicTextSimpleController', ['$scope', 'ActivityManager', 'COMMON_KEYS', 'TplPicTextSimpleService', function ($scope, ActivityManager, COMMON_KEYS, TplPicTextSimpleService) {
         var activity = ActivityManager.getActiveActivity();
         activity.initialize($scope);
 
-        activity.loadI18NResource(function (res) {
-            $scope.title = '酒店介绍/酒店/上海四季酒店';
-        });
+        //activity.loadI18NResource(function (res) {
+        //    $scope.title = '酒店介绍/酒店/上海四季酒店';
+        //});
 
-        var content = [
-            {src: 'assets/images/bg_window.jpg', text: '一家5星级的国际顶尖品牌豪华酒店，位于市中心的威海路 师门一路口，邻近南京路商业街'},
-            {src: 'assets/images/img-detail-1.png', text: '行政大床房，2米大床给您一个家的感觉，放松心情，享受一份好心情'},
-            {src: 'assets/images/img-detail-2.png', text: '标准大床房，2米大床给您舒适的感觉，呼吸新鲜空气，享受每一天'},
-            {src: 'assets/images/img-detail-3.jpg', text: '中式餐厅，想吃什么点什么'}
-        ];
+        var detailData = TplPicTextSimpleService.getPicTextDetail();
+        var content = [];
+        for (var i = 0; i < detailData.detail.length; i++) {
+            content.push({
+                src: TplPicTextSimpleService.getConfigUrl() + detailData.detail[i].Picurl,
+                text: detailData.detail[i].Introduce,
+                title: detailData.title + "/" + detailData.detail[i].Introduce
+            })
+        }
 
         $scope.previous = null;
         $scope.current = content[0];
         $scope.next = content[1];
+        $scope.title = content[0].title;
 
         var selectedIndex = 0;
 
@@ -31,7 +35,7 @@ angular.module('app.tpl_pic_text_simple', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    if (tempIndex < content.length-1) {
+                    if (tempIndex < content.length - 1) {
                         tempIndex++;
                     }
                     break;
@@ -44,7 +48,21 @@ angular.module('app.tpl_pic_text_simple', [])
                 $scope.previous = content[selectedIndex - 1];
                 $scope.current = content[selectedIndex];
                 $scope.next = content[selectedIndex + 1];
+                $scope.title = content[selectedIndex].title;
             }
         });
+
+    }])
+    .service('TplPicTextSimpleService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+        var configUrl = ResourceManager.getConfigurations().serverUrl();
+
+        this.getConfigUrl = function () {
+            return configUrl;
+        }
+
+        this.getPicTextDetail = function () {
+            return ResourceManager.getPicTextDetail();
+        }
+
 
     }]);

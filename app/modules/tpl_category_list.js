@@ -30,6 +30,7 @@ angular.module('app.tpl_category_list', [])
             LEVEL = 1;
             $scope.selectedIndex = 0;
             $scope.categories = [];
+            $scope.title = '城市介绍';
             for (var i = 0; i < firstLevel.length; i++) {
                 $scope.categories.push({
                     name: firstLevel[i].Name,
@@ -46,7 +47,6 @@ angular.module('app.tpl_category_list', [])
             for (var i = 0; i < secondLevel.length; i++) {
                 $scope.categories.push({
                     name: secondLevel[i].Name,
-                    previewText: secondLevel[i].introduce
                 });
             }
         }
@@ -88,8 +88,10 @@ angular.module('app.tpl_category_list', [])
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 1) {
                         jsonUrl = firstLevel[$scope.selectedIndex].json_Url;
+                        $scope.title = '城市介绍/' + firstLevel[$scope.selectedIndex].Name;
                         getSecondLevelData(jsonUrl);
                     } else if (LEVEL == 2) {
+                        TplCategoryListService.setPicTextDetail($scope.title, secondLevel[$scope.selectedIndex].SubContent);
                         ActivityManager.startActivity('tpl_pic_text_simple');
                     }
                     break;
@@ -176,5 +178,9 @@ angular.module('app.tpl_category_list', [])
         this.getSecondLevel = function () {
             return secondLevel;
         };
+
+        this.setPicTextDetail = function (title, detail) {
+            ResourceManager.setPicTextDetail(title, detail);
+        }
 
     }]);
