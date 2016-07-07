@@ -100,7 +100,7 @@ angular.module('app.live', [])
 
             function cutVideo() {
                 //stream = chaData[tempIndex].stream;
-                stream = "udp://@229.1.1.1:8001";
+                stream = "rtp://239.45.3.177:5140";
                 LiveService.changeVideo(stream);
             }
         });
@@ -108,7 +108,7 @@ angular.module('app.live', [])
         function bind() {
             chaData = LiveService.getChannels();
             //stream = chaData[0].stream;
-            stream = "udp://@224.1.1.1:8001";
+            stream = "rtp://239.45.3.228:5140";
             LiveService.onLoad(stream);
 
             for (var i = 0; i < chaData.length; i++) {
@@ -148,6 +148,29 @@ angular.module('app.live', [])
         var pluginSef;
         var pluginObjectTVMW;
         var PL_MEDIA_SOURCE = 45;
+
+        var SEF_EVENT_TYPE = {
+            CONNECTION_FAILED: 1,
+            AUTHENTICATION_FAILED: 2,
+            STREAM_NOT_FOUND: 3,
+            NETWORK_DISCONNECTED: 4,
+            NETWORK_SLOW: 5,
+            RENDER_ERROR: 6,
+            RENDERING_START: 7,
+            RENDERING_COMPLETE: 8,
+            STREAM_INFO_READY: 9,
+            DECODING_COMPLETE: 10,
+            BUFFERING_START: 11,
+            BUFFERING_COMPLETE: 12,
+            BUFFERING_PROGRESS: 13,
+            CURRENT_DISPLAY_TIME: 14,
+            AD_START: 15,
+            AD_END: 16,
+            RESOLUTION_CHANGED: 17,
+            BITRATE_CHANGED: 18,
+            SUBTITLE: 19,
+            CUSTOM: 20
+        };
 
         this.getPlayUrl = function () {
             return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
@@ -198,15 +221,23 @@ angular.module('app.live', [])
         }
 
         this.changeVideo = function (videoURL) {
+            //t = null
+            //time = null;
+            //startTime()
+            //pluginSef.OnEvent = onEvent;
+            //document.getElementById("test").innerHTML = "";
+            //var ret = pluginSef.Execute("ChangePlayingURL", videoURL,
+            //    "19", "28", "-1", "-1", "-1");
+            //document.getElementById("test").innerHTML += ret;
             pluginSef.Execute("Stop");
-            if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
-                pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
-            }
+            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
+            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
+            //}
             pluginSef.Execute("InitPlayer", videoURL);
             pluginSef.Execute("Start", videoURL);
             pluginSef.Execute("StartPlayback", 0);
         }
-        
+
         this.onLoad = function (videoURL) {
             widgetAPI.sendReadyEvent();
 
@@ -218,6 +249,7 @@ angular.module('app.live', [])
             pluginObjectTVMW = document.getElementById("pluginObjectTVMW");
 
             pluginSef.Open('Player', '1.000', 'Player');
+            pluginSef.OnEvent = onEvent;
 
             if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
                 pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
@@ -228,4 +260,65 @@ angular.module('app.live', [])
 
         }
 
+        function onEvent(event, data1, data2) {
+            //document.getElementById("test").innerHTML += "<br>onEvent==" + event + " param1 : " + data1 + " param2 : " + data2;
+            switch (event) {
+
+                case SEF_EVENT_TYPE.STREAM_INFO_READY:
+                    //startTime()
+                    //document.getElementById("test").innerHTML += "Stream info ready Completed <br>";
+                    break;
+
+                case SEF_EVENT_TYPE.DECODING_COMPLETE:
+                    //document.getElementById("test").innerHTML += "DECODING_COMPLETE Completed <br>";
+                    break;
+
+                case SEF_EVENT_TYPE.BUFFERING_COMPLETE:
+                    //document.getElementById("test").innerHTML += "Buffering Completed <br>";
+                    break;
+
+                case SEF_EVENT_TYPE.CURRENT_DISPLAY_TIME:
+                    //document.getElementById("test").innerHTML += "CURRENT_DISPLAY_TIME <br>";
+                    break;
+
+                case SEF_EVENT_TYPE.RENDERING_COMPLETE:
+                    //document.getElementById("test").innerHTML += "RENDERING_COMPLETE <br>";
+                    break;
+
+                case SEF_EVENT_TYPE.NETWORK_DISCONNECTED:
+                    //document.getElementById("test").innerHTML += "Network disconnected<br>";
+                    break;
+
+                case SEF_EVENT_TYPE.CONNECTION_FAILED:
+                    //document.getElementById("test").innerHTML += "CONNECTION_FAILED<br>";
+                    break;
+
+                case SEF_EVENT_TYPE.STREAM_NOT_FOUND:
+                    //document.getElementById("test").innerHTML += "STREAM_NOT_FOUND<br>";
+                    break;
+
+                case SEF_EVENT_TYPE.NETWORK_SLOW:
+                    //document.getElementById("test").innerHTML += "NETWORK_SLOW<br>";
+                    break;
+
+                case SEF_EVENT_TYPE.RENDERING_START:
+                    //stopCount();
+                    //document.getElementById("test").innerHTML += 'RENDERING_START<br>';
+                    break;
+            }
+        }
+
+        //var t;
+        //var time = 0;
+        //
+        //function startTime() {
+        //    t = setInterval(function () {
+        //        time += 1;
+        //        document.getElementById('timer').innerHTML = time;
+        //    }, 10)
+        //}
+        //
+        //function stopCount() {
+        //    clearInterval(t);
+        //}
     }]);
