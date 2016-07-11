@@ -26,6 +26,12 @@
 .index-sub-welcome-text {
     font-size: 36px;
     line-height: 140%;
+    width: 900px;
+    white-space: pre-line;
+    word-break: normal;
+    left: 50%;
+    margin-left: -450px;
+    position: absolute;
 }
 
 .index-room-number {

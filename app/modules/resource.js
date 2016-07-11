@@ -38,11 +38,11 @@ angular.module('app.resource', [])
 
             var viewTree = [], subViewTreeIndex = 0, viewTreeIndex = 0;
             menuJSON.Content.forEach(function (el, idx, arr) {
-                var childViews = [];
+                //var childViews = [];
                 if (el.Second) {
                     el.Second.Content.forEach(function (el2, idx2, arr2) {
-                        var nameKey = 'sub_menu_item_' + subViewTreeIndex;
-                        childViews.push({
+                        var nameKey = 'menu_item_' + viewTreeIndex;
+                        viewTree.push({
                             icon: SERVER_URL + el2.Icon_URL,
                             nameKey: nameKey,
                             type: el2.Type,
@@ -50,12 +50,13 @@ angular.module('app.resource', [])
                         });
                         i18nResource['zh-CN'][nameKey] = el2.Name;
                         i18nResource['en-US'][nameKey] = el2.NameEng;
-                        subViewTreeIndex++;
+                        viewTreeIndex++;
                     });
+                    return;
                 }
                 var nameKey = 'menu_item_' + viewTreeIndex;
                 viewTree.push({
-                    childViews: childViews,
+                    //childViews: childViews,
                     nameKey: nameKey,
                     type: el.Type,
                     icon: SERVER_URL + el.Icon_URL,

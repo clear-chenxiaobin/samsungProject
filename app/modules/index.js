@@ -6,7 +6,7 @@ angular.module('app.index', [])
         activity.initialize($scope);
 
         activity.loadI18NResource(function (res) {
-            $scope.guestName = '尊敬的' + res.guest_name + '先生';
+            $scope.guestName = '尊敬的' + res.guest_name;
             //$scope.welcomeText = '欢迎您来到东方滨江大酒店';
             //$scope.subWelcomeText = [
             //    '您好！衷心欢迎阁下光临东方滨江大酒店',
