@@ -1,6 +1,34 @@
 <div ng-controller="WeatherController" class="weather-content">
-    <div class="content-header">{{title}}</div>
-    <div class="content-main"></div>
+    <div class="content-header" style="padding: 0;width: 100%">{{title}}</div>
+    <div class="content-main">
+        <div class="weather-top">
+            <span class="weather-title">{{content.CityName}}</span>
+            <span class="weather-title">{{content.Wind}}</span>
+            <a href="#" style="">城市列表</a>
+        </div>
+        <div class="weather-content">
+            <div class="weather-days">
+                <p class="weather-days-title">{{content.Temperature_Today}}&nbsp;&nbsp;{{content.Weather_Today}}</p>
+                <div class="weather-icon">
+                    <img ng-src="{{conUrl+content.WeatherIconURL_Today}}">
+                </div>
+                <p class="weather-days-bottom">今天</p>
+            </div>
+            <div class="weather-days">
+                <p class="weather-days-title">{{content.Temperature_Tomorrday}}&nbsp;&nbsp;{{content.Weather_tomorrow}}</p>
+                <div class="weather-icon">
+                    <img ng-src="{{conUrl+content.WeatherIconURL_tomorrow}}">
+                </div>
+                <p class="weather-days-bottom">明天</p>
+            </div>
+            <div class="weather-days">
+                <p class="weather-days-title">{{content.Temperature_Thirdday}}&nbsp;&nbsp;{{content.Weather_Thirdday}}</p>
+                <div class="weather-icon">
+                    <img ng-src="{{conUrl+content.WeatherIconURL_Thirdday}}">
+                </div>
+                <p class="weather-days-bottom">后天</p>
+            </div>
+        </div>
+    </div>
     <toolbar items="|"></toolbar>
-
 </div>

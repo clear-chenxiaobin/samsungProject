@@ -6,7 +6,8 @@ angular.module('app.resource', [])
         var locale         = 'zh-CN',
             i18nResource,
             configurations,
-            picTextDetail;
+            picTextDetail,
+            cityIndex;
 
         this.initialize = function (mainJSON, menuJSON) {
 
@@ -104,6 +105,17 @@ angular.module('app.resource', [])
 
         this.getPicTextDetail = function () {
             return picTextDetail;
+        }
+
+        this.setWeatherCity = function(menuNum,cityNum){
+            cityIndex = {
+                menuNum:menuNum,
+                cityNum:cityNum
+            };
+        }
+
+        this.getWeatherCity = function(){
+            return cityIndex;
         }
 
         this.getConfigurations = function () {

@@ -46,7 +46,7 @@ angular.module('app.tpl_category_list', [])
             $scope.categories = [];
             for (var i = 0; i < secondLevel.length; i++) {
                 $scope.categories.push({
-                    name: secondLevel[i].Name,
+                    name: secondLevel[i].Name
                 });
             }
         }
@@ -182,5 +182,4 @@ angular.module('app.tpl_category_list', [])
         this.setPicTextDetail = function (title, detail) {
             ResourceManager.setPicTextDetail(title, detail);
         }
-
     }]);
