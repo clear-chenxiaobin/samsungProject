@@ -11,7 +11,7 @@ angular.module('app.menu', [])
                 ResourceManager.initialize(typeof mainJSON === 'string' ? JSON.parse(mainJSON) : mainJSON,
                     typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
                 ActivityManager.startActivity('welcome');
-                //menuBind();
+                menuBind();
             });
         });
 
@@ -53,7 +53,7 @@ angular.module('app.menu', [])
             }
         });
 
-        this.menuBind = function() {
+         function menuBind() {
             var jsonData = ResourceManager.getI18NResource();
             var treeView = ResourceManager.getConfigurations().viewTree();
             $scope.menuItems = [];
