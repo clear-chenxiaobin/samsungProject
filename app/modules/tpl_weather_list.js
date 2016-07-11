@@ -82,9 +82,7 @@ angular.module('app.tpl_weather_list', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_ENTER:
-                    if (LEVEL == 1) {
-                        bindSecondLevel();
-                    } else if (LEVEL == 2) {
+                    if (LEVEL == 2) {
                         //alert($scope.selectedIndex+"......" + $scope.selectedCityIndex)
                         ResourceManager.setWeatherCity($scope.selectedIndex,$scope.selectedCityIndex);
                         ActivityManager.startActivity('weather');
@@ -94,6 +92,11 @@ angular.module('app.tpl_weather_list', [])
                     if (LEVEL == 2) {
                         cancelBindSecondLevel();
                         bindFirstLevel($scope.selectedIndex);
+                    }
+                    break;
+                case COMMON_KEYS.KEY_RIGHT:
+                    if (LEVEL == 1) {
+                        bindSecondLevel();
                     }
                     break;
             }
