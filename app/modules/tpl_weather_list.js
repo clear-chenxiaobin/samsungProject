@@ -76,11 +76,7 @@ angular.module('app.tpl_weather_list', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_BACK:
-                    if (LEVEL == 1) {
-                        activity.finish();
-                    } else if (LEVEL == 2) {
-                        bindFirstLevel(0);
-                    }
+                    activity.finish();
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 2) {

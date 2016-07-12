@@ -33,6 +33,7 @@ angular.module('app.weather', [])
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_ENTER:
+                    activity.finish();
                     ActivityManager.startActivity('tpl_weather_list');
                     break;
                 case COMMON_KEYS.KEY_BACK:
