@@ -56,6 +56,8 @@ angular.module('app.menu', [])
                             break;
 
                         case COMMON_KEYS.KEY_ENTER:
+                            var activity = ActivityManager.getActiveActivity();
+                            activity.finish();
                             ActivityManager.go(scope.menuItems[scope.selectedMenuItemIndex].activityId, 2);
                             scope.$emit('activity.created');
                             break;
