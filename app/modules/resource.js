@@ -79,12 +79,11 @@ angular.module('app.resource', [])
         this.getI18NResource = function () {
             // keep i18n resource be a snapshot
             var resource = i18nResource[locale];
-            //return {
-            //    getString: function (resourceKey) {
-            //        return resource[resourceKey];
-            //    }
-            //};
-            return resource;
+            return {
+                getString: function (resourceKey) {
+                    return resource[resourceKey];
+                }
+            };
         };
 
         this.addI18NResource = function (strs) {

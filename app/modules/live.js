@@ -107,9 +107,9 @@ angular.module('app.live', [])
 
         function bind() {
             chaData = LiveService.getChannels();
-            //stream = chaData[0].stream;
-            stream = "rtp://239.45.3.228:5140";
-            LiveService.onLoad(stream);
+            stream = chaData[0].stream;
+            //stream = "rtp://239.45.3.228:5140";
+            //LiveService.onLoad(stream);
 
             for (var i = 0; i < chaData.length; i++) {
                 if (i % channelsPerColumn === 0) {
@@ -121,7 +121,7 @@ angular.module('app.live', [])
                 column.push({
                     index: i,
                     icon: chaData[i].icon,
-                    name: chaData[i].ChannelName,
+                    name: LiveService.getChannelName(chaData[i].nameKey),
                     stream: chaData[i].stream
                 });
             }
@@ -172,17 +172,6 @@ angular.module('app.live', [])
             CUSTOM: 20
         };
 
-        this.getPlayUrl = function () {
-            return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
-                menuJSON.Content.forEach(function (el, idx, arr) {
-                    if (el.Name == '直播') {
-                        jsonUrl = conUrl + el.Json_URL;
-                        return;
-                    }
-                })
-            })
-        }
-
         this.initialize = function () {
             var deferred = $q.defer();
 
@@ -197,7 +186,6 @@ angular.module('app.live', [])
                 configJSON.Content.forEach(function (el, idx, arr) {
                     var nameKey = 'channel_name_' + el.ChannelNum;
                     channels.push({
-                        ChannelName: el.ChannelName,
                         nameKey: nameKey,
                         stream: el.ChannelSrc[0].Src,
                         icon: conUrl + el.ChannelPic
@@ -209,9 +197,24 @@ angular.module('app.live', [])
             });
         };
 
+        this.getChannelName = function (nameKey) {
+            return ResourceManager.getI18NResource().getString(nameKey);
+        }
+
         this.getChannels = function () {
             return channels;
         };
+
+        this.getPlayUrl = function () {
+            return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
+                menuJSON.Content.forEach(function (el, idx, arr) {
+                    if (el.Name == '直播' || el.NameEng == "Live") {
+                        jsonUrl = conUrl + el.Json_URL;
+                        return;
+                    }
+                })
+            })
+        }
 
         this.stopPlay = function () {
             try {
@@ -221,18 +224,7 @@ angular.module('app.live', [])
         }
 
         this.changeVideo = function (videoURL) {
-            //t = null
-            //time = null;
-            //startTime()
-            //pluginSef.OnEvent = onEvent;
-            //document.getElementById("test").innerHTML = "";
-            //var ret = pluginSef.Execute("ChangePlayingURL", videoURL,
-            //    "19", "28", "-1", "-1", "-1");
-            //document.getElementById("test").innerHTML += ret;
             pluginSef.Execute("Stop");
-            //if (parseInt(pluginObjectTVMW.GetSource(), 10) != PL_MEDIA_SOURCE) {
-            //    pluginObjectTVMW.SetSource(PL_MEDIA_SOURCE);
-            //}
             pluginSef.Execute("InitPlayer", videoURL);
             pluginSef.Execute("Start", videoURL);
             pluginSef.Execute("StartPlayback", 0);
@@ -265,7 +257,6 @@ angular.module('app.live', [])
             switch (event) {
 
                 case SEF_EVENT_TYPE.STREAM_INFO_READY:
-                    //startTime()
                     //document.getElementById("test").innerHTML += "Stream info ready Completed <br>";
                     break;
 
@@ -302,23 +293,8 @@ angular.module('app.live', [])
                     break;
 
                 case SEF_EVENT_TYPE.RENDERING_START:
-                    //stopCount();
                     //document.getElementById("test").innerHTML += 'RENDERING_START<br>';
                     break;
             }
         }
-
-        //var t;
-        //var time = 0;
-        //
-        //function startTime() {
-        //    t = setInterval(function () {
-        //        time += 1;
-        //        document.getElementById('timer').innerHTML = time;
-        //    }, 10)
-        //}
-        //
-        //function stopCount() {
-        //    clearInterval(t);
-        //}
     }]);

@@ -15,11 +15,11 @@ angular.module('app.menu', [])
                 var treeView = ResourceManager.getConfigurations().viewTree();
                 scope.menuItems = [];
                 for (var i = 0; i < treeView.length; i++) {
-                    var nameKey = treeView[i].nameKey
+                    var menuName = ResourceManager.getI18NResource().getString(treeView[i].nameKey)
                     scope.menuItems.push({
-                        name: eval('jsonData.' + nameKey),
+                        name: menuName,
                         icon: treeView[i].icon,
-                        activityId: getActivityId(eval('jsonData.' + nameKey))
+                        activityId: getActivityId(menuName)
                     });
                 }
                 scope.selectedMenuItemIndex = 0;
@@ -54,6 +54,7 @@ angular.module('app.menu', [])
                                 scope.selectedMenuItemIndex = 0;
                             }
                             break;
+
                         case COMMON_KEYS.KEY_ENTER:
                             ActivityManager.go(scope.menuItems[scope.selectedMenuItemIndex].activityId, 2);
                             scope.$emit('activity.created');
