@@ -16,6 +16,7 @@ angular.module('app.tpl_weather_list', [])
         $scope.firstListContent = [];
         $scope.title = "城市列表";
         $scope.listTopStyle = 0;
+        $scope.listTopStyle2 = 0;
 
         $http.get(conUrl+'/Weather/local_weather_all.json').success(function (data) {
                 data.Content.forEach(function(el){
@@ -75,15 +76,13 @@ angular.module('app.tpl_weather_list', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_BACK:
-                    if (LEVEL == 1) {
-                        activity.finish();
-                    } else if (LEVEL == 2) {
-                        bindFirstLevel(0);
-                    }
+                    activity.finish();
+                    ActivityManager.startActivity('weather');
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 2) {
                         //alert($scope.selectedIndex+"......" + $scope.selectedCityIndex)
+                        activity.finish();
                         ResourceManager.setWeatherCity($scope.selectedIndex,$scope.selectedCityIndex);
                         ActivityManager.startActivity('weather');
                     }
@@ -101,7 +100,13 @@ angular.module('app.tpl_weather_list', [])
                     break;
             }
             if ($scope.selectedCityIndex > 9) {
-                $scope.listTopStyle = (9 - $scope.selectedCityIndex) * 39;
+                $scope.listTopStyle2 = (9 - $scope.selectedCityIndex) * 39;
+                console.log($scope.listTopStyle2);
+            } else if ($scope.listTopStyle2 !== 0) {
+                $scope.listTopStyle2 = 0;
+            }
+            if ($scope.selectedIndex > 9) {
+                $scope.listTopStyle = (9 - $scope.selectedIndex) * 39;
             } else if ($scope.listTopStyle !== 0) {
                 $scope.listTopStyle = 0;
             }

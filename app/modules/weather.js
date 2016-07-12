@@ -23,16 +23,15 @@ angular.module('app.weather', [])
                 $scope.title = '天气';
             });
             function loadWeatherData(num,cityNum){
+                ResourceManager.setWeatherCity(num,cityNum);
                 var loadCity = weatherData[num].Second.Content[cityNum];
                 $scope.content = loadCity;
             }
-
         });
-
-
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_ENTER:
+                    activity.finish();
                     ActivityManager.startActivity('tpl_weather_list');
                     break;
                 case COMMON_KEYS.KEY_BACK:
@@ -40,5 +39,4 @@ angular.module('app.weather', [])
                     break;
             }
         });
-
     }]);
