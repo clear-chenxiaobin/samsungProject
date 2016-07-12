@@ -3,8 +3,8 @@
 
 .menu-container {
     position: absolute;
-    left: 72px;
-    top: 532px;
+    /*left: 72px;*/
+    top: 484px;
     width: 1136px;
     height: 152px;
     z-index: 9;
@@ -22,6 +22,7 @@
     width: 194px;
     padding: 20px 25px;
     float: left;
+    text-align: left;
 }
 
 .menu-container>.menu-guest-info span {
@@ -101,7 +102,7 @@
     vertical-align: middle;
     position: relative;
     left: 50%;
-    margin-left: -40px;
+    margin-left: -100px;
     width: 80px;
 }
 
@@ -111,5 +112,5 @@
     position: relative;
     left: 50%;
     width: 100px;
-    margin-left: -50px;
+    margin-left: -110px;
 }

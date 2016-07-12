@@ -27,17 +27,17 @@ angular.module('app', [
     .run(['$rootScope', '$http', 'ActivityManager', 'ResourceManager', function ($rootScope, $http, ActivityManager, ResourceManager) {
 
         // 获取主配置文件
-        //var cfg = ResourceManager.getConfigurations();
-        //$http.get(cfg.mainConfigUrl()).success(function (mainJSON) {
-        //
-        //    // 获取目录配置文件
-        //    var menuConfigUrl = cfg.serverUrl() + mainJSON.MainView_Json_URL;
-        //    $http.get(menuConfigUrl).success(function (menuJSON) {
-        //        ResourceManager.initialize(typeof mainJSON === 'string' ? JSON.parse(mainJSON) : mainJSON,
-        //            typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
-        //        ActivityManager.startActivity('welcome');
-        //    });
-        //});
+        var cfg = ResourceManager.getConfigurations();
+        $http.get(cfg.mainConfigUrl()).success(function (mainJSON) {
+
+            // 获取目录配置文件
+            var menuConfigUrl = cfg.serverUrl() + mainJSON.MainView_Json_URL;
+            $http.get(menuConfigUrl).success(function (menuJSON) {
+                ResourceManager.initialize(typeof mainJSON === 'string' ? JSON.parse(mainJSON) : mainJSON,
+                    typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
+                ActivityManager.startActivity('welcome');
+            });
+        });
 
     }])
     .controller('RootController', ['$scope', 'ActivityManager', 'COMMON_KEYS', function ($scope, ActivityManager, COMMON_KEYS) {
@@ -80,6 +80,7 @@ angular.module('app', [
                 if (ActivityManager.getActiveActivity().shouldDisplayMenu()) {
                     $scope.showMenu = !$scope.showMenu;
                     $scope.$broadcast('menu.toggle', $scope.showMenu);
+                    $scope.$broadcast('menu.menu', !$scope.showMenu);
                 }
             } else if (!$scope.showMenu) {
                 ActivityManager.getActiveActivity().keyDown(key);
@@ -100,6 +101,7 @@ angular.module('app', [
         $scope.$on('activity.created', function (ev) {
             $scope.showMenu = false;
             $scope.$broadcast('menu.toggle', $scope.showMenu);
+            $scope.$broadcast('menu.menu', $scope.showMenu);
         });
 
     }])
