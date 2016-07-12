@@ -16,6 +16,7 @@ angular.module('app.tpl_weather_list', [])
         $scope.firstListContent = [];
         $scope.title = "城市列表";
         $scope.listTopStyle = 0;
+        $scope.listTopStyle2 = 0;
 
         $http.get(conUrl+'/Weather/local_weather_all.json').success(function (data) {
                 data.Content.forEach(function(el){
@@ -101,7 +102,12 @@ angular.module('app.tpl_weather_list', [])
                     break;
             }
             if ($scope.selectedCityIndex > 9) {
-                $scope.listTopStyle = (9 - $scope.selectedCityIndex) * 39;
+                $scope.listTopStyle2 = (5 - $scope.selectedCityIndex) * 39;
+            } else if ($scope.listTopStyle2 !== 0) {
+                $scope.listTopStyle2 = 0;
+            }
+            if ($scope.selectedIndex > 9) {
+                $scope.listTopStyle = (9 - $scope.selectedIndex) * 39;
             } else if ($scope.listTopStyle !== 0) {
                 $scope.listTopStyle = 0;
             }
