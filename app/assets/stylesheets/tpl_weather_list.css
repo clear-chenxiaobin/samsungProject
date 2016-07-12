@@ -17,7 +17,7 @@
     float: right;
 }
 
-.weather-menu-list .city-list {
+.weather-menu-list, .city-list {
     padding: 4px 8px;
     position: relative;
 }

@@ -102,7 +102,8 @@ angular.module('app.tpl_weather_list', [])
                     break;
             }
             if ($scope.selectedCityIndex > 9) {
-                $scope.listTopStyle2 = (5 - $scope.selectedCityIndex) * 39;
+                $scope.listTopStyle2 = (9 - $scope.selectedCityIndex) * 39;
+                console.log($scope.listTopStyle2);
             } else if ($scope.listTopStyle2 !== 0) {
                 $scope.listTopStyle2 = 0;
             }
