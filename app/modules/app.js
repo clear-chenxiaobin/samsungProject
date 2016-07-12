@@ -102,7 +102,7 @@ angular.module('app', [
         $scope.$on('activity.created', function (ev) {
             $scope.showMenu = false;
             $scope.$broadcast('menu.toggle', $scope.showMenu);
-            $scope.$broadcast('menu.menu', $scope.showMenu);
+            $scope.$broadcast('menu.menu', !$scope.showMenu);
         });
 
     }])

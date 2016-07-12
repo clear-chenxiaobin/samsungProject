@@ -31,20 +31,27 @@ angular.module('app.menu', [])
                 scope.showMenu = false;
                 scope.$on('menu.menu', function (ev, visible) {
                     scope.showMenu = !visible;
+                    scope.selectedMenuItemIndex = 0;
+                    scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
                 });
 
                 scope.$on('menu.keydown', function (ev, key) {
                     switch (key) {
                         case COMMON_KEYS.KEY_LEFT:
-                            if (scope.selectedMenuItemIndex > 0) {
+                            if (scope.selectedMenuItemIndex > 0 && scope.showMenu == true) {
                                 scope.selectedMenuItemIndex--;
                                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
                             }
                             break;
                         case COMMON_KEYS.KEY_RIGHT:
-                            if (scope.selectedMenuItemIndex < scope.menuItems.length - 1) {
+                            if (scope.selectedMenuItemIndex < scope.menuItems.length - 1 && scope.showMenu == true) {
                                 scope.selectedMenuItemIndex++;
                                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
+                            }
+                            break;
+                        case COMMON_KEYS.KEY_BACK:
+                            if (scope.showMenu == false) {
+                                scope.selectedMenuItemIndex = 0;
                             }
                             break;
                         case COMMON_KEYS.KEY_ENTER:
