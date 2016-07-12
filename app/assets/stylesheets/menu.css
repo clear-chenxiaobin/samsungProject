@@ -70,6 +70,7 @@
     height: 80px;
     width: 80px;
     margin: 10px;
+    position: relative;
 }
 
 .menu-container>.menu-item-container li.selected {
@@ -98,19 +99,14 @@
 }
 
 .menu-container>.menu-item-container li>img {
-    max-height: 100%;
-    vertical-align: middle;
-    position: relative;
-    left: 50%;
-    margin-left: -100px;
     width: 80px;
+    position: absolute;
+    left: 0;
 }
 
 .menu-container>.menu-item-container li.selected>img {
-    max-height: 100%;
-    vertical-align: middle;
-    position: relative;
-    left: 50%;
+    position: absolute;
     width: 100px;
-    margin-left: -110px;
+    right: 0px;
+    margin-left: 0;
 }

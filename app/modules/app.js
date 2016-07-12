@@ -14,6 +14,7 @@ angular.module('app', [
     'app.order',
     'app.movie',
     'app.music',
+    'app.message',
     'app.video',
     'app.weather',
     'app.weather_detail',
