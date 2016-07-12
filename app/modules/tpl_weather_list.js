@@ -77,10 +77,12 @@ angular.module('app.tpl_weather_list', [])
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
+                    ActivityManager.startActivity('weather');
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 2) {
                         //alert($scope.selectedIndex+"......" + $scope.selectedCityIndex)
+                        activity.finish();
                         ResourceManager.setWeatherCity($scope.selectedIndex,$scope.selectedCityIndex);
                         ActivityManager.startActivity('weather');
                     }
