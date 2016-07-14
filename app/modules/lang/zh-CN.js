@@ -9,8 +9,12 @@ angular.module('app.zh-CN', [])
                 subWelcomeText: '华丽的客房',
                 roomNumber: '房间号8088'
             },
-            confirm: {
-                network_state: 'The current network status is not wifi, go on？'
+            weather:{
+                title:'天气',
+                city_list:'城市列表',
+                day1:'今天',
+                day2:'明天',
+                day3:'后天'
             },
             bill: {
                 title: '账单',

@@ -1,10 +1,10 @@
 <div ng-controller="WeatherController" class="weather-content">
-    <div class="content-header" style="padding: 0;width: 100%">{{title}}</div>
+    <div class="content-header" style="padding: 0;width: 100%">{{weather.title}}</div>
     <div class="content-main">
         <div class="weather-top">
             <span class="weather-title">{{content.City}}</span>
             <span class="weather-title">{{}}</span>
-            <a href="#">城市列表</a>
+            <a href="#">{{weather.city_list}}</a>
         </div>
         <div class="weather-content">
             <div class="weather-days">
@@ -14,7 +14,7 @@
                 <p class="weather-days-title">{{content.TempDes_Low_1}}&nbsp;-&nbsp;{{content.TempDes_1}}℃</p>
                 <p class="weather-days-bottom">{{content.WeatherDes_1}}</p>
                 <p class="weather-days-bottom">{{content.WindDirect_1}}</p>
-                <p class="weather-days-bottom">今天</p>
+                <p class="weather-days-bottom">{{weather.day1}}</p>
             </div>
             <div class="weather-days">
                 <div class="weather-icon">
@@ -23,7 +23,7 @@
                 <p class="weather-days-title">{{content.TempDes_Low_2}}&nbsp;-&nbsp;{{content.TempDes_2}}℃</p>
                 <p class="weather-days-bottom">{{content.WeatherDes_2}}</p>
                 <p class="weather-days-bottom">{{content.WindDirect_2}}</p>
-                <p class="weather-days-bottom">明天</p>
+                <p class="weather-days-bottom">{{weather.day2}}</p>
             </div>
             <div class="weather-days">
                 <div class="weather-icon">
@@ -32,7 +32,7 @@
                 <p class="weather-days-title">{{content.TempDes_Low_3}}&nbsp;-&nbsp;{{content.TempDes_3}}℃</p>
                 <p class="weather-days-bottom">{{content.WeatherDes_3}}</p>
                 <p class="weather-days-bottom">{{content.WindDirect_3}}</p>
-                <p class="weather-days-bottom">后天</p>
+                <p class="weather-days-bottom">{{weather.day3}}</p>
             </div>
         </div>
     </div>
