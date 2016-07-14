@@ -5,10 +5,8 @@ angular.module('app.en-US', [])
         return{
             lang:'en-US',
             index:{
-                guestName:'guest name',
-                welcomeText:'',
-                subWelcomeText:'here is subWelcomeText',
-                roomNumber:'room-number:8088'
+                guestName:'Dear ',
+                roomNumber:'Room Number:8088'
             },
             weather: {
                 title: 'weather',

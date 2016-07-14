@@ -6,7 +6,8 @@ angular.module('app.index', [])
         activity.initialize($scope);
 
         activity.loadI18NResource(function (res) {
-            $scope.guestName = res.getString("guest_name");
+            var i18nText = ResourceManager.getLocale();
+            $scope.guestName = i18nText.index.guestName + res.getString("guest_name");
             //$scope.welcomeText = '欢迎您来到东方滨江大酒店';
             //$scope.subWelcomeText = [
             //    '您好！衷心欢迎阁下光临东方滨江大酒店',
@@ -14,9 +15,7 @@ angular.module('app.index', [])
             //    '使每一位宾客宾至如归，令阁下倍感尊崇之礼遇']
             //    .join('\n');
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
-            $scope.roomNumber = '房间号8088';
-            var i18nText = ResourceManager.getLocale();
-            $scope.index = i18nText.index;
+            $scope.roomNumber = i18nText.index.roomNumber;
         });
 
         activity.onKeyDown(function (keyCode) {

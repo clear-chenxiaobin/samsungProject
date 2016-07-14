@@ -3,10 +3,9 @@
 angular.module('app.zh-CN', [])
     .service('zh-CN-String', [function () {
         return {
+            lang:'zh-CN',
             index: {
-                guestName: '贵宾',
-                welcomeText: '',
-                subWelcomeText: '华丽的客房',
+                guestName: '尊敬的 ',
                 roomNumber: '房间号8088'
             },
             weather:{
