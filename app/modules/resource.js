@@ -14,6 +14,8 @@ angular.module('app.resource', [])
             i18nResource = {};
             i18nResource['zh-CN'] = {};
             i18nResource['en-US'] = {};
+            i18nResource['zh-CN'].language         = 'zh-CN';
+            i18nResource['en-US'].language         = 'en-US';
             i18nResource['zh-CN'].guest_name         = mainJSON.guest_name;
             i18nResource['en-US'].guest_name         = mainJSON.guest_name_eng;
             i18nResource['zh-CN'].hotel_manager_name = mainJSON.hotel_manager_name;
@@ -136,6 +138,9 @@ angular.module('app.resource', [])
                 },
                 viewTree: function () {
                     return configurations.viewTree;
+                },
+                billUrl: function() {
+                    return SERVER_URL + '/billing.json';
                 }
             };
         };

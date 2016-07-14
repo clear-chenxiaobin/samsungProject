@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.bill', [])
-    .controller('BillController', ['$scope', 'ActivityManager', 'COMMON_KEYS', '$http', function ($scope, ActivityManager, COMMON_KEYS, $http) {
+    .controller('BillController', ['$scope', 'ActivityManager', 'COMMON_KEYS', 'BillService', function ($scope, ActivityManager, COMMON_KEYS, BillService) {
         var activity = ActivityManager.getActiveActivity();
         activity.initialize($scope);
 
@@ -11,37 +11,34 @@ angular.module('app.bill', [])
             totalAmount = 0;
         var billItems = [];
         var currentPage = 0,
-            maxItemsPerPage = 8;
+            maxItemsPerPage = 6;
 
-        $http.get('http://172.17.173.100/nativevod/now/billing.json').success(function (data) {
-            var billData = data.Content;
+        if (BillService.getBill().length == 0) {
+            BillService.initialize().success(function (data) {
+                console.log(BillService.getBill());
+                bindBill();
+            })
+        } else {
+            bindBill();
+        }
 
-            for(var a = 0; a < billData.length; a++){
-                var typeName = billData[a].Name;
-                var detailData = billData[a].Second.Content;
 
-                for (var b = 0; b < detailData.length; b++ ){
-                    title = typeName + "：" + detailData[b].Name;
-                    date = formatDatetime(billData[a].Time);
-                    amount = Number(detailData[b].Price);
-                    totalAmount += amount;
-                    billItems.push({title: title, date: date, amount: amount});
-                }
-            }
-            activity.loadI18NResource(function (res) {
+
+        activity.loadI18NResource(function (res) {
+            if (res.getString('language') == "zh-CN") {
                 $scope.title = '账单';
-                updatePage();
-            });
-
-            function formatDatetime (date) {
-                var year = date.substring(0, 4);
-                var mouth = date.substring(4, 6);
-                var day = date.substring(6, 8);
-                var hour = date.substring(8, 10);
-                var minute = date.substring(10, 12);
-                var second = date.substring(12, 14);
-                var dataTime = new Date(year,(mouth-parseInt(1)),day,hour,minute,second);
-                return dataTime;
+                $scope.billList = '消费项目';
+                $scope.time = '时间';
+                $scope.price = '金额';
+                $scope.currentPage = '当前页';
+                $scope.total = '总计';
+            } else {
+                $scope.title = 'Bill';
+                $scope.billList = 'Consumer items';
+                $scope.time = 'Time';
+                $scope.price = 'Price';
+                $scope.currentPage = 'Current page';
+                $scope.total = 'Total';
             }
         });
 
@@ -67,11 +64,68 @@ angular.module('app.bill', [])
             }
         });
 
+        function bindBill() {
+            var billData = BillService.getBill();
+            for (var b= 0; b < billData.length; b++) {
+                title = billData[b].name;
+                date = formatDatetime(billData[b].time);
+                amount = Number(billData[b].price);
+                totalAmount += amount;
+                billItems.push({title: title, date: date, amount: amount});
+            }
+            updatePage();
+        }
+
         function updatePage() {
             $scope.billItems = billItems.slice(currentPage * maxItemsPerPage,
-            (currentPage + 1) * maxItemsPerPage >= billItems.length ? billItems.length: (currentPage + 1) * maxItemsPerPage)
+                (currentPage + 1) * maxItemsPerPage >= billItems.length ? billItems.length : (currentPage + 1) * maxItemsPerPage)
             $scope.pagerText = (currentPage + 1) + '/' + Math.ceil(billItems.length / maxItemsPerPage);
             $scope.amountText = '￥' + totalAmount.toFixed(2);
         }
 
+        function formatDatetime(date) {
+            var year = date.substring(0, 4);
+            var mouth = date.substring(4, 6);
+            var day = date.substring(6, 8);
+            var hour = date.substring(8, 10);
+            var minute = date.substring(10, 12);
+            var second = date.substring(12, 14);
+            var dataTime = new Date(year, (mouth - parseInt(1)), day, hour, minute, second);
+            return dataTime;
+        }
+
+    }])
+    .service('BillService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+        var billUrl = ResourceManager.getConfigurations().billUrl();
+        var configUrl,
+            bills = [];
+        this.initialize = function () {
+            var deferred = $q.defer();
+
+            // cached configurations
+            if (billUrl === configUrl) {
+                deferred.resolve();
+                return deferred.promise;
+            }
+            return $http.get(billUrl).success(function (configJSON) {
+                configUrl = billUrl;
+                configJSON.Content.forEach(function (el, idx, arr) {
+                    if (el.Second) {
+                        el.Second.Content.forEach(function (el2, idx2, arr2) {
+                            bills.push({
+                                name    : el.Name + ' · ' + el2.Name,
+                                count   : el2.Count,
+                                time    : el2.Time,
+                                price   : el2.Price
+                            });
+                        });
+                        return;
+                    }
+                });
+            });
+        }
+
+        this.getBill = function () {
+            return bills;
+        }
     }]);

@@ -2,7 +2,7 @@
     <div class="content-header">{{title}}</div>
     <div class="content-main">
         <div class="bill-header">
-            <span>账单列表</span><span>时间</span><span>金额</span>
+            <span>{{billList}}</span><span>{{time}}</span><span>{{price}}</span>
         </div>
         <ul class="bill-main">
             <li ng-repeat="item in billItems">
@@ -10,10 +10,10 @@
             </li>
         </ul>
         <div class="bill-footer">
-            <div class="bill-pager-container">当前页
+            <div class="bill-pager-container">{{currentPage}}
                 <span class="bill-pager">{{pagerText}}</span>
             </div>
-            <div class="bill-amount-container">总计
+            <div class="bill-amount-container">{{total}}
                 <span class="bill-amount">{{amountText}}</span>
             </div>
         </div>

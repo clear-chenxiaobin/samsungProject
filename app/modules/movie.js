@@ -137,7 +137,8 @@ angular.module('app.movie', [])
             numOfmovies = movData.length;
         }
 
-    }]).service('MovieService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
+    }])
+    .service('MovieService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
         var widgetAPI = new Common.API.Widget();
         var pluginObj = new Common.API.Plugin();
         var tvKey = new Common.API.TVKeyValue();
