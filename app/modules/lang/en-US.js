@@ -11,11 +11,14 @@ angular.module('app.en-US', [])
                 roomNumber:'room-number:8088'
             },
             weather:{
-                title:'weather',
+            title:'weather',
                 city_list:'list of cities',
                 day1:'today',
                 day2:'tomorrow',
                 day3:'the day after tomorrow'
+            },
+            tpl_categroy_list: {
+                title: 'City Guide'
             }
         }
 
