@@ -22,24 +22,8 @@ angular.module('app.bill', [])
             bindBill();
         }
 
-
-
         activity.loadI18NResource(function (res) {
-            if (res.getString('language') == "zh-CN") {
-                $scope.title = '账单';
-                $scope.billList = '消费项目';
-                $scope.time = '时间';
-                $scope.price = '金额';
-                $scope.currentPage = '当前页';
-                $scope.total = '总计';
-            } else {
-                $scope.title = 'Bill';
-                $scope.billList = 'Consumer items';
-                $scope.time = 'Time';
-                $scope.price = 'Price';
-                $scope.currentPage = 'Current page';
-                $scope.total = 'Total';
-            }
+            $scope.bill = BillService.getLang();
         });
 
         activity.onKeyDown(function (keyCode) {
@@ -123,6 +107,10 @@ angular.module('app.bill', [])
                     }
                 });
             });
+        }
+
+        this.getLang = function () {
+            return ResourceManager.getLocale().bill;
         }
 
         this.getBill = function () {

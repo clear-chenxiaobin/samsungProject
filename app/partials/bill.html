@@ -1,8 +1,8 @@
 <div ng-controller="BillController" class="bill-content">
-    <div class="content-header">{{title}}</div>
+    <div class="content-header">{{bill.title}}</div>
     <div class="content-main">
         <div class="bill-header">
-            <span>{{billList}}</span><span>{{time}}</span><span>{{price}}</span>
+            <span>{{bill.billList}}</span><span>{{bill.time}}</span><span>{{bill.price}}</span>
         </div>
         <ul class="bill-main">
             <li ng-repeat="item in billItems">
@@ -10,10 +10,10 @@
             </li>
         </ul>
         <div class="bill-footer">
-            <div class="bill-pager-container">{{currentPage}}
+            <div class="bill-pager-container">{{bill.currentPage}}
                 <span class="bill-pager">{{pagerText}}</span>
             </div>
-            <div class="bill-amount-container">{{total}}
+            <div class="bill-amount-container">{{bill.total}}
                 <span class="bill-amount">{{amountText}}</span>
             </div>
         </div>
