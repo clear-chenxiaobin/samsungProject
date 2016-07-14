@@ -18,6 +18,8 @@ angular.module('app', [
     'app.video',
     'app.weather',
     'app.weather_detail',
+    'app.zh-CN',
+    'app.en-US',
     'app.tpl_category_list',
     'app.tpl_pic_text_category',
     'app.tpl_pic_text_simple',

@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.index', [])
-    .controller('IndexController', ['$scope', 'ActivityManager', 'COMMON_KEYS', function ($scope, ActivityManager, COMMON_KEYS) {
+    .controller('IndexController', ['$scope','ResourceManager', 'ActivityManager', 'COMMON_KEYS', function ($scope,ResourceManager, ActivityManager, COMMON_KEYS) {
         var activity = ActivityManager.getActiveActivity();
         activity.initialize($scope);
 
@@ -15,6 +15,8 @@ angular.module('app.index', [])
             //    .join('\n');
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
             $scope.roomNumber = '房间号8088';
+            var i18nText = ResourceManager.getLocale();
+            $scope.index = i18nText.index;
         });
 
         activity.onKeyDown(function (keyCode) {

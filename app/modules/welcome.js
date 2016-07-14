@@ -6,8 +6,6 @@ angular.module('app.welcome', [])
         activity.initialize($scope);
         activity.shouldDisplayMenu(false);
 
-        $scope.language = 'zh-CN';
-
         activity.loadI18NResource(function (res) {
             $scope.guestName = res.getString("guest_name");
             //$scope.welcomeText = '欢迎您来到东方滨江大酒店';
@@ -18,6 +16,15 @@ angular.module('app.welcome', [])
             //    .join('\n');
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
             $scope.roomNumber = '房间号8088';
+
+            var i18nText;
+            if(ResourceManager.getLocale()){
+                i18nText  = ResourceManager.getLocale();
+            }else{
+                $scope.language = 'zh-CN';
+                ResourceManager.setLocale($scope.language);
+                i18nText = ResourceManager.getLocale();
+            }
         });
         var languages = ['zh-CN', 'en-US'],
             languageIndex = 0;

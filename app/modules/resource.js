@@ -1,13 +1,14 @@
 'use strict';
 
 angular.module('app.resource', [])
-    .service('ResourceManager', ['$rootScope', 'SERVER_URL', function ($rootScope, SERVER_URL) {
+    .service('ResourceManager', ['$rootScope', 'SERVER_URL','en-US-String','zh-CN-String', function ($rootScope, SERVER_URL , en_US_String,zh_CN_String) {
 
         var locale         = 'zh-CN',
             i18nResource,
             configurations,
             picTextDetail,
-            cityIndex;
+            cityIndex,
+            langString;
 
         this.initialize = function (mainJSON, menuJSON) {
 
@@ -75,7 +76,17 @@ angular.module('app.resource', [])
 
         this.setLocale = function (_locale) {
             locale = _locale;
-            $rootScope.$broadcast('locale.change', _locale);
+            //$rootScope.$broadcast('locale.change', _locale);
+            if(locale=="zh-CN"){
+                langString = zh_CN_String;
+            }else{
+                langString = en_US_String;
+            }
+            //console.log(locale);
+        };
+
+        this.getLocale = function () {
+            return langString;
         };
 
         this.getI18NResource = function () {
@@ -108,13 +119,13 @@ angular.module('app.resource', [])
             return picTextDetail;
         }
 
-        this.setWeatherCity = function(city){
+        this.setCity = function(city){
             cityIndex = {
                 cityName:city
             };
         }
 
-        this.getWeatherCity = function(){
+        this.getCity = function(){
             return cityIndex;
         }
 
