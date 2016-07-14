@@ -2,7 +2,7 @@
 .weather-list-container, .weather-preview {
     display: inline-block;
     width: 542px;
-    height: 492px;
+    height: 490px;
     background: url("../images/bg_category_list.png") no-repeat 0 0;
     background-size: 542px 490px;
     overflow: hidden;

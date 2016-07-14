@@ -108,10 +108,9 @@ angular.module('app.resource', [])
             return picTextDetail;
         }
 
-        this.setWeatherCity = function(menuNum,cityNum){
+        this.setWeatherCity = function(city){
             cityIndex = {
-                menuNum:menuNum,
-                cityNum:cityNum
+                cityName:city
             };
         }
 
