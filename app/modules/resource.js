@@ -17,8 +17,8 @@ angular.module('app.resource', [])
             i18nResource['en-US'] = {};
             i18nResource['zh-CN'].language         = 'zh-CN';
             i18nResource['en-US'].language         = 'en-US';
-            i18nResource['zh-CN'].guest_name         = mainJSON.guest_name;
-            i18nResource['en-US'].guest_name         = mainJSON.guest_name_eng;
+            i18nResource['zh-CN'].guest_name         = '尊敬的 ' + mainJSON.guest_name;
+            i18nResource['en-US'].guest_name         = 'Dear ' + mainJSON.guest_name_eng;
             i18nResource['zh-CN'].hotel_manager_name = mainJSON.hotel_manager_name;
             i18nResource['en-US'].hotel_manager_name = mainJSON.hotel_manager_name_eng;
             i18nResource['zh-CN'].welcome_text       = mainJSON.welcome_text;

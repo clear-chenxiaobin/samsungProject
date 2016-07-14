@@ -13,9 +13,9 @@ angular.module('app.tpl_pic_text_simple', [])
         var content = [];
         for (var i = 0; i < detailData.detail.length; i++) {
             content.push({
-                src: TplPicTextSimpleService.getConfigUrl() + detailData.detail[i].Picurl,
-                text: detailData.detail[i].Introduce,
-                title: detailData.title + "/" + detailData.detail[i].Introduce
+                src: detailData.detail[i].picurl,
+                text: TplPicTextSimpleService.getName(detailData.detail[i].introduceKey),
+                title: detailData.title
             })
         }
 
@@ -58,6 +58,10 @@ angular.module('app.tpl_pic_text_simple', [])
 
         this.getConfigUrl = function () {
             return configUrl;
+        }
+
+        this.getName = function (nameKey) {
+            return ResourceManager.getI18NResource().getString(nameKey);
         }
 
         this.getPicTextDetail = function () {

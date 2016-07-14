@@ -7,6 +7,7 @@ angular.module('app.tpl_category_list', [])
             secondLevel,
             LEVEL = 0,
             jsonUrl;
+        var langData = TplCategoryListService.getTitle()
         activity.initialize($scope);
 
         $scope.selectedIndex = 0;
@@ -14,53 +15,19 @@ angular.module('app.tpl_category_list', [])
 
         TplCategoryListService.getJsonUrl();
 
-        if (TplCategoryListService.getFirstLevel().length == 0) {
-            TplCategoryListService.getJsonUrl().success(function (data) {
-                TplCategoryListService.initialize().success(function (data) {
-                    firstLevel = TplCategoryListService.getFirstLevel();
-                    bindFirstLevel();
-                })
-            })
-        } else {
-            firstLevel = TplCategoryListService.getFirstLevel();
-            bindFirstLevel();
-        }
-
-        function bindFirstLevel() {
-            LEVEL = 1;
-            $scope.selectedIndex = 0;
-            $scope.categories = [];
-            $scope.title = '城市介绍';
-            for (var i = 0; i < firstLevel.length; i++) {
-                $scope.categories.push({
-                    name: firstLevel[i].Name,
-                    previewText: firstLevel[i].introduce,
-                    previewImage: firstLevel[i].picUrl
-                });
-            }
-        }
-
-        function bindSecondLevel() {
-            LEVEL = 2;
-            $scope.selectedIndex = 0;
-            $scope.categories = [];
-            for (var i = 0; i < secondLevel.length; i++) {
-                $scope.categories.push({
-                    name: secondLevel[i].Name
-                });
-            }
-        }
-
-        function getSecondLevelData(jsonUrl) {
-            secondLevel = null;
-            TplCategoryListService.secondLevel(jsonUrl).success(function (data) {
-                secondLevel = TplCategoryListService.getSecondLevel();
-                bindSecondLevel();
-            });
-        }
-
         activity.loadI18NResource(function (res) {
-            $scope.title = '城市介绍';
+            $scope.title = langData.title;
+            if (TplCategoryListService.getFirstLevel().length == 0) {
+                TplCategoryListService.getJsonUrl().success(function (data) {
+                    TplCategoryListService.initialize().success(function (data) {
+                        firstLevel = TplCategoryListService.getFirstLevel();
+                        bindFirstLevel();
+                    })
+                })
+            } else {
+                firstLevel = TplCategoryListService.getFirstLevel();
+                bindFirstLevel();
+            }
         });
 
         $scope.listTopStyle = 0;
@@ -88,10 +55,11 @@ angular.module('app.tpl_category_list', [])
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 1) {
                         jsonUrl = firstLevel[$scope.selectedIndex].json_Url;
-                        $scope.title = '城市介绍/' + firstLevel[$scope.selectedIndex].Name;
+                        $scope.title = langData.title + '/' + TplCategoryListService.getName(firstLevel[$scope.selectedIndex].nameKey);
                         getSecondLevelData(jsonUrl);
                     } else if (LEVEL == 2) {
-                        TplCategoryListService.setPicTextDetail($scope.title, secondLevel[$scope.selectedIndex].SubContent);
+                        var secondTitle = $scope.title + '/' + TplCategoryListService.getName(secondLevel[$scope.selectedIndex].nameKey) ;
+                        TplCategoryListService.setPicTextDetail(secondTitle, secondLevel[$scope.selectedIndex].threelevel);
                         ActivityManager.startActivity('tpl_pic_text_simple');
                     }
                     break;
@@ -103,6 +71,38 @@ angular.module('app.tpl_category_list', [])
             }
         });
 
+        function bindFirstLevel() {
+            LEVEL = 1;
+            $scope.selectedIndex = 0;
+            $scope.categories = [];
+            $scope.title = langData.title;
+            for (var i = 0; i < firstLevel.length; i++) {
+                $scope.categories.push({
+                    name: TplCategoryListService.getName(firstLevel[i].nameKey),
+                    previewText: TplCategoryListService.getName(firstLevel[i].introduceKey),
+                    previewImage: firstLevel[i].picUrl
+                });
+            }
+        }
+
+        function bindSecondLevel() {
+            LEVEL = 2;
+            $scope.selectedIndex = 0;
+            $scope.categories = [];
+            for (var i = 0; i < secondLevel.length; i++) {
+                $scope.categories.push({
+                    name: TplCategoryListService.getName(secondLevel[i].nameKey)
+                });
+            }
+        }
+
+        function getSecondLevelData(jsonUrl) {
+            secondLevel = null;
+            TplCategoryListService.secondLevel(jsonUrl).success(function (data) {
+                secondLevel = TplCategoryListService.getSecondLevel();
+                bindSecondLevel();
+            });
+        }
     }])
     .service('TplCategoryListService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
         var conUrl = ResourceManager.getConfigurations().serverUrl(),
@@ -114,9 +114,9 @@ angular.module('app.tpl_category_list', [])
         this.getJsonUrl = function () {
             return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
                 menuJSON.Content.forEach(function (el, idx, arr) {
-                    if (el.Name == '一二级菜单') {
+                    if (el.Type == 'SecondMenu') {
                         el.Second.Content.forEach(function (el, idx, arr) {
-                            if (el.Name == '城市介绍') {
+                            if (el.Type == 'Category_List_BlueSea') {
                                 jsonUrl = conUrl + el.Json_URL;
                                 return;
                             }
@@ -139,15 +139,18 @@ angular.module('app.tpl_category_list', [])
                 var zhStrs = [], enStrs = [];
                 configUrl = jsonUrl;
                 configJSON.Content.forEach(function (el, idx, arr) {
-                    var nameKey = 'movie_name_' + el.seq;
+                    var nameKey = 'first_level_name_' + idx;
+                    var introduceKey = 'first_level_introduce_' + idx
                     firstLevel.push({
-                        Name: el.Name,
-                        introduce: el.SubContent[0].Introduce,
+                        nameKey: nameKey,
+                        introduceKey: introduceKey,
                         picUrl: conUrl + el.SubContent[0].Picurl,
                         json_Url: conUrl + el.Json_URL
                     });
                     zhStrs[nameKey] = el.Name;
                     enStrs[nameKey] = el.NameEng;
+                    zhStrs[introduceKey] = el.SubContent[0].Introduce;
+                    enStrs[introduceKey] = el.SubContent[0].IntroduceEng;
                 });
                 ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
             });
@@ -158,18 +161,37 @@ angular.module('app.tpl_category_list', [])
             return $http.get(jsonUrl).success(function (configJSON) {
                 var zhStrs = [], enStrs = [];
                 configUrl = jsonUrl;
+                var viewTreeIndex = 0, subViewTreeIndex = 0;
                 configJSON.Content.forEach(function (el, idx, arr) {
-                    var nameKey = 'movie_name_' + el.seq;
+                    var threelevel = [];
+                    if (el.SubContent) {
+                        el.SubContent.forEach(function (el2, idx2, arr2) {
+                            var introduceKey = 'three_level_name_' + subViewTreeIndex;
+                            threelevel.push({
+                                introduceKey: introduceKey,
+                                picurl: conUrl + el2.Picurl
+                            });
+                            subViewTreeIndex++;
+                            zhStrs[introduceKey] = el2.Introduce;
+                            enStrs[introduceKey] = el2.IntroduceEng;
+                        });
+                    }
+                    var nameKey = 'second_level_name_' + viewTreeIndex;
                     secondLevel.push({
-                        Name: el.Name,
-                        SubContent: el.SubContent
+                        nameKey: nameKey,
+                        threelevel: threelevel
                     });
+                    viewTreeIndex++;
                     zhStrs[nameKey] = el.Name;
                     enStrs[nameKey] = el.NameEng;
                 });
                 ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
             });
         };
+
+        this.getTitle = function () {
+            return ResourceManager.getLocale().tpl_categroy_list;
+        }
 
         this.getFirstLevel = function () {
             return firstLevel;
@@ -178,6 +200,10 @@ angular.module('app.tpl_category_list', [])
         this.getSecondLevel = function () {
             return secondLevel;
         };
+
+        this.getName = function (nameKey) {
+            return ResourceManager.getI18NResource().getString(nameKey);
+        }
 
         this.setPicTextDetail = function (title, detail) {
             ResourceManager.setPicTextDetail(title, detail);

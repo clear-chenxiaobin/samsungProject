@@ -11,6 +11,9 @@ angular.module('app.en-US', [])
             },
             confirm:{
                 network_state:'The current network status is not wifi, go on？'
+            },
+            tpl_categroy_list: {
+                title: 'City Guide'
             }
         }
 
