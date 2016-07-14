@@ -11,7 +11,6 @@ angular.module('app.menu', [])
             },
             templateUrl: 'partials/menu.html',
             link: function (scope, element, attrs) {
-                var jsonData = ResourceManager.getI18NResource();
                 var treeView = ResourceManager.getConfigurations().viewTree();
                 scope.menuItems = [];
                 for (var i = 0; i < treeView.length; i++) {
@@ -23,7 +22,7 @@ angular.module('app.menu', [])
                     });
                 }
                 scope.selectedMenuItemIndex = 0;
-                scope.guestName = jsonData.guest_name;
+                scope.guestName = ResourceManager.getI18NResource().getString("guest_name");
                 scope.roomNumber = '8088';
 
                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
