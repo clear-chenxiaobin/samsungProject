@@ -4,9 +4,19 @@ angular.module('app.zh-CN', [])
     .service('zh-CN-String', [function () {
         return {
             lang:'zh-CN',
+            welcome: {
+                cue: '根据您的语言习惯选择使用的语言系统',
+            },
             index: {
                 guestName: '尊敬的 ',
                 roomNumber: '房间号8088'
+            },
+            toolbar: {
+                ok: '按OK选择分类',
+                up_down: '按上下移动选项',
+                left_right: '按左右切换图片',
+                back: '点击 返回',
+                menu: '点击 打开菜单'
             },
             weather:{
                 title:'天气',

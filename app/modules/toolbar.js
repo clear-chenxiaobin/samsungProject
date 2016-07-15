@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.toolbar', [])
-    .directive('toolbar', [function () {
+    .directive('toolbar', [ 'ResourceManager', function (ResourceManager) {
         return {
             restrict: 'E',
             replace: true,
@@ -11,11 +11,12 @@ angular.module('app.toolbar', [])
             },
             templateUrl: 'partials/toolbar.html',
             link: function (scope, element, attrs) {
+                var i18nText  = ResourceManager.getLocale();
                 var toolbarItems = [
-                    {code: 'ok', icon: false, title: '按OK选择分类'},
-                    {code: 'up-down', icon: 'assets/images/ic_up_down.png', title: '按上下移动选项'},
-                    {code: 'left-right', icon: 'assets/images/ic_left_right.png', title: '按左右切换图片'},
-                    {code: 'back', icon: 'assets/images/ic_back.png', title: '点击 返回'}
+                    {code: 'ok', icon: false, title: i18nText.toolbar.ok},
+                    {code: 'up-down', icon: 'assets/images/ic_up_down.png', title: i18nText.toolbar.up_down},
+                    {code: 'left-right', icon: 'assets/images/ic_left_right.png', title: i18nText.toolbar.left_right},
+                    {code: 'back', icon: 'assets/images/ic_back.png', title: i18nText.toolbar.back}
                 ];
                 var items = attrs.items.split('|');
                 var leftItems = items[0].split(',');
@@ -26,7 +27,7 @@ angular.module('app.toolbar', [])
                 scope.rightItems = toolbarItems.filter(function (el, idx, arr) {
                     return rightItems.indexOf(el.code) !== -1;
                 });
-                scope.menu = {icon: 'assets/images/ic_menu.png', title: '点击 打开菜单'};
+                scope.menu = {icon: 'assets/images/ic_menu.png', title: i18nText.toolbar.menu};
                 scope.showToolbar = true;
                 scope.$on('menu.toggle', function (ev, visible) {
                     scope.showToolbar = !visible;

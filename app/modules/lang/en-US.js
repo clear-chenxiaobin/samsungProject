@@ -4,9 +4,19 @@ angular.module('app.en-US', [])
     .service('en-US-String', [function () {
         return{
             lang:'en-US',
+            welcome: {
+                cue: 'Please select language as you like',
+            },
             index:{
                 guestName:'Dear ',
                 roomNumber:'Room Number:8088'
+            },
+            toolbar: {
+                ok: 'Click OK button to select category',
+                up_down: 'Click Up and Down to move option',
+                left_right: 'Click Left and Right to change image',
+                back: 'Click back',
+                menu: 'Click to open the menu'
             },
             weather: {
                 title: 'weather',
