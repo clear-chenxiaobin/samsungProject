@@ -16,7 +16,8 @@ angular.module('app.zh-CN', [])
                 up_down: '按上下移动选项',
                 left_right: '按左右切换图片',
                 back: '点击 返回',
-                menu: '点击 打开菜单'
+                menu: '点击 打开菜单',
+                menuText: '菜 单'
             },
             weather:{
                 title:'天气',

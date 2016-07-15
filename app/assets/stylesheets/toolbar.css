@@ -13,8 +13,7 @@
 }
 
 .toolbar .center, .toolbar li {
-    height: 40px;
-    padding: 0 25px;
+    height: 36px;
     font-size: 22px;
 }
 
@@ -33,12 +32,12 @@
 }
 
 .toolbar .ng-binding {
-    font-size: 24px;
+    font-size: 22px;
 }
 
 .toolbar>.left {
     float: left;
-    width: 418px;
+    width: 388px;
     height: 100%;
     overflow: hidden;
 }
@@ -53,14 +52,30 @@
 
 .toolbar>.right {
     float: left;
-    width: 418px;
+    width: 388px;
     height: 100%;
     overflow: hidden;
 }
 
 .toolbar>.center {
     float: left;
-    width: 250px;
+    width: 360px;
     height: 100%;
     overflow: hidden;
+}
+
+.toolbar>.center>.button-menu {
+    display: inline-block;
+    width: 82px;
+    background: url("../images/ic_button.png") no-repeat 0;
+    background-size: 82px;
+    text-align: center;
+}
+
+.toolbar>.center>.button-menu.selected {
+    background: url("../images/ic_button_active.png") no-repeat 0;
+}
+
+.toolbar>.center>.button-menu>span {
+    font-size: 18px;
 }

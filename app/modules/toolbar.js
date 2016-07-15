@@ -27,7 +27,7 @@ angular.module('app.toolbar', [])
                 scope.rightItems = toolbarItems.filter(function (el, idx, arr) {
                     return rightItems.indexOf(el.code) !== -1;
                 });
-                scope.menu = {icon: 'assets/images/ic_menu.png', title: i18nText.toolbar.menu};
+                scope.menu = {menuText: i18nText.toolbar.menuText, title: i18nText.toolbar.menu};
                 scope.showToolbar = true;
                 scope.$on('menu.toggle', function (ev, visible) {
                     scope.showToolbar = !visible;

@@ -16,7 +16,8 @@ angular.module('app.en-US', [])
                 up_down: 'Click Up and Down to move option',
                 left_right: 'Click Left and Right to change image',
                 back: 'Click back',
-                menu: 'Click to open the menu'
+                menu: 'Click to open the menu',
+                menuText: 'MENU'
             },
             weather: {
                 title: 'weather',
