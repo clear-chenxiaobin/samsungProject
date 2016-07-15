@@ -22,7 +22,7 @@ angular.module('app.menu', [])
                     });
                 }
                 scope.selectedMenuItemIndex = 0;
-                scope.guestName = ResourceManager.getI18NResource().getString("guest_name");
+                scope.guestName = ResourceManager.getI18NResource().getString("guest_name").replace(/:/g, "");;
                 scope.roomNumber = '8088';
 
                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
