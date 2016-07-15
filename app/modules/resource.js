@@ -108,6 +108,15 @@ angular.module('app.resource', [])
             });
         };
 
+        //this.setTriggeBottom = function (_triggeBottom) {
+        //    triggeBottom = _triggeBottom;
+        //    $rootScope.$broadcast('triggeBottom.change', triggeBottom);
+        //};
+        //
+        //this.getTriggeBottom = function () {
+        //    return triggeBottom;
+        //};
+
         this.setPicTextDetail = function (title, detail) {
             picTextDetail = {
                 title : title,

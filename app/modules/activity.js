@@ -8,6 +8,7 @@ angular.module('app.activity', ['app.resource'])
             this.templateUrl = 'partials/' + id + '.html';
             this._hide = false;
             this._shouldDisplayMenu = true;
+            this._triggeBottom = false
         }
 
         Activity.prototype.finish = function () {
@@ -35,6 +36,14 @@ angular.module('app.activity', ['app.resource'])
                 return this._shouldDisplayMenu;
             } else {
                 this._shouldDisplayMenu = bool;
+            }
+        };
+
+        Activity.prototype.triggeBottom = function (bool) {
+            if (typeof bool !== 'boolean') {
+                return this._triggeBottom;
+            } else {
+                this._triggeBottom = bool;
             }
         };
 

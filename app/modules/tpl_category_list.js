@@ -36,12 +36,21 @@ angular.module('app.tpl_category_list', [])
             switch (keyCode) {
                 case COMMON_KEYS.KEY_UP:
                     if ($scope.selectedIndex > 0) {
+                        if ($scope.selectedIndex >= $scope.categories.length - 1){
+                            activity.triggeBottom(false);
+                            $scope.$broadcast('triggeBottom.change', false);
+                        }
                         $scope.selectedIndex--;
                     }
                     break;
                 case COMMON_KEYS.KEY_DOWN:
                     if ($scope.selectedIndex < $scope.categories.length - 1) {
                         $scope.selectedIndex++;
+                    } else {
+                        $scope.selectedIndex++;
+                        activity.triggeBottom(true);
+                        $scope.$broadcast('triggeBottom.change', true);
+                        return;
                     }
                     break;
                 case COMMON_KEYS.KEY_BACK:

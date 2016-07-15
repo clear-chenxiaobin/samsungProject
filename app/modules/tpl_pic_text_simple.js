@@ -30,14 +30,22 @@ angular.module('app.tpl_pic_text_simple', [])
             var tempIndex = selectedIndex;
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
-                    if (tempIndex > 0) {
+                    if (tempIndex > 0 && activity.triggeBottom() == false) {
                         tempIndex--;
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    if (tempIndex < content.length - 1) {
+                    if (tempIndex < content.length - 1 && activity.triggeBottom() == false) {
                         tempIndex++;
                     }
+                    break;
+                case COMMON_KEYS.KEY_UP:
+                    activity.triggeBottom(false);
+                    $scope.$broadcast('triggeBottom.change', false);
+                    break;
+                case COMMON_KEYS.KEY_DOWN:
+                    activity.triggeBottom(true);
+                    $scope.$broadcast('triggeBottom.change', true);
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();

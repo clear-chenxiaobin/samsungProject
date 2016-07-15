@@ -85,6 +85,10 @@ angular.module('app', [
                     $scope.$broadcast('menu.toggle', $scope.showMenu);
                     $scope.$broadcast('menu.menu', !$scope.showMenu);
                 }
+            } else if (key === COMMON_KEYS.KEY_ENTER && ActivityManager.getActiveActivity().triggeBottom() && $scope.showMenu == false) {
+                $scope.showMenu = !$scope.showMenu;
+                $scope.$broadcast('menu.toggle', $scope.showMenu);
+                $scope.$broadcast('menu.menu', !$scope.showMenu);
             } else if (!$scope.showMenu) {
                 ActivityManager.getActiveActivity().keyDown(key);
             } else {

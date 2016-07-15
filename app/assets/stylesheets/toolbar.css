@@ -62,6 +62,7 @@
     width: 360px;
     height: 100%;
     overflow: hidden;
+    text-align: center;
 }
 
 .toolbar>.center>.button-menu {
@@ -74,6 +75,7 @@
 
 .toolbar>.center>.button-menu.selected {
     background: url("../images/ic_button_active.png") no-repeat 0;
+    background-size: 82px;
 }
 
 .toolbar>.center>.button-menu>span {

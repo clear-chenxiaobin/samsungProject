@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.toolbar', [])
-    .directive('toolbar', [ 'ResourceManager', function (ResourceManager) {
+    .directive('toolbar', [ 'ResourceManager', 'COMMON_KEYS', 'ActivityManager', function (ResourceManager, COMMON_KEYS, ActivityManager) {
         return {
             restrict: 'E',
             replace: true,
@@ -12,6 +12,7 @@ angular.module('app.toolbar', [])
             templateUrl: 'partials/toolbar.html',
             link: function (scope, element, attrs) {
                 var i18nText  = ResourceManager.getLocale();
+                var triggeBottom  = ActivityManager.getActiveActivity().triggeBottom();
                 var toolbarItems = [
                     {code: 'ok', icon: false, title: i18nText.toolbar.ok},
                     {code: 'up-down', icon: 'assets/images/ic_up_down.png', title: i18nText.toolbar.up_down},
@@ -31,6 +32,10 @@ angular.module('app.toolbar', [])
                 scope.showToolbar = true;
                 scope.$on('menu.toggle', function (ev, visible) {
                     scope.showToolbar = !visible;
+                });
+                scope.isActive = triggeBottom;
+                scope.$on('triggeBottom.change', function (ev, visible) {
+                    scope.isActive = visible;
                 });
             }
         };

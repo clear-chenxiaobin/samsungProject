@@ -29,18 +29,30 @@ angular.module('app.bill', [])
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
-                    currentPage--;
-                    if (-1 === currentPage) {
-                        currentPage = Math.ceil(billItems.length / maxItemsPerPage) - 1;
+                    if (activity.triggeBottom() == false) {
+                        currentPage--;
+                        if (-1 === currentPage) {
+                            currentPage = Math.ceil(billItems.length / maxItemsPerPage) - 1;
+                        }
+                        updatePage();
                     }
-                    updatePage();
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    currentPage++;
-                    if (Math.ceil(billItems.length / maxItemsPerPage) === currentPage) {
-                        currentPage = 0;
+                    if (activity.triggeBottom() == false) {
+                        currentPage++;
+                        if (Math.ceil(billItems.length / maxItemsPerPage) === currentPage) {
+                            currentPage = 0;
+                        }
+                        updatePage();
                     }
-                    updatePage();
+                    break;
+                case COMMON_KEYS.KEY_UP:
+                    activity.triggeBottom(false);
+                    $scope.$broadcast('triggeBottom.change', false);
+                    break;
+                case COMMON_KEYS.KEY_DOWN:
+                    activity.triggeBottom(true);
+                    $scope.$broadcast('triggeBottom.change', true);
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();

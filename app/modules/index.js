@@ -4,6 +4,7 @@ angular.module('app.index', [])
     .controller('IndexController', ['$scope','ResourceManager', 'ActivityManager', 'COMMON_KEYS', function ($scope,ResourceManager, ActivityManager, COMMON_KEYS) {
         var activity = ActivityManager.getActiveActivity();
         activity.initialize($scope);
+        activity.triggeBottom(true);
 
         activity.loadI18NResource(function (res) {
             var i18nText = ResourceManager.getLocale();
