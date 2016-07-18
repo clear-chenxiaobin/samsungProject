@@ -7,7 +7,6 @@ angular.module('app.weather', [])
 
         var i18nText = ResourceManager.getLocale();
         $scope.weather = i18nText.weather;
-        var lang = i18nText.lang;
         //var conUrl = ResourceManager.getConfigurations().serverUrl();
         //$scope.conUrl = conUrl;
         $scope.serverURl = 'http://192.168.18.201/weather/weather?city=';
@@ -20,9 +19,13 @@ angular.module('app.weather', [])
         function loadWeatherData(cityName){
             $http.get($scope.serverURl+cityName).success(function (data) {
                 $scope.content = data;
-                if(lang == "en-US"){
-                    $scope.content.City = $scope.content.CityEng;
-                }
+                var zhStrs = [];
+                var enStrs = [];
+                var nameKey = 'cityNameStr';
+                zhStrs[nameKey] = $scope.content.City;
+                enStrs[nameKey] = $scope.content.CityEng;
+                ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
+                $scope.content.City = ResourceManager.getI18NResource().getString(nameKey);
                 ResourceManager.setCity(cityName);
             });
         }

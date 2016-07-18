@@ -3,16 +3,16 @@
   "rescode": "200",
   "content":[
     {
-      "name":"北京",
-      "subArea":["海淀","大兴","房山","丰台","昌平","怀柔","门头沟","密云","平谷","石景山","顺义","通州","延庆"]
+      "name":"beijing",
+      "subArea":["haidian","daxing","fangshan","fengtai","changping","huairou","mentougou","miyun","pinggu","shijingshan","shunyi","tongzhou","yanqing"]
     },
     {
-      "name":"上海",
-      "subArea":["松江","宝山","金山","嘉定","青浦","浦东新区","奉贤","徐汇","闵行","崇明"]
+      "name":"shanghai",
+      "subArea":["songjiang","baoshan","jinshan","jiading","qingpu","pudongxinqu","fengxian","xuhui","minhang","chongming"]
     },
     {
-      "name":"天津",
-      "subArea":["宝坻","北辰","滨海新区","大港","东丽","汉沽","静海","津南","蓟县","南开区","宁河","塘沽","武清","西青"]
+      "name":"tianjin",
+      "subArea":["baodi","beichen","binhaixinqu","大港","东丽","汉沽","静海","津南","蓟县","南开区","宁河","塘沽","武清","西青"]
     },
     {
       "name":"重庆",
@@ -88,14 +88,14 @@
     },
     {
       "name":"辽宁",
-      "subArea":["大连","沈阳","丹东","辽阳","葫芦岛","锦州","朝阳","营口","鞍山","抚顺","阜新","盘锦","本溪","铁岭"]
+      "subArea":["dalian","沈阳","丹东","辽阳","葫芦岛","锦州","朝阳","营口","鞍山","抚顺","阜新","盘锦","本溪","铁岭"]
     },
     {
-      "name":"澳门",
-      "subArea":["澳门"]
+      "name":"macao",
+      "subArea":["macao"]
     },
     {
-      "name":"宁夏",
+      "name":"ningxia",
       "subArea":["银川","吴忠","中卫","石嘴山","固原"]
     },
     {
