@@ -14,8 +14,18 @@ angular.module('app.weather', [])
         if(cityData){
             loadWeatherData(cityData.cityName);
         }else{
-            loadWeatherData('上海');
+            loadWeatherData('101020100');
         }
+        $http.get("assets/images/weather/weather_en.json").success(function (data) {
+            data.content.forEach(function (el, idx, arr) {
+                var zhStrs = [];
+                var enStrs = [];
+                var nameKey = 'weather_list'+ idx;
+                zhStrs[nameKey] = el.name;
+                enStrs[nameKey] = el.name_en;
+                ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
+            });
+        })
         function loadWeatherData(cityName){
             $http.get($scope.serverURl+cityName).success(function (data) {
                 $scope.content = data;
@@ -26,6 +36,14 @@ angular.module('app.weather', [])
                 enStrs[nameKey] = $scope.content.CityEng;
                 ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
                 $scope.content.City = ResourceManager.getI18NResource().getString(nameKey);
+
+                var weatherID_1 = data.WeatherID_1;
+                var weatherID_2 = data.WeatherID_2;
+                var weatherID_3 = data.WeatherID_3;
+                $scope.content.WeatherDes_1 = ResourceManager.getI18NResource().getString('weather_list'+ weatherID_1);
+                $scope.content.WeatherDes_2 = ResourceManager.getI18NResource().getString('weather_list'+ weatherID_2);
+                $scope.content.WeatherDes_3 = ResourceManager.getI18NResource().getString('weather_list'+ weatherID_3);
+
                 ResourceManager.setCity(cityName);
             });
         }
