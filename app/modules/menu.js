@@ -18,7 +18,7 @@ angular.module('app.menu', [])
                     scope.menuItems.push({
                         name: menuName,
                         icon: treeView[i].icon,
-                        activityId: getActivityId(menuName)
+                        activityId: getActivityId(treeView[i].type)
                     });
                 }
                 scope.selectedMenuItemIndex = 0;
@@ -63,49 +63,31 @@ angular.module('app.menu', [])
                     }
                 });
 
-                function getActivityId(name) {
-                    switch (name) {
-                        case '直播':
+                function getActivityId(type) {
+                    switch (type) {
+                        case 'Live_blue"':
                             return 'live';
                             break;
-                        case 'Live':
-                            return 'live';
-                            break;
-                        case '账单':
+                        case 'Billing_blue':
                             return 'bill';
                             break;
-                        case 'Bill':
-                            return 'bill';
-                            break;
-                        case '城市天气':
+                        case 'Weather_blue':
                             return 'weather';
                             break;
-                        case 'Weather':
-                            return 'weather';
-                            break;
-                        case '留言':
+                        case 'Message_blue':
                             return 'message';
                             break;
-                        case 'message':
-                            return 'message';
-                            break;
-                        case '勿扰':
+                        case 'DND_blue':
                             return 'dnd';
                             break;
-                        case 'UnExcuse':
-                            return 'dnd';
-                            break;
-                        case '城市介绍':
+                        case 'Category_List_BlueSea':
                             return 'tpl_category_list';
                             break;
-                        case 'City Guide':
-                            return 'tpl_category_list';
-                            break;
-                        case '点餐':
+                        case 'PicText_Category_Order_BlueSea':
                             return 'order';
                             break;
-                        case 'Ordering':
-                            return 'order';
+                        case 'Movie_Category':
+                            return 'movie';
                             break;
                     }
                 }

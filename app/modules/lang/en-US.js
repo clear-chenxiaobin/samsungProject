@@ -39,8 +39,11 @@ angular.module('app.en-US', [])
             tpl_categroy_list: {
                 title: 'City Guide'
             },
-            order:{
-                title:'Order'
+            movie: {
+                title: 'Movie'
+            },
+            order: {
+                title: 'Order'
             }
         }
 

@@ -39,8 +39,11 @@ angular.module('app.zh-CN', [])
             tpl_categroy_list: {
                 title: '城市介绍'
             },
-            order:{
-                title:'订餐服务'
+            movie: {
+                title: '电影'
+            },
+            order: {
+                title: '订餐服务'
             }
         }
     }])
