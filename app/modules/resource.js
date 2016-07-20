@@ -8,6 +8,7 @@ angular.module('app.resource', [])
             configurations,
             picTextDetail,
             cityIndex,
+            meal,
             langString;
 
         this.initialize = function (mainJSON, menuJSON) {
@@ -136,6 +137,16 @@ angular.module('app.resource', [])
 
         this.getCity = function(){
             return cityIndex;
+        }
+
+        this.setMeal = function(id){
+            meal = {
+                id:id
+            };
+        }
+
+        this.getMeal = function(){
+            return meal;
         }
 
         this.getConfigurations = function () {

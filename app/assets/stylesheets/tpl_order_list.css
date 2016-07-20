@@ -1,0 +1,27 @@
+.number_btn{
+    width: 24px;
+    height: 24px;
+    background: url("../images/ic_button.png") no-repeat 0;
+    background-size: 24px 24px;
+    text-align: center;
+}
+
+.top-arrow {
+    width: 24px;
+    height: 24px;
+    vertical-align: top;
+    background: url("../images/ic_arrow_top.png") center no-repeat;
+    background-size: 24px 12px;
+}
+
+.bot-arrow {
+    width: 24px;
+    height: 24px;
+    vertical-align: top;
+    background: url("../images/ic_arrow_bot.png") center no-repeat;
+    background-size: 24px 12px;
+}
+
+
+
+

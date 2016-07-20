@@ -1,10 +1,10 @@
-<div ng-controller="OrderController" class="order-content">
+<div ng-controller="OrderListController" class="order-content">
     <div class="content-header">{{title}}</div>
     <div class="content-main">
         <div class="category-list-container">
             <ul class="category-list" ng-style="{top: listTopStyle + 'px'}">
-                <li ng-repeat="meal in meals" ng-class="{'selected': $index==selectedIndex}">
-                    <span>{{meal.name}}</span>
+                <li ng-repeat="food in foods" ng-class="{'selected': $index==selectedIndex}">
+                    <span>{{food.name}}</span>
                 </li>
             </ul>
         </div>
@@ -13,8 +13,11 @@
                 <img ng-src="{{content.img}}">
             </div>
             <p>{{content.intro}}</p>
+            <div class="top-arrow"></div>
+            <div class="number_btn"><span>1</span></div>
+            <div class="bot-arrow"></div>
         </div>
     </div>
-    <toolbar items="order_ok|back"></toolbar>
+    <toolbar items="ok|back"></toolbar>
     <menu></menu>
 </div>
