@@ -5,6 +5,7 @@ angular.module('app.tpl_weather_list', [])
         var activity = ActivityManager.getActiveActivity();
 
         var LEVEL = 0;
+        var cityObj = {};
 
         //var conUrl = ResourceManager.getConfigurations().serverUrl();
         //$scope.conUrl = conUrl;
@@ -14,17 +15,30 @@ angular.module('app.tpl_weather_list', [])
         $scope.selectedIndex = 0;
         //$scope.firstList = ['北京','上海','天津','重庆','安徽','福建','甘肃','广东','广西','贵州','海南','河北','黑龙江','河南','香港','湖北','湖南','内蒙古','江苏','江西','吉林','辽宁','澳门','宁夏','青海','陕西','山东','山西','四川','西藏','新疆','云南','浙江','台湾'];
         $scope.firstList = [];
-        $scope.firstListContent = [];
+        $scope.firstListCN = [];
+        $scope.firstListEN = ['Beijing','Shanghai','Tianjin','Chongqing','Heilongjiang','Jilin','Liaoning','Inner Mongolia','Hebei','Shanxi','Shaanxi','Shandong','Xinjiang','Tibet','Qinghai','Gansu','Ningxia','Henan','Jiangsu','Hubei','Zhejiang','Anhui','Fujian','Jiangxi','Hunan','Guizhou','Sichuan','Guangdong','Yunnan','Guangxi','Hainan','Hong Kong','Macao','Taiwan'];
+        //$scope.firstListContent = [];
         var i18nText = ResourceManager.getLocale();
+        var lang = i18nText.lang;
         $scope.weather = i18nText.weather;
         $scope.listTopStyle = 0;
         $scope.listTopStyle2 = 0;
 
-        $http.get("assets/images/weather/weather_simple.json").success(function (data) {
-                data.content.forEach(function(el){
-                    var menuItem = el.name;
-                    $scope.firstList.push(menuItem);
-                    $scope.firstListContent.push(el.subArea);
+        $http.get("assets/images/weather/weather.json").success(function (data) {
+                data.content.forEach(function(val,idx,arr){
+                    var menuItem = val.d4;
+                    var cityInfo = {
+                        areaID: val.d1,
+                        areaName:val.d2,
+                        areaEnName:val.d3
+                    }
+                    if($scope.firstListCN.indexOf(menuItem)<0){
+                        $scope.firstListCN.push(menuItem);
+                        cityObj[menuItem] = [];
+                    }else{
+                        cityObj[menuItem].push(cityInfo);
+                    }
+                    //$scope.firstListContent.push(val.subArea);
                 })
             bindFirstLevel(0);
         })
@@ -33,9 +47,21 @@ angular.module('app.tpl_weather_list', [])
             LEVEL = 1;
             $scope.selectedIndex = num;
             $scope.cities = [];
-            $scope.firstListContent[num].forEach(function(el,index,arr){
-                $scope.cities.push(el);
-            })
+            $scope.areaIDArr = [];
+            var province = $scope.firstListCN[num];
+            if(lang == "en-US"){
+                $scope.firstList = $scope.firstListEN;
+                cityObj[province].forEach(function(el,index,arr){
+                    $scope.cities.push(el.areaEnName);
+                    $scope.areaIDArr.push(el.areaID);
+                })
+            }else {
+                $scope.firstList = $scope.firstListCN;
+                cityObj[province].forEach(function (el, index, arr) {
+                    $scope.cities.push(el.areaName);
+                    $scope.areaIDArr.push(el.areaID);
+                })
+            }
         }
 
         function bindSecondLevel() {
@@ -84,7 +110,7 @@ angular.module('app.tpl_weather_list', [])
                     }
                     else if (LEVEL == 2) {
                         //alert($scope.selectedIndex+"......" + $scope.selectedCityIndex)
-                        var city = $scope.cities[$scope.selectedCityIndex];
+                        var city = $scope.areaIDArr[$scope.selectedCityIndex];
                         ResourceManager.setCity(city);
                         activity.finish();
                         ActivityManager.startActivity('weather');
@@ -104,7 +130,6 @@ angular.module('app.tpl_weather_list', [])
             }
             if ($scope.selectedCityIndex > 11) {
                 $scope.listTopStyle2 = (11 - $scope.selectedCityIndex) * 39;
-                console.log($scope.listTopStyle2);
             } else if ($scope.listTopStyle2 !== 0) {
                 $scope.listTopStyle2 = 0;
             }

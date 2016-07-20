@@ -10,7 +10,7 @@
         </div>
         <div class="weather-preview">
             <ul class="city-list" ng-style="{top: listTopStyle2 + 'px'}">
-                <li ng-repeat="city in cities" ng-class="{'selected': $index==selectedCityIndex}">
+                <li ng-repeat="city in cities track by $index" ng-class="{'selected': $index==selectedCityIndex}">
                     <span>{{city}}</span>
                 </li>
             </ul>
