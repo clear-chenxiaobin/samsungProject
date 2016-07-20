@@ -6,20 +6,24 @@ angular.module('app.movie', [])
         var movData,
             movieUrl,
             numOfmovies,
-            movies = [];
+            movies = [],
+            movieTypes = [];
         var moviesPerColumn = 4, column;
         activity.initialize($scope);
 
-        if (MovieService.getMovies().length == 0) {
-            MovieService.getPlayUrl().success(function (data) {
-                MovieService.initialize().success(function (data) {
-                    console.log(MovieService.getMovies());
-                    bind();
+        activity.loadI18NResource(function (res) {
+            $scope.title = MovieService.getTitle().title;
+            if (MovieService.getMovies().length == 0) {
+                MovieService.getPlayUrl().success(function (data) {
+                    MovieService.initialize().success(function (data) {
+                        console.log(MovieService.getMovies());
+                        bindType();
+                    })
                 })
-            })
-        } else {
-            bind();
-        }
+            } else {
+                bindType();
+            }
+        })
 
         activity.onKeyUp(function (keyCode) {
             if (activity.isHide()) {
@@ -37,6 +41,7 @@ angular.module('app.movie', [])
         activity.onKeyDown(function (keyCode) {
             var tempIndex = $scope.selectedIndex;
             var oldIndex = tempIndex + 1;
+            var typeIndex = $scope.selectedTypeIndex;
 
             if (activity.isHide()) {
                 switch (keyCode) {
@@ -72,10 +77,20 @@ angular.module('app.movie', [])
                     tempIndex += 1;
                     break;
                 case COMMON_KEYS.KEY_UP:
-                    tempIndex -= 4;
+                    //tempIndex -= 4;
+                    if (typeIndex > 0) {
+                        typeIndex -= 1;
+                        bindMovie(movData[typeIndex].nameKey);
+                        tempIndex = 0;
+                    }
                     break;
                 case COMMON_KEYS.KEY_DOWN:
-                    tempIndex += 4;
+                    //tempIndex += 4;
+                    if (typeIndex < $scope.movieTypes.length - 1) {
+                        typeIndex += 1;
+                        bindMovie(movData[typeIndex].nameKey);
+                        tempIndex = 0;
+                    }
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     activity.hide();
@@ -106,37 +121,51 @@ angular.module('app.movie', [])
                 $scope.currentPage = currentPage;
                 $scope.movies = movies.slice(currentPage * 3, currentPage * 3 + 3);
             }
+            $scope.selectedTypeIndex = typeIndex;
             $scope.selectedIndex = tempIndex;
         });
 
-        function bind() {
+        function bindType() {
             movData = MovieService.getMovies();
 
-            for (var i = 0; i < movData.length; i++) {
-                if (i % moviesPerColumn === 0) {
-                    if (column) {
-                        movies.push(column);
+            for (var a = 0; a< movData.length; a++) {
+                movieTypes.push({
+                    index: a,
+                    name: MovieService.getName(movData[a].nameKey),
+                    nameKey: movData[a].nameKey
+                })
+            }
+            $scope.movieTypes = movieTypes;
+            $scope.selectedTypeIndex = 0;
+            bindMovie(movData[0].nameKey);
+        }
+
+        function bindMovie(nameKey) {
+            column = [];
+            movies = [];
+            $scope.movies = [];
+            for (var b = 0; b < movData.length; b++) {
+                if (movData[b].nameKey == nameKey){
+                    var movieData = movData[b].movies;
+                    for (var c = 0; c < movieData.length; c++) {
+                        column.push({
+                            index: c,
+                            pic: movieData[c].picUrl,
+                            name: MovieService.getName(movieData[c].nameKey),
+                            movieUrl: movieData[c].movieUrl
+                        });
                     }
-                    column = [];
                 }
-                column.push({
-                    index: i,
-                    pic: movData[i].picUrl,
-                    name: movData[i].movieName,
-                    movieUrl: movData[i].movieUrl
-                });
             }
             if (column) {
                 movies.push(column);
             }
             $scope.currentPage = 0;
             $scope.selectedIndex = 0;
-            $scope.title = '电影';
             $scope.totalPage = Math.ceil(movData.length / (3 * moviesPerColumn));
             $scope.movies = movies.slice(0, 3);
             numOfmovies = movData.length;
         }
-
     }])
     .service('MovieService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
         var widgetAPI = new Common.API.Widget();
@@ -175,12 +204,12 @@ angular.module('app.movie', [])
             jsonUrl,
             videoURL,
             playStatus;
-        var movies = []
+        var moviesType = [];
 
         this.getPlayUrl = function () {
             return $http.get(conUrl + '/Main/json/MainMenu_4.json').success(function (menuJSON) {
                 menuJSON.Content.forEach(function (el, idx, arr) {
-                    if (el.Name == '点播') {
+                    if (el.Type == 'Movie_Category') {
                         jsonUrl = conUrl + el.Json_URL;
                         return;
                     }
@@ -198,25 +227,52 @@ angular.module('app.movie', [])
             }
             return $http.get(jsonUrl).success(function (configJSON) {
                 var zhStrs = [], enStrs = [];
+                var subViewTreeIndex = 0, viewTreeIndex = 0;
                 configUrl = jsonUrl;
                 configJSON.Content.forEach(function (el, idx, arr) {
-                    var nameKey = 'movie_name_' + el.seq;
-                    movies.push({
-                        movieName: el.Name,
+                    var movies = [];
+                    if (el.Second) {
+                        el.Second.forEach(function (el2, idx2, arr2) {
+                            var nameKey = 'movie_name_' + subViewTreeIndex;
+                            var introduceKey = 'first_level_introduce_' + subViewTreeIndex;
+                            movies.push({
+                                nameKey: nameKey,
+                                type: el2.Type,
+                                duration: el2.Duration,
+                                picUrl: conUrl + el2.Picurl,
+                                movieUrl: conUrl + el2.Address
+                            });
+                            zhStrs[nameKey] = el2.Name;
+                            enStrs[nameKey] = el2.NameEng;
+                            zhStrs[introduceKey] = el2.Introduce;
+                            enStrs[introduceKey] = el2.IntroduceEng;
+                            subViewTreeIndex++;
+                        });
+                    }
+                    var nameKey = 'movie_tyep_name_' + viewTreeIndex;
+                    moviesType.push({
                         nameKey: nameKey,
-                        movieUrl: conUrl + el.Address,
-                        picUrl: conUrl + el.Picurl
+                        movies: movies,
                     });
-                    zhStrs[nameKey] = el.Name;
-                    enStrs[nameKey] = el.NameEng;
+                    zhStrs[nameKey] = el.MovieCategoryName;
+                    enStrs[nameKey] = el.MovieCategoryNameEng;
+                    viewTreeIndex++;
                 });
                 ResourceManager.addI18NResource({'zh-CN': zhStrs, 'en-US': enStrs});
             });
         };
 
         this.getMovies = function () {
-            return movies;
+            return moviesType;
         };
+
+        this.getName = function (nameKey) {
+            return ResourceManager.getI18NResource().getString(nameKey);
+        }
+
+        this.getTitle = function () {
+            return ResourceManager.getLocale().movie;
+        }
 
         var blktime = null;
         var noneFlag = false;

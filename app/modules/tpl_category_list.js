@@ -7,7 +7,7 @@ angular.module('app.tpl_category_list', [])
             secondLevel,
             LEVEL = 0,
             jsonUrl;
-        var langData = TplCategoryListService.getTitle()
+        var langData = TplCategoryListService.getTitle();
         activity.initialize($scope);
 
         $scope.selectedIndex = 0;

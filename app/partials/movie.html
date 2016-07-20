@@ -3,8 +3,9 @@
     <div class="content-main index-content">
         <div class="movie-type">
             <ul class="movie-type-list ">
-                <li class="selected">全部</li>
-                <li>科幻</li>
+                <li ng-repeat="type in movieTypes" ng-class="{'selected': type.index==selectedTypeIndex}">
+                    <span>{{type.name}}</span>
+                </li>
             </ul>
         </div>
         <div class="movie">

@@ -36,6 +36,9 @@ angular.module('app.zh-CN', [])
             },
             tpl_categroy_list: {
                 title: '城市介绍'
+            },
+            movie: {
+                title: '电影'
             }
         }
     }])

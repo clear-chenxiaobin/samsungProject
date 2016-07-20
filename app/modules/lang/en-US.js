@@ -36,6 +36,9 @@ angular.module('app.en-US', [])
             },
             tpl_categroy_list: {
                 title: 'City Guide'
+            },
+            movie: {
+                title: 'Movie'
             }
         }
 
