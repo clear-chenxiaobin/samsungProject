@@ -15,7 +15,6 @@ angular.module('app.bill', [])
 
         if (BillService.getBill().length == 0) {
             BillService.initialize().success(function (data) {
-                console.log(BillService.getBill());
                 bindBill();
             })
         } else {
