@@ -1,0 +1,55 @@
+.shopping-list-container {
+    display: inline-block;
+    width: 542px;
+    height: 492px;
+    background: url("../images/bg_category_list.png") no-repeat 0 0;
+    background-size: 542px 490px;
+    overflow: hidden;
+    margin: 10px auto;
+}
+
+.shopping-list {
+    padding: 4px 8px;
+    position: relative;
+}
+
+.shopping-list li {
+    height: 39px;
+    line-height: 38px;
+}
+
+.shopping-list li.selected {
+    background: url("../images/bg_category_lsit_selected.png") 0 0 no-repeat;
+    background-size: 526px 39px;
+
+}
+
+.shopping-list li>span {
+    display: inline-block;
+    font-size: 26px;
+    padding: 0 10px;
+    width: 145px;
+    height: 100%;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.cart_num:after {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 100%;
+    vertical-align: top;
+    background: url("../images/ic_arrow_right.png") center no-repeat;
+    background-size: 12px 24px;
+}
+.cart_num:before {
+    content: '';
+    display: inline-block;
+    width: 12px;
+    height: 100%;
+    vertical-align: top;
+    background: url("../images/ic_arrow_left.png") center no-repeat;
+    background-size: 12px 24px;
+}
+

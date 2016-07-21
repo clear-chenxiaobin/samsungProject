@@ -1,7 +1,7 @@
 'use strict';
 
-angular.module('app.tpl_order_list', [])
-    .controller('OrderListController', ['$scope', 'ActivityManager', 'COMMON_KEYS','ResourceManager','$http', function ($scope, ActivityManager, COMMON_KEYS,ResourceManager, $http) {
+angular.module('app.tpl_shopping_cart', [])
+    .controller('ShoppingCartController', ['$scope', 'ActivityManager', 'COMMON_KEYS','ResourceManager','$http', function ($scope, ActivityManager, COMMON_KEYS,ResourceManager, $http) {
         var activity = ActivityManager.getActiveActivity();
         activity.initialize($scope);
 
@@ -143,7 +143,7 @@ angular.module('app.tpl_order_list', [])
                         confirm(foodID,$scope.copies)
                     }else{
                         var cart = ResourceManager.getCart();
-                        ActivityManager.startActivity('tpl_shopping_cart');
+                        console.log(cart);
                     }
                     break;
                 case COMMON_KEYS.KEY_LEFT:

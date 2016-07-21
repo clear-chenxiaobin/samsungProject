@@ -1,0 +1,14 @@
+<div ng-controller="ShoppingCartController" class="order-content">
+    <div class="content-header">{{title}}</div>
+    <div class="content-main" style="text-align: center">
+        <div class="shopping-list-container">
+            <ul class="shopping-list" ng-style="{top: listTopStyle + 'px'}">
+                <li ng-repeat="food in foods" ng-class="{'selected': $index==selectedIndex}">
+                    <span>{{food.name}}</span><span>{{food.price}}元/份</span><span class="cart_num">&nbsp;{{food.id}}&nbsp;</span>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <toolbar items="ok|back"></toolbar>
+    <menu></menu>
+</div>

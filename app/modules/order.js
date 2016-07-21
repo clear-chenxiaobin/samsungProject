@@ -16,23 +16,21 @@ angular.module('app.order', [])
         $scope.listTopStyle = 0;
         $scope.selectedIndex = 0;
 
-        $http.get("assets/images/order/order_menu.json").success(function (data) {
-            data.content.forEach(function(val,idx,arr){
+        $http.get("http://172.17.173.100/nativevod/now/Main/json/PicText_Category_Order_BlueSea_295.json").success(function (data) {
+            data.Content.forEach(function(val,idx,arr){
 
                 var meal = {};
                 if(lang == "en-US") {
                      meal = {
-                        name: val.name_en,
-                        intro:val.intro_en,
-                        img:val.img,
-                        id:val.id
+                        name: val.NameEng,
+                        img:val.Picurl_abs_path,
+                        id:idx
                     }
                 }else{
                      meal = {
-                        name: val.name,
-                        intro:val.intro,
-                        img:val.img,
-                        id:val.id
+                        name: val.Name,
+                        img:val.Picurl_abs_path,
+                        id:idx
                      }
                 }
                 $scope.meals.push(meal);
@@ -50,6 +48,7 @@ angular.module('app.order', [])
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_BACK:
+                    ResourceManager.resetCart();
                     activity.finish();
                     break;
                 case COMMON_KEYS.KEY_UP:
@@ -66,7 +65,12 @@ angular.module('app.order', [])
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     ResourceManager.setMeal($scope.meals[$scope.selectedIndex].id);
-                    activity.finish();
+                    //activity.finish();
+                    ActivityManager.startActivity('tpl_order_list');
+                    break;
+                case COMMON_KEYS.KEY_RIGHT:
+                    ResourceManager.setMeal($scope.meals[$scope.selectedIndex].id);
+                    //activity.finish();
                     ActivityManager.startActivity('tpl_order_list');
                     break;
             }
