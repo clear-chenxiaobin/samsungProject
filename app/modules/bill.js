@@ -15,7 +15,6 @@ angular.module('app.bill', [])
 
         if (BillService.getBill().length == 0) {
             BillService.initialize().success(function (data) {
-                console.log(BillService.getBill());
                 bindBill();
             })
         } else {
@@ -29,7 +28,7 @@ angular.module('app.bill', [])
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
-                    if (activity.triggeBottom() == false) {
+                    if (activity.triggerBottom() == false) {
                         currentPage--;
                         if (-1 === currentPage) {
                             currentPage = Math.ceil(billItems.length / maxItemsPerPage) - 1;
@@ -38,7 +37,7 @@ angular.module('app.bill', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    if (activity.triggeBottom() == false) {
+                    if (activity.triggerBottom() == false) {
                         currentPage++;
                         if (Math.ceil(billItems.length / maxItemsPerPage) === currentPage) {
                             currentPage = 0;
@@ -47,12 +46,12 @@ angular.module('app.bill', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_UP:
-                    activity.triggeBottom(false);
-                    $scope.$broadcast('triggeBottom.change', false);
+                    activity.triggerBottom(false);
+                    $scope.$broadcast('triggerBottom.change', false);
                     break;
                 case COMMON_KEYS.KEY_DOWN:
-                    activity.triggeBottom(true);
-                    $scope.$broadcast('triggeBottom.change', true);
+                    activity.triggerBottom(true);
+                    $scope.$broadcast('triggerBottom.change', true);
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();

@@ -6,9 +6,7 @@ angular.module('app.menu', [])
             restrict: 'EA',
             replace: true,
             transclude: true,
-            scope: {
-                items: '@items'
-            },
+            scope: {},
             templateUrl: 'partials/menu.html',
             link: function (scope, element, attrs) {
                 var treeView = ResourceManager.getConfigurations().viewTree();
@@ -28,8 +26,8 @@ angular.module('app.menu', [])
                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
                 scope.menuStyleWidth = scope.menuItems.length * 100 + 1000 + 'px';
                 scope.showMenu = false;
-                scope.$on('menu.menu', function (ev, visible) {
-                    scope.showMenu = !visible;
+                scope.$on('menu.toggle', function (ev, visible) {
+                    scope.showMenu = visible;
                     scope.selectedMenuItemIndex = 0;
                     scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
                 });
@@ -65,7 +63,7 @@ angular.module('app.menu', [])
 
                 function getActivityId(type) {
                     switch (type) {
-                        case 'Live_blue"':
+                        case 'Live_blue':
                             return 'live';
                             break;
                         case 'Billing_blue':

@@ -37,8 +37,8 @@ angular.module('app.tpl_category_list', [])
                 case COMMON_KEYS.KEY_UP:
                     if ($scope.selectedIndex > 0) {
                         if ($scope.selectedIndex >= $scope.categories.length - 1){
-                            activity.triggeBottom(false);
-                            $scope.$broadcast('triggeBottom.change', false);
+                            activity.triggerBottom(false);
+                            $scope.$broadcast('triggerBottom.change', false);
                         }
                         $scope.selectedIndex--;
                     }
@@ -48,8 +48,8 @@ angular.module('app.tpl_category_list', [])
                         $scope.selectedIndex++;
                     } else {
                         $scope.selectedIndex++;
-                        activity.triggeBottom(true);
-                        $scope.$broadcast('triggeBottom.change', true);
+                        activity.triggerBottom(true);
+                        $scope.$broadcast('triggerBottom.change', true);
                         return;
                     }
                     break;
