@@ -12,7 +12,7 @@ angular.module('app.toolbar', [])
             templateUrl: 'partials/toolbar.html',
             link: function (scope, element, attrs) {
                 var i18nText  = ResourceManager.getLocale();
-                var triggeBottom  = ActivityManager.getActiveActivity().triggeBottom();
+                var triggerBottom  = ActivityManager.getActiveActivity().triggerBottom();
                 var toolbarItems = [
                     {code: 'ok', icon: false, title: i18nText.toolbar.ok},
                     {code: 'up-down', icon: 'assets/images/ic_up_down.png', title: i18nText.toolbar.up_down},
@@ -29,12 +29,12 @@ angular.module('app.toolbar', [])
                     return rightItems.indexOf(el.code) !== -1;
                 });
                 scope.menu = {menuText: i18nText.toolbar.menuText, title: i18nText.toolbar.menu};
-                scope.showToolbar = true;
+                    scope.showToolbar = true;
                 scope.$on('menu.toggle', function (ev, visible) {
                     scope.showToolbar = !visible;
                 });
-                scope.isActive = triggeBottom;
-                scope.$on('triggeBottom.change', function (ev, visible) {
+                scope.isActive = triggerBottom;
+                scope.$on('triggerBottom.change', function (ev, visible) {
                     scope.isActive = visible;
                 });
             }

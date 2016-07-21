@@ -83,12 +83,10 @@ angular.module('app', [
                 if (ActivityManager.getActiveActivity().shouldDisplayMenu()) {
                     $scope.showMenu = !$scope.showMenu;
                     $scope.$broadcast('menu.toggle', $scope.showMenu);
-                    $scope.$broadcast('menu.menu', !$scope.showMenu);
                 }
-            } else if (key === COMMON_KEYS.KEY_ENTER && ActivityManager.getActiveActivity().triggeBottom() && $scope.showMenu == false) {
+            } else if (key === COMMON_KEYS.KEY_ENTER && ActivityManager.getActiveActivity().triggerBottom() && $scope.showMenu == false) {
                 $scope.showMenu = !$scope.showMenu;
                 $scope.$broadcast('menu.toggle', $scope.showMenu);
-                $scope.$broadcast('menu.menu', !$scope.showMenu);
             } else if (!$scope.showMenu) {
                 ActivityManager.getActiveActivity().keyDown(key);
             } else {
@@ -107,8 +105,8 @@ angular.module('app', [
 
         $scope.$on('activity.created', function (ev) {
             $scope.showMenu = false;
-            $scope.$broadcast('menu.toggle', $scope.showMenu);
-            $scope.$broadcast('menu.menu', !$scope.showMenu);
+            $scope.$broadcast('menu.toggle', !$scope.showMenu);
+            $scope.$broadcast('menu.menu', $scope.showMenu);
         });
 
     }])

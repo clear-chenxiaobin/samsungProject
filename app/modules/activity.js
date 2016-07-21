@@ -8,7 +8,7 @@ angular.module('app.activity', ['app.resource'])
             this.templateUrl = 'partials/' + id + '.html';
             this._hide = false;
             this._shouldDisplayMenu = true;
-            this._triggeBottom = false
+            this._triggerBottom = false;
         }
 
         Activity.prototype.finish = function () {
@@ -22,13 +22,13 @@ angular.module('app.activity', ['app.resource'])
         Activity.prototype.hide = function () {
             this._hide = true;
         };
-        
+
         Activity.prototype.show = function () {
-            this._hide = false;  
+            this._hide = false;
         };
-        
+
         Activity.prototype.isHide = function () {
-            return this._hide;  
+            return this._hide;
         };
 
         Activity.prototype.shouldDisplayMenu = function (bool) {
@@ -39,11 +39,11 @@ angular.module('app.activity', ['app.resource'])
             }
         };
 
-        Activity.prototype.triggeBottom = function (bool) {
+        Activity.prototype.triggerBottom = function (bool) {
             if (typeof bool !== 'boolean') {
-                return this._triggeBottom;
+                return this._triggerBottom;
             } else {
-                this._triggeBottom = bool;
+                this._triggerBottom = bool;
             }
         };
 

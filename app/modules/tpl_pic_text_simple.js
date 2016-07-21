@@ -30,22 +30,22 @@ angular.module('app.tpl_pic_text_simple', [])
             var tempIndex = selectedIndex;
             switch (keyCode) {
                 case COMMON_KEYS.KEY_LEFT:
-                    if (tempIndex > 0 && activity.triggeBottom() == false) {
+                    if (tempIndex > 0 && activity.triggerBottom() == false) {
                         tempIndex--;
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    if (tempIndex < content.length - 1 && activity.triggeBottom() == false) {
+                    if (tempIndex < content.length - 1 && activity.triggerBottom() == false) {
                         tempIndex++;
                     }
                     break;
                 case COMMON_KEYS.KEY_UP:
-                    activity.triggeBottom(false);
-                    $scope.$broadcast('triggeBottom.change', false);
+                    activity.triggerBottom(false);
+                    $scope.$broadcast('triggerBottom.change', false);
                     break;
                 case COMMON_KEYS.KEY_DOWN:
-                    activity.triggeBottom(true);
-                    $scope.$broadcast('triggeBottom.change', true);
+                    activity.triggerBottom(true);
+                    $scope.$broadcast('triggerBottom.change', true);
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
@@ -62,12 +62,6 @@ angular.module('app.tpl_pic_text_simple', [])
 
     }])
     .service('TplPicTextSimpleService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
-        var configUrl = ResourceManager.getConfigurations().serverUrl();
-
-        this.getConfigUrl = function () {
-            return configUrl;
-        }
-
         this.getName = function (nameKey) {
             return ResourceManager.getI18NResource().getString(nameKey);
         }
