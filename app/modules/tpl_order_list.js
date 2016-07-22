@@ -9,6 +9,7 @@ angular.module('app.tpl_order_list', [])
         var lang = i18nText.lang;
         $scope.orderText = i18nText.order;
         $scope.title = $scope.orderText.title;
+        $scope.coin = $scope.orderText.coin;
 
         var mealID = ResourceManager.getMeal().id;
         //根据上一级中选择的mealID请求对应数据
@@ -145,6 +146,7 @@ angular.module('app.tpl_order_list', [])
                         }
                     }else{
                         var cart = ResourceManager.getCart();
+                        activity.finish();
                         ActivityManager.startActivity('tpl_shopping_cart');
                     }
                     break;
@@ -169,6 +171,11 @@ angular.module('app.tpl_order_list', [])
                         $scope.confirm = 'cart'
                     }
                     break;
+            }
+            if ($scope.selectedIndex > 11) {
+                $scope.listTopStyle = (11 - $scope.selectedIndex) * 39;
+            } else if ($scope.listTopStyle !== 0) {
+                $scope.listTopStyle = 0;
             }
         });
     }]);

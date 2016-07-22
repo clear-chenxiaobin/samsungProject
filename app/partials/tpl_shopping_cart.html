@@ -9,10 +9,11 @@
             </ul>
         </div>
         <div class="total-price">
-            <span>总价</span><span>￥1080</span>
+            <span>{{cartText.total}}</span><span>{{coin}}{{total}}</span>
         </div>
         <div class="cart_btn_container">
-            <span class="button-submit" style="margin-right: 60px">提交订单</span><span class="button-cancel" style="margin-left: 60px">取消订单</span>
+            <span class="button-submit" ng-class="{'active': menu=='submit'}" style="margin-right: 60px">{{cartText.submit}}</span>
+            <span class="button-cancel" ng-class="{'active': menu=='cancel'}" style="margin-left: 60px">{{cartText.cancel}}</span>
         </div>
     </div>
     <toolbar items="ok|back"></toolbar>

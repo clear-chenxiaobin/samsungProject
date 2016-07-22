@@ -74,6 +74,11 @@ angular.module('app.order', [])
                     ActivityManager.startActivity('tpl_order_list');
                     break;
             }
+            if ($scope.selectedIndex > 11) {
+                $scope.listTopStyle = (11 - $scope.selectedIndex) * 39;
+            } else if ($scope.listTopStyle !== 0) {
+                $scope.listTopStyle = 0;
+            }
         });
 
     }]);
