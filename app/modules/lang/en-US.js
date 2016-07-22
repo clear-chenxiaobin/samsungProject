@@ -13,6 +13,8 @@ angular.module('app.en-US', [])
             },
             toolbar: {
                 ok: 'Click OK button to select category',
+                weather_ok:'Click OK button to select city',
+                order_ok:'Click OK button to select meal',
                 up_down: 'Click Up and Down to move option',
                 left_right: 'Click Left and Right to change image',
                 back: 'Click back',
@@ -42,6 +44,14 @@ angular.module('app.en-US', [])
             },
             message: {
                 title: 'Mwssage'
+            },
+            order: {
+                title: 'Order'
+            },
+            cart:{
+                title:'Shopping Cart',
+                coin:'$',
+                price:'/parts'
             }
         }
 

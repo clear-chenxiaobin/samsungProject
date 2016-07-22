@@ -8,6 +8,8 @@ angular.module('app.resource', [])
             configurations,
             picTextDetail,
             cityIndex,
+            meal,
+            cart = [],
             langString;
 
         this.initialize = function (mainJSON, menuJSON) {
@@ -127,6 +129,32 @@ angular.module('app.resource', [])
 
         this.getCity = function(){
             return cityIndex;
+        }
+
+        this.setMeal = function(id){
+            meal = {
+                id:id
+            };
+        }
+
+        this.getMeal = function(){
+            return meal;
+        }
+
+        this.addToCart = function(id,f,n,p){
+            cart[id] = {
+                name : f ,
+                num : n ,
+                price : p
+            }
+        }
+
+        this.getCart = function(){
+            return cart;
+        }
+
+        this.resetCart = function(){
+            cart = [];
         }
 
         this.getConfigurations = function () {

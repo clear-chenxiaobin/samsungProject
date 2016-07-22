@@ -21,6 +21,8 @@ angular.module('app', [
     'app.zh-CN',
     'app.en-US',
     'app.tpl_category_list',
+    'app.tpl_order_list',
+    'app.tpl_shopping_cart',
     'app.tpl_pic_text_category',
     'app.tpl_pic_text_simple',
     'app.tpl_text',

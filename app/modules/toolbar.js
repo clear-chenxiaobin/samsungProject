@@ -15,6 +15,8 @@ angular.module('app.toolbar', [])
                 var triggerBottom  = ActivityManager.getActiveActivity().triggerBottom();
                 var toolbarItems = [
                     {code: 'ok', icon: false, title: i18nText.toolbar.ok},
+                    {code: 'weather_ok', icon: false, title: i18nText.toolbar.weather_ok},
+                    {code: 'order_ok', icon: false, title: i18nText.toolbar.order_ok},
                     {code: 'up-down', icon: 'assets/images/ic_up_down.png', title: i18nText.toolbar.up_down},
                     {code: 'left-right', icon: 'assets/images/ic_left_right.png', title: i18nText.toolbar.left_right},
                     {code: 'back', icon: 'assets/images/ic_back.png', title: i18nText.toolbar.back}

@@ -13,6 +13,8 @@ angular.module('app.zh-CN', [])
             },
             toolbar: {
                 ok: '按OK选择分类',
+                weather_ok:'按OK选择分类',
+                order_ok:'按OK选择分类',
                 up_down: '按上下移动选项',
                 left_right: '按左右切换图片',
                 back: '点击 返回',
@@ -42,6 +44,14 @@ angular.module('app.zh-CN', [])
             },
             message: {
                 title: '留言'
+            },
+            order: {
+                title: '订餐服务'
+            },
+            cart:{
+                title:'购物车',
+                coin:'￥',
+                price:'/份'
             }
         }
     }])
