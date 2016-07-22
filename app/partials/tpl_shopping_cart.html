@@ -2,11 +2,17 @@
     <div class="content-header">{{title}}</div>
     <div class="content-main" style="text-align: center">
         <div class="shopping-list-container">
-            <ul class="shopping-list" ng-style="{top: listTopStyle + 'px'}">
-                <li ng-repeat="food in foods" ng-class="{'selected': $index==selectedIndex}">
-                    <span>{{food.name}}</span><span>{{food.price}}元/份</span><span class="cart_num">&nbsp;{{food.id}}&nbsp;</span>
+            <ul id="order-list" class="shopping-list" ng-style="{top: listTopStyle + 'px'}">
+                <li ng-repeat="item in order track by $index" ng-class="{'selected': $index==selectedIndex}">
+                    <span>{{item.name}}</span><span>{{coin}}{{item.price}}{{priceText}}</span><span class="cart_num">&nbsp;{{item.num}}&nbsp;</span>
                 </li>
             </ul>
+        </div>
+        <div class="total-price">
+            <span>总价</span><span>￥1080</span>
+        </div>
+        <div class="cart_btn_container">
+            <span class="button-submit" style="margin-right: 60px">提交订单</span><span class="button-cancel" style="margin-left: 60px">取消订单</span>
         </div>
     </div>
     <toolbar items="ok|back"></toolbar>

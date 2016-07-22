@@ -44,6 +44,11 @@ angular.module('app.zh-CN', [])
             },
             order: {
                 title: '订餐服务'
+            },
+            cart:{
+                title:'购物车',
+                coin:'￥',
+                price:'/份'
             }
         }
     }])

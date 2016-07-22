@@ -140,7 +140,9 @@ angular.module('app.tpl_order_list', [])
                         $scope.confirm = 'after';
                     }else if($scope.confirm == 'after'){
                         var foodID = $scope.foods[$scope.selectedIndex].id;
-                        confirm(foodID,$scope.copies)
+                        if($scope.copies!=0){
+                            confirm(foodID,$scope.copies)
+                        }
                     }else{
                         var cart = ResourceManager.getCart();
                         ActivityManager.startActivity('tpl_shopping_cart');

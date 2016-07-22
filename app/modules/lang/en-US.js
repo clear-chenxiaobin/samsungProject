@@ -44,6 +44,11 @@ angular.module('app.en-US', [])
             },
             order: {
                 title: 'Order'
+            },
+            cart:{
+                title:'Shopping Cart',
+                coin:'$',
+                price:'/parts'
             }
         }
 
