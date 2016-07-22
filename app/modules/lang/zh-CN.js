@@ -9,7 +9,7 @@ angular.module('app.zh-CN', [])
             },
             index: {
                 guestName: '尊敬的 ',
-                roomNumber: '房间号8088'
+                roomNumber: '房间号:'
             },
             toolbar: {
                 ok: '按OK选择分类',
@@ -39,6 +39,9 @@ angular.module('app.zh-CN', [])
             },
             movie: {
                 title: '电影'
+            },
+            message: {
+                title: '留言'
             }
         }
     }])

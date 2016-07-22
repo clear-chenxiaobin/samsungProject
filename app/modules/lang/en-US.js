@@ -9,7 +9,7 @@ angular.module('app.en-US', [])
             },
             index:{
                 guestName:'Dear ',
-                roomNumber:'Room Number:8088'
+                roomNumber:'Room Number:'
             },
             toolbar: {
                 ok: 'Click OK button to select category',
@@ -39,6 +39,9 @@ angular.module('app.en-US', [])
             },
             movie: {
                 title: 'Movie'
+            },
+            message: {
+                title: 'Mwssage'
             }
         }
 
