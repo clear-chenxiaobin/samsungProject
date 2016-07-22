@@ -5,6 +5,7 @@ angular.module('app', [
     'app.resource',
     'app.toolbar',
     'app.menu',
+    'app.room',
     'app.welcome',
     'app.index',
     'app.alarm',
@@ -35,13 +36,19 @@ angular.module('app', [
         var cfg = ResourceManager.getConfigurations();
         $http.get(cfg.mainConfigUrl()).success(function (mainJSON) {
 
-            // 获取目录配置文件
-            var menuConfigUrl = cfg.serverUrl() + mainJSON.MainView_Json_URL;
-            $http.get(menuConfigUrl).success(function (menuJSON) {
-                ResourceManager.initialize(typeof mainJSON === 'string' ? JSON.parse(mainJSON) : mainJSON,
-                    typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
-                ActivityManager.startActivity('welcome');
-            });
+                // 获取目录配置文件
+                var menuConfigUrl = cfg.serverUrl() + mainJSON.MainView_Json_URL;
+                $http.get(menuConfigUrl).success(function (menuJSON) {
+                    ResourceManager.initialize(typeof mainJSON === 'string' ? JSON.parse(mainJSON) : mainJSON,
+                        typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
+
+                    //判断localStorage中房间号是否存在，不存在则跳转至home页面设置房间号
+                    if(!window.localStorage.room){
+                        ActivityManager.startActivity('room');
+                    }else {
+                        ActivityManager.startActivity('welcome');
+                    }
+                });
         });
 
     }])
