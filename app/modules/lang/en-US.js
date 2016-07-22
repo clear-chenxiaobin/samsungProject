@@ -43,7 +43,7 @@ angular.module('app.en-US', [])
                 title: 'Movie'
             },
             message: {
-                title: 'Mwssage'
+                title: 'Message'
             },
             order: {
                 title: 'Order',

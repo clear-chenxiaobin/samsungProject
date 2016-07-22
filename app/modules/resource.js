@@ -192,4 +192,4 @@ angular.module('app.resource', [])
     }])
     .constant('SERVER_URL', 'http://172.17.173.100/nativevod/now')
     .constant('MESSAGE_URL', 'http://192.168.17.101:8000/backend/GetMessage')
-    .constant('ROOM_NUM', '2046');
+    .constant('ROOM_NUM', '0005');

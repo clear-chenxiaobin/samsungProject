@@ -9,6 +9,7 @@ angular.module('app.message', [])
             $scope.title = MessageService.getTitle().title;
             if (MessageService.getMessage() == undefined) {
                 MessageService.initialize().success(function (data) {
+                    MessageService.getMessage()
                     //bindBill();
                 })
             } else {
