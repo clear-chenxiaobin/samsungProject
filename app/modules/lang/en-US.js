@@ -43,12 +43,18 @@ angular.module('app.en-US', [])
                 title: 'Movie'
             },
             order: {
-                title: 'Order'
+                title: 'Order',
+                add:'Add',
+                cart:'Cart',
+                coin:'$'
             },
             cart:{
                 title:'Shopping Cart',
                 coin:'$',
-                price:'/parts'
+                price:'/parts',
+                total:'Total Price',
+                submit:'Submit',
+                cancel:'Cancel'
             }
         }
 

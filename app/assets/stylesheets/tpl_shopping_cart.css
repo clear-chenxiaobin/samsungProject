@@ -15,7 +15,7 @@
     background: url("../images/bg_category_list.png") no-repeat 0 0;
     background-size: 542px 40px;
     overflow: hidden;
-    margin: -5px auto;
+    margin: -10px auto;
 }
 
 .total-price >span {

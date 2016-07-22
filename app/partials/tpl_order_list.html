@@ -13,7 +13,7 @@
                 <img ng-src="{{content.img}}">
             </div>
             <p>{{content.intro}}</p>
-            <p>{{content.price}}</p>
+            <p>{{coin}}{{content.price}}</p>
             <div class="btn_container">
                 <span style="width: 15%;height: 100%;display: inline-block;padding-left: 55px;">
                     <div class="top-arrow"></div>
@@ -21,10 +21,10 @@
                     <div class="bot-arrow"></div>
                 </span>
                 <span style="width: 30%;height: 100%;display: inline-block;">
-                    <div class="button-confirm" ng-class="{'active': confirm=='after'}"><span>加入购物车</span></div>
+                    <div class="button-confirm" ng-class="{'active': confirm=='after'}"><span>{{orderText.add}}</span></div>
                 </span>
                 <span style="width: 30%;height: 100%;display: inline-block;">
-                    <div class="button-cart" ng-class="{'active': confirm=='cart'}"><span>购物车（{{total}}）</span></div>
+                    <div class="button-cart" ng-class="{'active': confirm=='cart'}"><span>{{orderText.cart}}（{{total}}）</span></div>
                 </span>
             </div>
         </div>

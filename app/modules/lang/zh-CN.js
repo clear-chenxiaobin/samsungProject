@@ -43,12 +43,18 @@ angular.module('app.zh-CN', [])
                 title: '电影'
             },
             order: {
-                title: '订餐服务'
+                title: '订餐服务',
+                add:'加入购物车',
+                cart:'购物车',
+                coin:'￥'
             },
             cart:{
                 title:'购物车',
                 coin:'￥',
-                price:'/份'
+                price:'/份',
+                total:'总价',
+                submit:'提交订单',
+                cancel:'取消订单'
             }
         }
     }])
