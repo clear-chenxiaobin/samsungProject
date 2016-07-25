@@ -24,7 +24,7 @@ angular.module('app.welcome', [])
             //    .join('\n');
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
             //$scope.roomNumber = i18nText.index.roomNumber;
-            $scope.roomNumber = window.localStorage.room;
+            $scope.roomNumber = i18nText.index.roomNumber + window.localStorage.room;
             $scope.cue = i18nText.welcome.cue;
         });
         var languages = ['zh-CN', 'en-US'],
