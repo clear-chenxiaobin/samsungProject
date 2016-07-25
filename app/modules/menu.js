@@ -12,7 +12,7 @@ angular.module('app.menu', [])
                 var treeView = ResourceManager.getConfigurations().viewTree();
                 scope.menuItems = [];
                 for (var i = 0; i < treeView.length; i++) {
-                    var menuName = ResourceManager.getI18NResource().getString(treeView[i].nameKey)
+                    var menuName = ResourceManager.getI18NResource().getString(treeView[i].nameKey);
                     scope.menuItems.push({
                         name: menuName,
                         icon: treeView[i].icon,
@@ -20,8 +20,9 @@ angular.module('app.menu', [])
                     });
                 }
                 scope.selectedMenuItemIndex = 0;
-                scope.guestName = ResourceManager.getI18NResource().getString("guest_name").replace(/:/g, "");;
-                scope.roomNumber = ResourceManager.getConfigurations().roomNum();
+                scope.guestName = ResourceManager.getI18NResource().getString("guest_name").replace(/:/g, "");
+                //scope.roomNumber = ResourceManager.getConfigurations().roomNum();
+                scope.roomNumber = window.localStorage.room;
 
                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
                 scope.menuStyleWidth = scope.menuItems.length * 100 + 1000 + 'px';
