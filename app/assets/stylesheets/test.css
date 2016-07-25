@@ -1,8 +1,8 @@
 .test_animation{
-    animation: myfirst 1.5s;
-    -moz-animation: myfirst 1.5s;	/* Firefox */
-    -webkit-animation: myfirst 1.5s;	/* Safari 和 Chrome */
-    -o-animation: myfirst 1.5s;
+    animation: myfirst 0.5s forwards;
+    -moz-animation: myfirst 0.5s forwards;	/* Firefox */
+    -webkit-animation: myfirst 0.5s forwards;	/* Safari 和 Chrome */
+    -o-animation: myfirst 0.5s forwards;
 }
 
 
