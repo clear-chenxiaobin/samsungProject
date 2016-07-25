@@ -11,6 +11,7 @@ angular.module('app.tpl_shopping_cart', [])
         $scope.title = $scope.cartText.title;
         $scope.priceText = $scope.cartText.price;
         $scope.coin = $scope.cartText.coin;
+        var roomNum = window.localStorage.room;
 
         $scope.listTopStyle = 0;
         $scope.selectedIndex = 0;
@@ -42,6 +43,9 @@ angular.module('app.tpl_shopping_cart', [])
 
         function submit(){
             //提交的订单信息(order数组+total总价)
+            console.log($scope.order);
+            console.log($scope.total);
+            console.log(roomNum);
         }
 
         function cancel(){
@@ -78,10 +82,20 @@ angular.module('app.tpl_shopping_cart', [])
                         }
                     break;
                 case COMMON_KEYS.KEY_ENTER:
-                    cancel();
+                    if($scope.menu == 'submit'){
+                        submit();
+                    }else if($scope.menu == 'cancel'){
+                        cancel();
+                    }
                     break;
                 case COMMON_KEYS.KEY_LEFT:
-                    if($scope.order[$scope.selectedIndex].num<2){
+                    if($scope.menu == 'submit'){
+                        $scope.selectedIndex--;
+                        $scope.menu = '';
+                    }else if($scope.menu == 'cancel'){
+                        $scope.selectedIndex--;
+                        $scope.menu = 'submit';
+                    }else if($scope.order[$scope.selectedIndex].num<2){
                         deleteOrder($scope.selectedIndex);
                         //$scope.order[$scope.selectedIndex].num = 0;
                     }else{
@@ -90,8 +104,15 @@ angular.module('app.tpl_shopping_cart', [])
                     }
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
-                    $scope.order[$scope.selectedIndex].num++;
-                    summary();
+                    if($scope.menu == 'submit'){
+                        $scope.selectedIndex++;
+                        $scope.menu = 'cancel';
+                    }else if($scope.menu == 'cancel'){
+                        return
+                    }else {
+                        $scope.order[$scope.selectedIndex].num++;
+                        summary();
+                    }
                     break;
             }
             if ($scope.selectedIndex > 5 && $scope.menu!='submit' && $scope.menu!='cancel') {

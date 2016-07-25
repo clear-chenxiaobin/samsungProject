@@ -5,7 +5,7 @@ angular.module('app.zh-CN', [])
         return {
             lang:'zh-CN',
             welcome: {
-                cue: '根据您的语言习惯选择使用的语言系统',
+                cue: '根据您的语言习惯选择使用的语言系统'
             },
             index: {
                 guestName: '尊敬的 ',
@@ -17,6 +17,8 @@ angular.module('app.zh-CN', [])
                 order_ok:'按OK选择分类',
                 up_down: '按上下移动选项',
                 left_right: '按左右切换图片',
+                cart_l_r:'按左右修改数量',
+                weather_open:'按OK打开城市列表',
                 back: '点击 返回',
                 menu: '点击 打开菜单',
                 menuText: '菜 单'

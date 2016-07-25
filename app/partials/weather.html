@@ -4,7 +4,7 @@
         <div class="weather-top">
             <span class="weather-title">{{content.City}}</span>
             <span class="weather-title">{{}}</span>
-            <a href="#">{{weather.city_list}}</a>
+            <div class="button-confirm" ng-class="{'active': select=='list'}"><span>{{weather.city_list}}</span></div>
         </div>
         <div class="weather-content">
             <div class="weather-days">
@@ -36,6 +36,6 @@
             </div>
         </div>
     </div>
-    <toolbar items="|"></toolbar>
+    <toolbar items="weather_open|back"></toolbar>
     <menu></menu>
 </div>

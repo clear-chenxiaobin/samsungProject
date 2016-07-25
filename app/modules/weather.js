@@ -7,6 +7,7 @@ angular.module('app.weather', [])
 
         var i18nText = ResourceManager.getLocale();
         $scope.weather = i18nText.weather;
+        $scope.select = '';
         //var conUrl = ResourceManager.getConfigurations().serverUrl();
         //$scope.conUrl = conUrl;
         $scope.serverURl = 'http://192.168.18.201/weather/weather?city=';
