@@ -1,0 +1,31 @@
+.test_animation{
+    animation: myfirst 1.5s;
+    -moz-animation: myfirst 1.5s;	/* Firefox */
+    -webkit-animation: myfirst 1.5s;	/* Safari 和 Chrome */
+    -o-animation: myfirst 1.5s;
+}
+
+
+@keyframes myfirst
+{
+    from {width: 213px;height: 120px}
+    to {width: 426px;height: 240px}
+}
+
+@-moz-keyframes myfirst /* Firefox */
+{
+    from {width: 213px;height: 120px}
+    to {width: 426px;height: 240px}
+}
+
+@-webkit-keyframes myfirst /* Safari 和 Chrome */
+{
+    from {width: 213px;height: 120px}
+    to {width: 426px;height: 240px}
+}
+
+@-o-keyframes myfirst /* Opera */
+{
+    from {width: 213px;height: 120px}
+    to {width: 426px;height: 240px}
+}

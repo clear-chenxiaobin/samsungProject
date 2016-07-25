@@ -28,7 +28,8 @@ angular.module('app', [
     'app.tpl_pic_text_simple',
     'app.tpl_text',
     'app.tpl_text_detail',
-    'app.tpl_weather_list'
+    'app.tpl_weather_list',
+    'app.test',
 ])
     .run(['$rootScope', '$http', 'ActivityManager', 'ResourceManager', function ($rootScope, $http, ActivityManager, ResourceManager) {
 

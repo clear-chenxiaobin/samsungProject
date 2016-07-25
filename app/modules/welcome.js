@@ -40,6 +40,9 @@ angular.module('app.welcome', [])
                 case COMMON_KEYS.KEY_ENTER:
                     ActivityManager.startActivity('index');
                     break;
+                case COMMON_KEYS.KEY_BACK:
+                    ActivityManager.startActivity('test');
+                    break;
             }
         });
     }]);
