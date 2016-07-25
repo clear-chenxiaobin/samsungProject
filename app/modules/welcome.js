@@ -38,7 +38,7 @@ angular.module('app.welcome', [])
                     ResourceManager.setLocale($scope.language);
                     break;
                 case COMMON_KEYS.KEY_ENTER:
-                    ActivityManager.startActivity('test');
+                    ActivityManager.startActivity('index');
                     break;
                 case COMMON_KEYS.KEY_UP:
                     ActivityManager.startActivity('test');
