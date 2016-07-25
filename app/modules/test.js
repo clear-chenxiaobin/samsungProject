@@ -7,7 +7,11 @@ angular.module('app.test', [])
 
         function animate(){
             var target = document.getElementById('test');
-            addClass(target,'test_animation');
+            if(hasClass(target,'test_animation')){
+                remove();
+            };
+            addClass(target, 'test_animation');
+
         };
 
         function remove(){
