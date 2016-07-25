@@ -37,7 +37,7 @@ angular.module('app.test', [])
 
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
-                case COMMON_KEYS.KEY_BACK:
+                case COMMON_KEYS.KEY_UP:
                     remove();
                     break;
                 case COMMON_KEYS.KEY_ENTER:
