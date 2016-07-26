@@ -10,48 +10,28 @@
 {
     from {width: 192px;height: 253px;opacity: 1;top: 0}
     to {width: 192px;height: 253px;opacity: 0;top:-126.5px}
-    0%{
-        -webkit-transform:rotatex(0deg);
-    }
-    100%{
-        -webkit-transform:rotatex(90deg);
-    }
+
 }
 
 @-moz-keyframes myfirst /* Firefox */
 {
     from {width: 192px;height: 253px;opacity: 1;top: 0}
     to {width: 192px;height: 253px;opacity: 0;top:-126.5px}
-    0%{
-        -webkit-transform:rotatex(0deg);
-    }
-    100%{
-        -webkit-transform:rotatex(90deg);
-    }
+
 }
 
 @-webkit-keyframes myfirst /* Safari 和 Chrome */
 {
     from {width: 192px;height: 253px;opacity: 1;top: 0}
     to {width: 192px;height: 253px;opacity: 0;top:-126.5px}
-    0%{
-        -webkit-transform:rotatex(0deg);
-    }
-    100%{
-        -webkit-transform:rotatex(90deg);
-    }
+
 }
 
 @-o-keyframes myfirst /* Opera */
 {
     from {width: 192px;height: 253px;opacity: 1;top: 0}
     to {width: 192px;height: 253px;opacity: 0;top:-126.5px}
-    0%{
-        -webkit-transform:rotatex(0deg);
-    }
-    100%{
-        -webkit-transform:rotatex(90deg);
-    }
+  
 }
 
 #test{
