@@ -1,7 +1,7 @@
 'use strict';
 
 angular.module('app.resource', [])
-    .service('ResourceManager', ['$rootScope', 'SERVER_URL', 'MESSAGE_URL', 'ROOM_NUM', 'en-US-String','zh-CN-String', function ($rootScope, SERVER_URL, MESSAGE_URL, ROOM_NUM, en_US_String,zh_CN_String) {
+    .service('ResourceManager', ['$rootScope', 'SERVER_URL', 'MESSAGE_URL', 'en-US-String','zh-CN-String', function ($rootScope, SERVER_URL, MESSAGE_URL, en_US_String,zh_CN_String) {
 
         var locale         = 'zh-CN',
             i18nResource,
@@ -183,13 +183,9 @@ angular.module('app.resource', [])
                 messageUrl: function() {
                     return MESSAGE_URL;
                 },
-                roomNum: function() {
-                    return ROOM_NUM;
-                }
             };
         };
 
     }])
     .constant('SERVER_URL', 'http://172.17.173.100/nativevod/now')
-    .constant('MESSAGE_URL', 'http://192.168.17.101:8000/backend/GetMessage')
-    .constant('ROOM_NUM', '0005');
+    .constant('MESSAGE_URL', 'http://192.168.17.101:8000/backend/GetMessage');

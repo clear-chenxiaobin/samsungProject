@@ -21,7 +21,6 @@ angular.module('app.menu', [])
                 }
                 scope.selectedMenuItemIndex = 0;
                 scope.guestName = ResourceManager.getI18NResource().getString("guest_name").replace(/:/g, "");
-                //scope.roomNumber = ResourceManager.getConfigurations().roomNum();
                 scope.roomNumber = window.localStorage.room;
 
                 scope.menuStyleLeft = (231 - scope.selectedMenuItemIndex * 100) + 'px';
