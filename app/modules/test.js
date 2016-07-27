@@ -42,9 +42,69 @@ angular.module('app.test', [])
             target.className = '';
         }
 
-        animate(0,'test','test_animation');
-        animate(0,'test1','animation');
 
+        function rotateUp(num){
+            if(num == 0) {
+                var number = num + 2;
+                var target = document.getElementById('test' + number).children;
+                for(var i=0;i<target.length;i++){
+                    transform(target[i],"rotateX(0deg)");
+                    target[i].style.top = '0px';
+                }
+            }else{
+                var number = num + 2;
+                var target = document.getElementById('test' + number).children;
+                for(var i=0;i<target.length;i++){
+                    transform(target[i],"rotateX(0deg)");
+                    target[i].style.top = '0px';
+                }
+                var number1 = num+1;
+                var target1 = document.getElementById('test'+ number1).children;
+                for(var i=0;i<target1.length;i++) {
+                    transform(target1[i], "rotateX(90deg)");
+                    target1[i].style.top = '-115px';
+                }
+            }
+        }
+
+
+        function rotateDown(num){
+            if(num==-1){
+                var target = document.getElementsByClassName('rotate_img');
+                for(var i=0;i<target.length;i++){
+                    transform(target[i],"rotateX(-90deg)");
+                    target[i].style.top = '100px';
+                }
+            }else{
+                var number1 = num+3;
+                var target1 = document.getElementById('test'+ number1).children;
+                for(var i=0;i<target1.length;i++) {
+                    transform(target1[i], "rotateX(-90deg)");
+                    target1[i].style.top = '100px';
+                }
+                var number = num + 2;
+                var target = document.getElementById('test' + number).children;
+                for(var i=0;i<target.length;i++){
+                    transform(target[i],"rotateX(0deg)");
+                    target[i].style.top = '0px';
+                }
+            }
+        }
+
+        var transform = function(element, value, key) {
+            key = key || "Transform";
+            ["Moz", "O", "Ms", "Webkit", ""].forEach(function(prefix) {
+                element.style[prefix + key] = value;
+            });
+
+            return element;
+        }
+
+
+        //animate(0,'test','test_animation');
+        rotateDown(-1);
+        rotateUp(0);
+        animate(0,'test1','animation');
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_DOWN:
@@ -62,18 +122,26 @@ angular.module('app.test', [])
                     animate($scope.selectedIndex2,'test1','animation');
                     break;
                 case COMMON_KEYS.KEY_LEFT:
+                    //if ($scope.selectedIndex > 0) {
+                    //    $scope.selectedIndex--;
+                    //}
+                    //remove($scope.selectedIndex+1,'test','test_animation');
+                    //animate($scope.selectedIndex,'test','test_animation');
                     if ($scope.selectedIndex > 0) {
                         $scope.selectedIndex--;
                     }
-                    remove($scope.selectedIndex+1,'test','test_animation');
-                    animate($scope.selectedIndex,'test','test_animation');
+                    rotateDown($scope.selectedIndex);
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
+                    //if ($scope.selectedIndex < 2) {
+                    //    $scope.selectedIndex++;
+                    //}
+                    //remove($scope.selectedIndex-1,'test','test_animation');
+                    //animate($scope.selectedIndex,'test','test_animation');
                     if ($scope.selectedIndex < 2) {
                         $scope.selectedIndex++;
                     }
-                    remove($scope.selectedIndex-1,'test','test_animation');
-                    animate($scope.selectedIndex,'test','test_animation');
+                    rotateUp($scope.selectedIndex);
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     clearClass($scope.selectedIndex);
