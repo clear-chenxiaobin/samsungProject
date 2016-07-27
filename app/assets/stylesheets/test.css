@@ -1,8 +1,8 @@
 .test_animation{
-    animation: myfirst 1s forwards;
-    -moz-animation: myfirst 1s forwards;	/* Firefox */
-    -webkit-animation: myfirst 1s forwards;	/* Safari 和 Chrome */
-    -o-animation: myfirst 1s forwards;
+    animation: myfirst 0.5s forwards;
+    -moz-animation: myfirst 0.5s forwards;	/* Firefox */
+    -webkit-animation: myfirst 0.5s forwards;	/* Safari 和 Chrome */
+    -o-animation: myfirst 0.5s forwards;
 }
 
 
@@ -73,10 +73,10 @@
 
 
 .animation{
-    animation: test 1s forwards;
-    -moz-animation: test 1s forwards;	/* Firefox */
-    -webkit-animation: test 1s forwards;	/* Safari 和 Chrome */
-    -o-animation: test 1s forwards;
+    animation: test 0.5s forwards;
+    -moz-animation: test 0.5s forwards;	/* Firefox */
+    -webkit-animation: test 0.5s forwards;	/* Safari 和 Chrome */
+    -o-animation: test 0.5s forwards;
 }
 
 
