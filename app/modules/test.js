@@ -6,18 +6,19 @@ angular.module('app.test', [])
         activity.initialize($scope);
 
         $scope.selectedIndex = 0;
+        $scope.selectedIndex2 = 0;
 
-        function animate(num){
-            var target = document.getElementById('test').children[num];
-            if(hasClass(target,'test_animation')){
+        function animate(num,sel,className){
+            var target = document.getElementById(sel).children[num];
+            if(hasClass(target,className)){
                 remove(num);
             }
-            addClass(target, 'test_animation');
+            addClass(target, className);
         }
 
-        function remove(num){
-            var target = document.getElementById('test').children[num];
-            removeClass(target,'test_animation');
+        function remove(num,sel,className){
+            var target = document.getElementById(sel).children[num];
+            removeClass(target,className);
         }
 
         function addClass(obj, cls) {
@@ -36,29 +37,46 @@ angular.module('app.test', [])
             }
         }
 
-        animate(0);
+        function clearClass(num){
+            var target = document.getElementById('test').children[num];
+            target.className = '';
+        }
+
+        animate(0,'test','test_animation');
+        animate(0,'test1','animation');
 
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
                 case COMMON_KEYS.KEY_DOWN:
-                    remove();
+                    if ($scope.selectedIndex2 < 2) {
+                        $scope.selectedIndex2++;
+                    }
+                    remove($scope.selectedIndex2-1,'test1','animation');
+                    animate($scope.selectedIndex2,'test1','animation');
                     break;
                 case COMMON_KEYS.KEY_UP:
-                    animate();
+                    if ($scope.selectedIndex2 > 0) {
+                        $scope.selectedIndex2--;
+                    }
+                    remove($scope.selectedIndex2+1,'test1','animation');
+                    animate($scope.selectedIndex2,'test1','animation');
                     break;
                 case COMMON_KEYS.KEY_LEFT:
                     if ($scope.selectedIndex > 0) {
                         $scope.selectedIndex--;
                     }
-                    remove($scope.selectedIndex+1);
-                    animate($scope.selectedIndex);
+                    remove($scope.selectedIndex+1,'test','test_animation');
+                    animate($scope.selectedIndex,'test','test_animation');
                     break;
                 case COMMON_KEYS.KEY_RIGHT:
                     if ($scope.selectedIndex < 2) {
                         $scope.selectedIndex++;
                     }
-                    remove($scope.selectedIndex-1);
-                    animate($scope.selectedIndex);
+                    remove($scope.selectedIndex-1,'test','test_animation');
+                    animate($scope.selectedIndex,'test','test_animation');
+                    break;
+                case COMMON_KEYS.KEY_ENTER:
+                    clearClass($scope.selectedIndex);
                     break;
             }
         })
