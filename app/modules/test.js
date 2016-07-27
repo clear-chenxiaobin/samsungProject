@@ -49,6 +49,8 @@ angular.module('app.test', [])
                 var target = document.getElementById('test' + number).children;
                 for(var i=0;i<target.length;i++){
                     transform(target[i],"rotateX(0deg)");
+                    removeClass(target[i], 'opacityReduce');
+                    addClass(target[i], 'opacityAdd');
                     target[i].style.top = '0px';
                 }
             }else{
@@ -56,12 +58,15 @@ angular.module('app.test', [])
                 var target = document.getElementById('test' + number).children;
                 for(var i=0;i<target.length;i++){
                     transform(target[i],"rotateX(0deg)");
+                    removeClass(target[i], 'opacityReduce');
+                    addClass(target[i], 'opacityAdd');
                     target[i].style.top = '0px';
                 }
                 var number1 = num+1;
                 var target1 = document.getElementById('test'+ number1).children;
                 for(var i=0;i<target1.length;i++) {
                     transform(target1[i], "rotateX(90deg)");
+                    addClass(target1[i], 'opacityReduce');
                     target1[i].style.top = '-115px';
                 }
             }
@@ -73,6 +78,7 @@ angular.module('app.test', [])
                 var target = document.getElementsByClassName('rotate_img');
                 for(var i=0;i<target.length;i++){
                     transform(target[i],"rotateX(-90deg)");
+                    addClass(target[i], 'opacityReduce');
                     target[i].style.top = '100px';
                 }
             }else{
@@ -80,12 +86,15 @@ angular.module('app.test', [])
                 var target1 = document.getElementById('test'+ number1).children;
                 for(var i=0;i<target1.length;i++) {
                     transform(target1[i], "rotateX(-90deg)");
+                    addClass(target1[i], 'opacityReduce');
                     target1[i].style.top = '100px';
                 }
                 var number = num + 2;
                 var target = document.getElementById('test' + number).children;
                 for(var i=0;i<target.length;i++){
                     transform(target[i],"rotateX(0deg)");
+                    removeClass(target[i], 'opacityReduce');
+                    addClass(target[i], 'opacityAdd');
                     target[i].style.top = '0px';
                 }
             }

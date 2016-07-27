@@ -1,7 +1,7 @@
 .rotate_img{
-    -webkit-transition: -webkit-transform 1s;
-    -moz-transition: -moz-transform 1s;
-    transition: transform 1s;
+    -webkit-transition: -webkit-transform 0.5s;
+    -moz-transition: -moz-transform 0.5s;
+    transition: transform 0.5s;
 }
 
 .rotate_down{
@@ -180,4 +180,67 @@
 {
     from {width: 191px;height: 340px;top: 0}
     to {width: 229.2px;height: 408px;top:-34px}
+}
+
+
+.opacityAdd{
+    animation: add 0.5s forwards;
+    -moz-animation: add 0.5s forwards;	/* Firefox */
+    -webkit-animation: add 0.5s forwards;	/* Safari 和 Chrome */
+    -o-animation: add 0.5s forwards;
+}
+
+@keyframes add
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-moz-keyframes add /* Firefox */
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-webkit-keyframes add /* Safari 和 Chrome */
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+@-o-keyframes add /* Opera */
+{
+    from {opacity: 0;}
+    to {opacity: 1;}
+}
+
+.opacityReduce{
+    animation: reduce 0.5s forwards;
+    -moz-animation: reduce 0.5s forwards;	/* Firefox */
+    -webkit-animation: reduce 0.5s forwards;	/* Safari 和 Chrome */
+    -o-animation: reduce 0.5s forwards;
+}
+
+@keyframes reduce
+{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-moz-keyframes reduce /* Firefox */
+{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-webkit-keyframes reduce /* Safari 和 Chrome */
+{
+    from {opacity: 1;}
+    to {opacity: 0;}
+}
+
+@-o-keyframes reduce /* Opera */
+{
+    from {opacity: 1;}
+    to {opacity: 0;}
 }
