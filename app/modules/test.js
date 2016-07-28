@@ -119,6 +119,16 @@ angular.module('app.test', [])
             transform(btn,"translateX("+($scope.count*100)+"px)")
         }
 
+        function click_btn(){
+            var btn = document.getElementById('amt_btn');
+            addClass(btn, 'click_amt');
+        }
+
+        function unclick_btn(){
+            var btn = document.getElementById('amt_btn');
+            removeClass(btn, 'click_amt');
+        }
+
 
         //animate(0,'test','test_animation');
         rotateDown(-1);
@@ -165,6 +175,12 @@ angular.module('app.test', [])
                 case COMMON_KEYS.KEY_ENTER:
                     //clearClass($scope.selectedIndex);
                     move();
+                    break;
+                case COMMON_KEYS.KEY_VOL_UP:
+                    click_btn();
+                    break;
+                case COMMON_KEYS.KEY_VOL_DOWN:
+                    unclick_btn();
                     break;
             }
         })
