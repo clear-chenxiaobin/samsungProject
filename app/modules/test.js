@@ -112,7 +112,7 @@ angular.module('app.test', [])
 
 
         function move(){
-            var btn = document.getElementById('amt_btn');
+            var btn = document.getElementById('btn_border');
             //var pre = parseInt(btn.style.left);
             //btn.style.left = (pre+100)+'px';
             $scope.count +=1;
@@ -121,12 +121,16 @@ angular.module('app.test', [])
 
         function click_btn(){
             var btn = document.getElementById('amt_btn');
+            var btn_border = document.getElementById('btn_border');
             addClass(btn, 'click_amt');
+            addClass(btn_border,'click_amt');
         }
 
         function unclick_btn(){
             var btn = document.getElementById('amt_btn');
+            var btn_border = document.getElementById('btn_border');
             removeClass(btn, 'click_amt');
+            removeClass(btn_border, 'click_amt');
         }
 
 
