@@ -1,7 +1,13 @@
 .rotate_img{
-    -webkit-transition: -webkit-transform 0.5s;
-    -moz-transition: -moz-transform 0.5s;
-    transition: transform 0.5s;
+    -webkit-transition: -webkit-transform 0.75s;
+    -moz-transition: -moz-transform 0.75s;
+    transition: transform 0.75s;
+}
+
+#amt_btn{
+    -webkit-transition: -webkit-transform 0.75s;
+    -moz-transition: -moz-transform 0.75s;
+    transition: transform 0.75s;
 }
 
 .rotate_down{
@@ -184,10 +190,10 @@
 
 
 .opacityAdd{
-    animation: add 0.5s forwards;
-    -moz-animation: add 0.5s forwards;	/* Firefox */
-    -webkit-animation: add 0.5s forwards;	/* Safari 和 Chrome */
-    -o-animation: add 0.5s forwards;
+    animation: add 0.75s forwards;
+    -moz-animation: add 0.75s forwards;	/* Firefox */
+    -webkit-animation: add 0.75s forwards;	/* Safari 和 Chrome */
+    -o-animation: add 0.75s forwards;
 }
 
 @keyframes add
@@ -215,10 +221,10 @@
 }
 
 .opacityReduce{
-    animation: reduce 0.5s forwards;
-    -moz-animation: reduce 0.5s forwards;	/* Firefox */
-    -webkit-animation: reduce 0.5s forwards;	/* Safari 和 Chrome */
-    -o-animation: reduce 0.5s forwards;
+    animation: reduce 0.75s forwards;
+    -moz-animation: reduce 0.75s forwards;	/* Firefox */
+    -webkit-animation: reduce 0.75s forwards;	/* Safari 和 Chrome */
+    -o-animation: reduce 0.75s forwards;
 }
 
 @keyframes reduce
@@ -243,4 +249,11 @@
 {
     from {opacity: 1;}
     to {opacity: 0;}
+}
+
+#amt_btn{
+    height: 40px;
+    width: 100px;
+    background-color: blue;
+    border-radius: 10px;
 }

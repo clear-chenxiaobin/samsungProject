@@ -7,6 +7,7 @@ angular.module('app.test', [])
 
         $scope.selectedIndex = 0;
         $scope.selectedIndex2 = 0;
+        $scope.count = 0;
 
         function animate(num,sel,className){
             var target = document.getElementById(sel).children[num];
@@ -110,6 +111,15 @@ angular.module('app.test', [])
         }
 
 
+        function move(){
+            var btn = document.getElementById('amt_btn');
+            //var pre = parseInt(btn.style.left);
+            //btn.style.left = (pre+100)+'px';
+            $scope.count +=1;
+            transform(btn,"translateX("+($scope.count*100)+"px)")
+        }
+
+
         //animate(0,'test','test_animation');
         rotateDown(-1);
         rotateUp(0);
@@ -153,7 +163,8 @@ angular.module('app.test', [])
                     rotateUp($scope.selectedIndex);
                     break;
                 case COMMON_KEYS.KEY_ENTER:
-                    clearClass($scope.selectedIndex);
+                    //clearClass($scope.selectedIndex);
+                    move();
                     break;
             }
         })
