@@ -70,5 +70,4 @@ angular.module('app.message', [])
         this.getTitle = function() {
             return ResourceManager.getLocale().message;
         }
-
     }]);

@@ -4,11 +4,6 @@
     transition: transform 0.75s;
 }
 
-#amt_btn{
-    -webkit-transition: -webkit-transform 0.75s;
-    -moz-transition: -moz-transform 0.75s;
-    transition: transform 0.75s;
-}
 
 .rotate_down{
     animation: down 1s forwards;
@@ -254,17 +249,32 @@
 #amt_btn{
     height: 40px;
     width: 100px;
-    background-color: blue;
+    background-color: #4C5176;
     border-radius: 10px;
+    z-index: 101;
+    -webkit-transition: -webkit-transform 0.75s;
+    -moz-transition: -moz-transform 0.75s;
+    transition: transform 0.75s;
+}
+
+#btn_border{
+    height: 40px;
+    width: 100px;
+    background: none;
+    border: 3px solid white;
+    border-radius: 10px;
+    -webkit-transition: -webkit-transform 0.75s;
+    -moz-transition: -moz-transform 0.75s;
+    transition: transform 0.75s;
 }
 
 
 
 .click_amt{
-    animation: click 1.2s forwards;
-    -moz-animation: click 1.2s forwards;	/* Firefox */
-    -webkit-animation: click 1.2s forwards;	/* Safari 和 Chrome */
-    -o-animation: click 1.2s forwards;
+    animation: click 1s forwards;
+    -moz-animation: click 1s forwards;	/* Firefox */
+    -webkit-animation: click 1s forwards;	/* Safari 和 Chrome */
+    -o-animation: click 1s forwards;
 }
 
 
