@@ -47,6 +47,7 @@ angular.module('app.live', [])
                         LiveService.stopPlay();
                         document.getElementsByTagName("body")[0].setAttribute("style", "background-image:(url:../assets/images/bg_window.jpg)");
                         activity.finish();
+                        $scope.$emit('menu.indexShow', true);
                         break;
                 }
                 $scope.selectedIndex = tempIndex;

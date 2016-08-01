@@ -116,11 +116,15 @@ angular.module('app', [
         $scope.$on('activity.created', function (ev) {
             $scope.showMenu = false;
             $scope.$broadcast('menu.toggle', !$scope.showMenu);
-            $scope.$broadcast('menu.menu', $scope.showMenu);
         });
 
         $scope.$on('menu.created', function (ev) {
             $scope.$broadcast('menu.load', true);
+        });
+
+        $scope.$on('menu.indexShow', function (ev) {
+            $scope.showMenu = true;
+            $scope.$broadcast('menu.toggle', !$scope.showMenu);
         });
 
     }])

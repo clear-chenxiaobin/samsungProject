@@ -56,6 +56,7 @@ angular.module('app.tpl_category_list', [])
                 case COMMON_KEYS.KEY_BACK:
                     if (LEVEL == 1) {
                         activity.finish();
+                        $scope.$emit('menu.indexShow', true);
                     } else if (LEVEL == 2) {
                         bindFirstLevel();
                     }

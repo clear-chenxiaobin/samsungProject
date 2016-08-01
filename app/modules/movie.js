@@ -100,6 +100,7 @@ angular.module('app.movie', [])
                     break;
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
+                    $scope.$emit('menu.indexShow', true);
                     break;
             }
             if (tempIndex >= numOfmovies) {

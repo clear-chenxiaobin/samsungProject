@@ -50,6 +50,7 @@ angular.module('app.order', [])
                 case COMMON_KEYS.KEY_BACK:
                     ResourceManager.resetCart();
                     activity.finish();
+                    $scope.$emit('menu.indexShow', true);
                     break;
                 case COMMON_KEYS.KEY_UP:
                         if ($scope.selectedIndex > 0) {

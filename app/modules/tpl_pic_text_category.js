@@ -13,6 +13,7 @@ angular.module('app.tpl_pic_text_category', [])
             switch (keyCode) {
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
+                    $scope.$emit('menu.indexShow', true);
                     break;
             }
         });

@@ -113,7 +113,7 @@ angular.module('app.menu', [])
     //}])
     .controller('MenuController', ['$scope', '$http', '$interval', 'ActivityManager', 'COMMON_KEYS', 'ResourceManager', function ($scope, $http, $interval, ActivityManager, COMMON_KEYS, ResourceManager) {
         $scope.$on('menu.load', function (ev) {
-            if ($scope.menuItems.length == 0) {
+            if ($scope.menuItems == undefined) {
                 menuBind();
             }
         })

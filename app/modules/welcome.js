@@ -39,6 +39,7 @@ angular.module('app.welcome', [])
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     $scope.$emit('menu.created', true);
+                    $scope.$emit('menu.indexShow', true);
                     ActivityManager.startActivity('index');
                     break;
                 case COMMON_KEYS.KEY_UP:
