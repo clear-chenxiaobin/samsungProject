@@ -31,7 +31,8 @@ angular.module('app.message', [])
             messageUrl = ResourceManager.getConfigurations().messageUrl(),
             configUrl,
             data = JSON.stringify({
-                roomid: ResourceManager.getConfigurations().roomNum()
+                //roomid: ResourceManager.getConfigurations().roomNum()
+                roomid:window.localStorage.room
             });
 
         this.initialize = function() {
