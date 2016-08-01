@@ -3,8 +3,8 @@
 
 .menu-container {
     position: absolute;
-    /*left: 72px;*/
-    top: 484px;
+    left: 72px;
+    top: 532px;
     width: 1136px;
     height: 152px;
     z-index: 9;

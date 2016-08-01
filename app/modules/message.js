@@ -9,11 +9,10 @@ angular.module('app.message', [])
             $scope.title = MessageService.getTitle().title;
             if (MessageService.getMessage() == undefined) {
                 MessageService.initialize().success(function (data) {
-                    MessageService.getMessage()
-                    //bindBill();
+                    bindMessage();
                 })
             } else {
-                //bindBill();
+                bindMessage();
             }
         });
 
@@ -25,13 +24,21 @@ angular.module('app.message', [])
             }
         });
 
+        function bindMessage() {
+            var meassage = MessageService.getMessage();
+            $scope.texts = []
+            for (var i = 0; i < meassage.length; i++) {
+                $scope.texts.push({title: i + meassage, content: i + '、To run the directive after the DOM has finished rendering you should postpone the execution, for example using the setTimeout function. AngularJS has a method wrapper for the window.setTimeout function, that is $timeout.'});
+            }
+        }
+
     }])
     .service('MessageService', ['$q', '$http', 'ResourceManager', function ($q, $http, ResourceManager) {
         var messages,
             messageUrl = ResourceManager.getConfigurations().messageUrl(),
             configUrl,
             data = JSON.stringify({
-                roomid: ResourceManager.getConfigurations().roomNum()
+                roomid: window.localStorage.room
             });
 
         this.initialize = function() {
@@ -62,4 +69,5 @@ angular.module('app.message', [])
         this.getTitle = function() {
             return ResourceManager.getLocale().message;
         }
+
     }]);

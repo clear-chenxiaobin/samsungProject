@@ -119,6 +119,10 @@ angular.module('app', [
             $scope.$broadcast('menu.menu', $scope.showMenu);
         });
 
+        $scope.$on('menu.created', function (ev) {
+            $scope.$broadcast('menu.load', true);
+        });
+
     }])
     .constant('COMMON_KEYS', {
         KEY_LEFT    : 0,

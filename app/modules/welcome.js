@@ -38,6 +38,7 @@ angular.module('app.welcome', [])
                     ResourceManager.setLocale($scope.language);
                     break;
                 case COMMON_KEYS.KEY_ENTER:
+                    $scope.$emit('menu.created', true);
                     ActivityManager.startActivity('index');
                     break;
                 case COMMON_KEYS.KEY_UP:
