@@ -8,11 +8,11 @@ if (!window.Common) {
     };
 
     window.Common.API.Widget.prototype.blockNavigation = function (event) {
-        console.log('Common.API.Widget.blockNavigation(', event, ')');
+        //console.log('Common.API.Widget.blockNavigation(', event, ')');
     };
 
     window.Common.API.Widget.prototype.sendReadyEvent = function () {
-        console.log('Common.API.Widget.sendReadyEvent()');
+        //console.log('Common.API.Widget.sendReadyEvent()');
     };
 
 
@@ -24,7 +24,7 @@ if (!window.Common) {
     };
     
     window.Common.API.Plugin.prototype.unregistKey = function (keyCode) {
-        console.log('Common.API.Widget.unregistKey(', keyCode, ')');
+        //console.log('Common.API.Widget.unregistKey(', keyCode, ')');
     };
 
 }

@@ -9,6 +9,7 @@ angular.module('app.activity', ['app.resource'])
             this._hide = false;
             this._shouldDisplayMenu = true;
             this._triggerBottom = false;
+            this._isIndex = false;
         }
 
         Activity.prototype.finish = function () {
@@ -44,6 +45,14 @@ angular.module('app.activity', ['app.resource'])
                 return this._triggerBottom;
             } else {
                 this._triggerBottom = bool;
+            }
+        };
+
+        Activity.prototype.isIndex = function (bool) {
+            if (typeof bool !== 'boolean') {
+                return this._isIndex;
+            } else {
+                this._isIndex = bool;
             }
         };
 

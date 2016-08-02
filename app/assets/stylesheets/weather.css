@@ -35,3 +35,19 @@
 .weather-days-bottom{
     text-align: center;
 }
+
+.weather-button-confirm {
+    display: inline-block;
+    width: 120px;
+    height: 41px;
+    line-height: 41px;
+    margin-left: 320px;
+    background: url("../images/ic_button.png") no-repeat 0;
+    background-size: 120px;
+    text-align: center;
+}
+
+.weather-button-confirm.selected {
+    background: url("../images/ic_button_active.png") no-repeat 0;
+    background-size: 120px;
+}

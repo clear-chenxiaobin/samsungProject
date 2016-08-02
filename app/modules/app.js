@@ -73,8 +73,6 @@ angular.module('app', [
         /* production environment */
         if (Common.API) {
             var tvKey = new Common.API.TVKeyValue();
-            //var pluginObj = new Common.API.Plugin();
-            //pluginObj.unregistKey(tvKey.KEY_RETURN);
             keyMapping[tvKey.KEY_LEFT] = COMMON_KEYS.KEY_LEFT;
             keyMapping[tvKey.KEY_RIGHT] = COMMON_KEYS.KEY_RIGHT;
             keyMapping[tvKey.KEY_UP] = COMMON_KEYS.KEY_UP;
@@ -97,8 +95,8 @@ angular.module('app', [
             keyMapping[tvKey.KEY_0] = COMMON_KEYS.KEY_0;
         }
 
-        var widgetAPI = new Common.API.Widget();
         var handler = function(event){
+            var widgetAPI = new Common.API.Widget();
             widgetAPI.sendReadyEvent();
             widgetAPI.blockNavigation(event);
         };
@@ -115,6 +113,8 @@ angular.module('app', [
             } else if (key === COMMON_KEYS.KEY_ENTER && ActivityManager.getActiveActivity().triggerBottom() && $scope.showMenu == false) {
                 $scope.showMenu = !$scope.showMenu;
                 $scope.$broadcast('menu.toggle', $scope.showMenu);
+            } else if (key === COMMON_KEYS.KEY_BACK && ActivityManager.getActiveActivity().isIndex()) {
+                ActivityManager.getActiveActivity().keyDown(key);
             } else if (!$scope.showMenu) {
                 ActivityManager.getActiveActivity().keyDown(key);
             } else {
@@ -142,9 +142,12 @@ angular.module('app', [
             $scope.$broadcast('menu.load', true);
         });
 
-        $scope.$on('menu.indexShow', function (ev) {
-            $scope.showMenu = true;
+        $scope.$on('menu.indexShow', function (ev, bool) {
+            $scope.showMenu = bool;
             $scope.$broadcast('menu.toggle', !$scope.showMenu);
+            if (bool == true) {
+                ActivityManager.getActiveActivity().isIndex(true);
+            }
         });
 
     }])

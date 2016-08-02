@@ -103,7 +103,6 @@ angular.module('app.tpl_weather_list', [])
                 case COMMON_KEYS.KEY_BACK:
                     activity.finish();
                     ActivityManager.startActivity('weather');
-                    $scope.$emit('menu.indexShow', true);
                     break;
                 case COMMON_KEYS.KEY_ENTER:
                     if (LEVEL == 1) {

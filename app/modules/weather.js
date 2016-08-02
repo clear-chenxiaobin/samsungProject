@@ -30,6 +30,7 @@ angular.module('app.weather', [])
         function loadWeatherData(cityName){
             $http.get($scope.serverURl+cityName).success(function (data) {
                 $scope.content = data;
+                $scope.isActive = true;
                 var zhStrs = [];
                 var enStrs = [];
                 var nameKey = 'cityNameStr';
@@ -50,6 +51,16 @@ angular.module('app.weather', [])
         }
         activity.onKeyDown(function (keyCode) {
             switch (keyCode) {
+                case COMMON_KEYS.KEY_UP:
+                    $scope.isActive = true;
+                    activity.triggerBottom(false);
+                    $scope.$broadcast('triggerBottom.change', false);
+                    break;
+                case COMMON_KEYS.KEY_DOWN:
+                    $scope.isActive = false;
+                    activity.triggerBottom(true);
+                    $scope.$broadcast('triggerBottom.change', true);
+                    break;
                 case COMMON_KEYS.KEY_ENTER:
                     activity.finish();
                     ActivityManager.startActivity('tpl_weather_list');
