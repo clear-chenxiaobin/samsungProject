@@ -73,17 +73,35 @@ angular.module('app', [
         /* production environment */
         if (Common.API) {
             var tvKey = new Common.API.TVKeyValue();
+            //var pluginObj = new Common.API.Plugin();
+            //pluginObj.unregistKey(tvKey.KEY_RETURN);
             keyMapping[tvKey.KEY_LEFT] = COMMON_KEYS.KEY_LEFT;
             keyMapping[tvKey.KEY_RIGHT] = COMMON_KEYS.KEY_RIGHT;
             keyMapping[tvKey.KEY_UP] = COMMON_KEYS.KEY_UP;
             keyMapping[tvKey.KEY_DOWN] = COMMON_KEYS.KEY_DOWN;
             keyMapping[tvKey.KEY_ENTER] = COMMON_KEYS.KEY_ENTER;
-            keyMapping[tvKey.KEY_1] = COMMON_KEYS.KEY_MENU;
-            keyMapping[tvKey.KEY_2] = COMMON_KEYS.KEY_BACK;
+            keyMapping[tvKey.KEY_MENU] = COMMON_KEYS.KEY_MENU;
+            keyMapping[tvKey.KEY_RETURN] = COMMON_KEYS.KEY_BACK;
             keyMapping[tvKey.KEY_VOL_UP] = COMMON_KEYS.KEY_VOL_UP;
             keyMapping[tvKey.KEY_VOL_DOWN] = COMMON_KEYS.KEY_VOL_DOWN;
             keyMapping[tvKey.KEY_MUTE] = COMMON_KEYS.KEY_MUTE;
+            keyMapping[tvKey.KEY_1] = COMMON_KEYS.KEY_1;
+            keyMapping[tvKey.KEY_2] = COMMON_KEYS.KEY_2;
+            keyMapping[tvKey.KEY_3] = COMMON_KEYS.KEY_3;
+            keyMapping[tvKey.KEY_4] = COMMON_KEYS.KEY_4;
+            keyMapping[tvKey.KEY_5] = COMMON_KEYS.KEY_5;
+            keyMapping[tvKey.KEY_6] = COMMON_KEYS.KEY_6;
+            keyMapping[tvKey.KEY_7] = COMMON_KEYS.KEY_7;
+            keyMapping[tvKey.KEY_8] = COMMON_KEYS.KEY_8;
+            keyMapping[tvKey.KEY_9] = COMMON_KEYS.KEY_9;
+            keyMapping[tvKey.KEY_0] = COMMON_KEYS.KEY_0;
         }
+
+        var widgetAPI = new Common.API.Widget();
+        var handler = function(event){
+            widgetAPI.sendReadyEvent();
+            widgetAPI.blockNavigation(event);
+        };
 
         $scope.showMenu = false;
 
@@ -102,6 +120,8 @@ angular.module('app', [
             } else {
                 $scope.$broadcast('menu.keydown', key);
             }
+            document.removeEventListener("keydown", handler, false);
+            document.addEventListener("keydown", handler, false);
         };
 
         $scope.onkeyup = function (ev) {
