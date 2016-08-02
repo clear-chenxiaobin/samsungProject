@@ -106,7 +106,7 @@ angular.module('app', [
         $scope.onkeydown = function (ev) {
             var key = keyMapping[ev.keyCode];
             if (key === COMMON_KEYS.KEY_MENU) {
-                if (ActivityManager.getActiveActivity().shouldDisplayMenu()) {
+                if (ActivityManager.getActiveActivity().shouldDisplayMenu() && !ActivityManager.getActiveActivity().isIndex()) {
                     $scope.showMenu = !$scope.showMenu;
                     $scope.$broadcast('menu.toggle', $scope.showMenu);
                 }
