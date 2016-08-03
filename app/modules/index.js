@@ -10,7 +10,7 @@ angular.module('app.index', [])
             var i18nText = ResourceManager.getLocale();
             $scope.guestName = i18nText.index.guestName + res.getString("guest_name");
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
-            $scope.roomNumber = i18nText.index.roomNumber + window.localStorage.room;
+            $scope.roomNumber = i18nText.index.roomNumber + window.sessionStorage.room;
         });
 
         activity.onKeyDown(function (keyCode) {

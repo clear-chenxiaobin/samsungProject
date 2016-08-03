@@ -11,7 +11,7 @@ angular.module('app.tpl_shopping_cart', [])
         $scope.title = $scope.cartText.title;
         $scope.priceText = $scope.cartText.price;
         $scope.coin = $scope.cartText.coin;
-        var roomNum = window.localStorage.room;
+        var roomNum = window.sessionStorage.room;
 
         $scope.listTopStyle = 0;
         $scope.selectedIndex = 0;

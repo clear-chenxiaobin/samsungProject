@@ -44,7 +44,7 @@ angular.module('app', [
                         typeof menuJSON === 'string' ? JSON.parse(menuJSON) : menuJSON);
 
                     //判断localStorage中房间号是否存在，不存在则跳转至home页面设置房间号
-                    if(!window.localStorage.room){
+                    if(!window.sessionStorage.room){
                         ActivityManager.startActivity('room');
                     }else {
                         ActivityManager.startActivity('welcome');

@@ -11,7 +11,8 @@ angular.module('app.room', [])
         function setRoomNum(){
             var roomNum = document.getElementById('room').value;
             if(roomNum !=''){
-                window.localStorage.room = roomNum;
+                //window.localStorage.room = roomNum;
+                window.sessionStorage.room = roomNum;
                 activity.finish();
                 ActivityManager.startActivity('welcome');
             }else{

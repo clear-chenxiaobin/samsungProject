@@ -23,7 +23,7 @@ angular.module('app.welcome', [])
             //    '使每一位宾客宾至如归，令阁下倍感尊崇之礼遇']
             //    .join('\n');
             $scope.subWelcomeText = res.getString("welcome_text").replace(/，|。|,|\./g, "\n");
-            $scope.roomNumber = i18nText.index.roomNumber + window.localStorage.room;
+            $scope.roomNumber = i18nText.index.roomNumber + window.sessionStorage.room;
             $scope.cue = i18nText.welcome.cue;
         });
         var languages = ['zh-CN', 'en-US'],
